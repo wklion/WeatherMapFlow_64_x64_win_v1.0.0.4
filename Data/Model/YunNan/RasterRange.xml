@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value="test_yun_nan"/>
+		<Param Name="Author" Value="Administrator"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2016-11-10 08:00:00"/>
+		<Param Name="DataStartTime" Value="2016-11-07 08:00:00"/>
+		<Param Name="DataEndTime" Value="2016-11-07 08:00:00"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample2.ModuleCreateDS" x="32" y="16">
+			<Params>
+				<Param Name="Type" Value="Memory"/>
+				<Param Name="Alias" Value="a"/>
+				<Param Name="Server" Value=""/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts/>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.pluginexample2.ModuleOpenDS" x="32" y="128">
+			<Params>
+				<Param Name="Type" Value="Micaps"/>
+				<Param Name="Alias" Value="test"/>
+				<Param Name="Server" Value="../../Input/China/16101908.000"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetPoint"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="3" ClassName="com.wmf.pluginexample2.ModuleIDW" x="192" y="128">
+			<Params>
+				<Param Name="Datasource" Value="test"/>
+				<Param Name="Dataset" Value="16101908.000"/>
+				<Param Name="Field" Value="Value1"/>
+				<Param Name="Bounds" Value="97.500000 21.000000 106.200000 29.300000"/>
+				<Param Name="CellSize" Value="0.050000 0.050000"/>
+				<Param Name="ValueType" Value="Single"/>
+				<Param Name="SearchMode" Value="RadiusVariable"/>
+				<Param Name="PointCount" Value="12"/>
+				<Param Name="MaxRadius" Value="0"/>
+				<Param Name="Radius" Value="5"/>
+				<Param Name="MinPointCount" Value="0"/>
+				<Param Name="Power" Value="2"/>
+				<Param Name="CrossValidation" Value="false"/>
+				<Param Name="ResidualFileName" Value=""/>
+				<Param Name="Datasource" Value="a"/>
+				<Param Name="Dataset" Value="output_idw"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetPoint"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRaster"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="4" ClassName="com.wmf.pluginexample2.ModuleGraphicProduct" x="384" y="80">
+			<Params>
+				<Param Name="TemplateFile" Value="../..\GraphicProductTemplate\YunNan\RasterRange.xml"/>
+				<Param Name="Datasource" Value="test"/>
+				<Param Name="Dataset" Value="16101908.000"/>
+				<Param Name="Unit" Value=""/>
+				<Param Name="Datasource" Value="a"/>
+				<Param Name="Dataset" Value="output_idw"/>
+				<Param Name="Unit" Value=""/>
+				<Param Name="Bounds" Value="0.000000 0.000000 0.000000 0.000000"/>
+				<Param Name="ClipRegion" Value="[Name_CHN]='云南省'"/>
+				<Param Name="MainTitle" Value="云南省周平均气温分布图"/>
+				<Param Name="SubTitle" Value="[yyyy年M月d日]"/>
+				<Param Name="Organization" Value="云南省气候中心"/>
+				<Param Name="PublishTime" Value="[yyyy年M月d日HH时]发布"/>
+				<Param Name="GeoLegendToLayer" Value="yun_nan.MGCBottom.RasterRange"/>
+				<Param Name="FileName" Value="../../Output/[yyMMddHH].png"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetPoint"/>
+				<InputPort ID="2" Type="DatasetRaster"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="ImageFile"/>
+			</OutputPorts>
+		</Module>
+	</Modules>
+	<Pipes>
+		<Pipe ID="5" IncomingModule="2" IncomingPort="1" OutgoingModule="3" OutgoingPort="1"/>
+		<Pipe ID="6" IncomingModule="2" IncomingPort="1" OutgoingModule="4" OutgoingPort="1"/>
+		<Pipe ID="7" IncomingModule="3" IncomingPort="1" OutgoingModule="4" OutgoingPort="2"/>
+	</Pipes>
+</Model>

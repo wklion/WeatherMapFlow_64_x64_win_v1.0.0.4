@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value=""/>
+		<Param Name="Author" Value="Administrator"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2017-04-28 09:27:45"/>
+		<Param Name="DataStartTime" Value="2017-04-28 09:27:45"/>
+		<Param Name="DataEndTime" Value="2017-04-28 09:27:45"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample2.ModuleCreateDS" x="48" y="32">
+			<Params>
+				<Param Name="Type" Value="GTiff"/>
+				<Param Name="Alias" Value="Datasource2"/>
+				<Param Name="Server" Value="d:/temp/aspect.tif"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts/>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.pluginexample2.ModuleOpenDS" x="48" y="128">
+			<Params>
+				<Param Name="Type" Value="GTiff"/>
+				<Param Name="Alias" Value="Datasource1"/>
+				<Param Name="Server" Value="../../Input/ShanXi/shanxi_dem_1000.TIF"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRaster"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="3" ClassName="com.wmf.pluginexample2.ModuleAspect" x="224" y="128">
+			<Params>
+				<Param Name="Datasource" Value="Datasource1"/>
+				<Param Name="Dataset" Value="d1"/>
+				<Param Name="Datasource" Value="Datasource2"/>
+				<Param Name="Dataset" Value="Aspect4"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetRaster"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRaster"/>
+			</OutputPorts>
+		</Module>
+	</Modules>
+	<Pipes>
+		<Pipe ID="4" IncomingModule="2" IncomingPort="1" OutgoingModule="3" OutgoingPort="1"/>
+	</Pipes>
+</Model>

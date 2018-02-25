@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="gb2312"?>
+<FillSymbol>
+  <!--一个填充符号由若干个点符号组合而成-->
+  <!--________________________________________________________________________________________________________________-->
+  <Item ID="900" Name="测试">
+    <!--x:水平方向偏移;y:竖直方向偏移;Angle:从水平方向开始逆时针旋转角度;Size:尺寸,0表示无穷大;单位统一为mm-->
+    <Symbol ID="30000" x="0" y="0" Angle="0" Size="5" Stroke="RGB(255,0,0)" Fill="RGB(255,0,0)"/>
+  </Item>
+  <Item ID="901" Name="测试">
+    <Symbol ID="1001" x="0" y="0" Angle="0" Size="4" Stroke="RGB(255,0,0)" Fill="RGB(255,0,0)"/>
+  </Item>
+  <Item ID="902" Name="测试">
+    <Symbol ID="1002" x="0" y="0" Angle="30" Size="5" Stroke="RGB(0,0,255)" Fill="RGB(0,0,255)"/>
+  </Item>
+  <Item ID="903" Name="测试">
+    <Symbol ID="1003" x="0" y="0" Angle="60" Size="6" Stroke="RGB(255,255,0)" Fill="RGB(255,255,0)"/>
+  </Item>
+  <Item ID="904" Name="测试">
+    <Symbol ID="1004" x="0" y="0" Angle="90" Size="7" Stroke="RGB(255,128,0)" Fill="RGB(255,128,0)"/>
+  </Item>
+  <Item ID="905" Name="测试">
+    <Symbol ID="1005" x="0" y="0" Angle="120" Size="8" Stroke="RGB(255,0,128)" Fill="RGB(255,0,128)"/>
+  </Item>
+  <Item ID="906" Name="测试">
+    <Symbol ID="1006" x="0" y="0" Angle="150" Size="9" Stroke="RGB(255,0,255)" Fill="RGB(255,0,255)"/>
+  </Item>
+  <!--________________________________________________________________________________________________________________-->
+  <Item ID="1001" Name="水平线填充">
+    <!--x:无效;y:线间距-->
+    <Symbol ID="30001" x="0" y="3" Angle="0" Size="0" Stroke="RGB(255,0,0)"/>
+  </Item>
+  <Item ID="1002" Name="竖直线填充">
+    <!--x:无效;y:线间距-->
+    <Symbol ID="30001" x="0" y="3" Angle="90" Size="0" Stroke="RGB(0,0,255)"/>
+  </Item>
+  <Item ID="1003" Name="斜线填充">
+    <!--x:无效;y:线间距-->
+    <Symbol ID="30001" x="0" y="2" Angle="45" Size="0" Stroke="RGB(192,192,192)"/>
+  </Item>
+  <Item ID="1004" Name="方格填充">
+    <!--x:无效;y:线间距-->
+    <Symbol ID="30001" x="0" y="3" Angle="0" Size="0" Stroke="RGB(255,128,0)"/>
+    <Symbol ID="30001" x="0" y="3" Angle="90" Size="0" Stroke="RGB(0,128,255)"/>
+  </Item>
+  <Item ID="1005" Name="斜方格填充">
+    <!--x:无效;y:线间距-->
+    <Symbol ID="30001" x="0" y="3" Angle="30" Size="0" Stroke="RGB(128,0,0)"/>
+    <Symbol ID="30001" x="0" y="3" Angle="120" Size="0" Stroke="RGB(0,128,1280)"/>
+  </Item>
+  <Item ID="1006" Name="斜格填充">
+    <!--x:无效;y:线间距-->
+    <Symbol ID="30001" x="0" y="3" Angle="30" Size="0" Stroke="RGB(128,0,0)"/>
+    <Symbol ID="30001" x="0" y="3" Angle="150" Size="0" Stroke="RGB(0,128,1280)"/>
+  </Item>
+  <Item ID="1007" Name="水平线性渐变色填充">
+    <!--x:关键色位置，[0,1];y:0-->
+    <Symbol ID="0" x="0.0" y="0" Angle="0" Size="0" Fill="RGB(255,0,0)"/>
+    <Symbol ID="0" x="1.0" y="0" Angle="0" Size="0" Fill="RGB(0,0,255)"/>
+  </Item>
+  <Item ID="1008" Name="竖直线性渐变色填充">
+    <!--x:关键色位置，[0,1];y:0-->
+    <Symbol ID="0" x="0.0" y="0" Angle="90" Size="0" Fill="RGB(0,0,255)"/>
+    <Symbol ID="0" x="1.0" y="0" Angle="90" Size="0" Fill="RGB(255,0,0)"/>
+  </Item>
+  <Item ID="1009" Name="斜线性渐变色填充">
+    <!--x:关键色位置，[0,1];y:0-->
+    <Symbol ID="0" x="0.0" y="0" Angle="30" Size="0" Fill="RGB(255,0,0)"/>
+    <Symbol ID="0" x="1.0" y="0" Angle="30" Size="0" Fill="RGB(0,255,255)"/>
+  </Item>
+  <Item ID="1010" Name="多线性渐变色填充">
+    <!--x:关键色位置，[0,1];y:0-->
+    <Symbol ID="0" x="0.0" y="0" Angle="0" Size="0" Fill="RGB(255,0,0)"/>
+    <Symbol ID="0" x="0.3" y="0" Angle="0" Size="0" Fill="RGB(0,255,0)"/>
+    <Symbol ID="0" x="1.0" y="0" Angle="0" Size="0" Fill="RGB(0,0,255)"/>
+  </Item>
+  <Item ID="1011" Name="线性渐变色填充叠加符号">
+    <!--x:关键色位置，[0,1];y:0-->
+    <Symbol ID="0" x="0.0" y="0" Angle="0" Size="0" Fill="RGB(255,0,0)"/>
+    <Symbol ID="0" x="0.3" y="0" Angle="0" Size="0" Fill="RGB(0,255,0)"/>
+    <Symbol ID="0" x="1.0" y="0" Angle="0" Size="0" Fill="RGB(0,0,255)"/>
+    
+    <Symbol ID="30000" x="0" y="0" Angle="0" Size="5" Stroke="RGB(0,0,0)"/>
+  </Item>
+</FillSymbol>

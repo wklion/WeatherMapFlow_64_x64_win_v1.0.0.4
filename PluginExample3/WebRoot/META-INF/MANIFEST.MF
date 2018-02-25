@@ -1,0 +1,2 @@
+Manifest-Version: 1.0
+Class-Path: . ./c3p0-0.9.1.1.jar ./mysql-connector-java-5.1.2.jar ./ojdbc6.jar ./expressionJ.jar ./wmf-pluginexample1.jar

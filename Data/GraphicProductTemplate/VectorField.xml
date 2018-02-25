@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="gb2312"?>
+<Workspace Version="20150901">
+	<Datasources>
+	</Datasources>
+	<Volumes/>
+	<Maps>
+    <Map Version="20150901" Name="test" Projection="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs" Size="0 0" MinScale="0.000000" MaxScale="0.000000">
+			<Bounds>
+				<Rect left="0" bottom="0" right="0" top="0"/>
+			</Bounds>
+			<BackgroundStyle>
+				<FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+			</BackgroundStyle>
+			<FixedScales/>
+			<ClipRegion Datasource="" Dataset="" Where=""/>
+			<LayerGroups>
+				<LayerGroup Name="MGCBottom">
+          <Layer Type="VectorField" Name="VectorField" Datasource="" Dataset="" MinScale="0" MaxScale="0" LOD="true">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGB(0,0,255)"/>
+            <!--Micaps第11类格点矢量数据显示设置-->
+            <Direction Datasource="" Dataset=""/>
+            <Symbol Color="RGB(0,0,255)" Size="8">
+              <!--风速单位为m/s-->
+              <Item Value="0.3" SymbolID="1001"/>
+              <Item Value="1.5" SymbolID="1002"/>
+              <Item Value="3.3" SymbolID="1003"/>
+              <Item Value="5.4" SymbolID="1004"/>
+              <Item Value="7.9" SymbolID="1005"/>
+              <Item Value="10.7" SymbolID="1006"/>
+              <Item Value="13.8" SymbolID="1007"/>
+              <Item Value="17.1" SymbolID="1008"/>
+              <Item Value="20.7" SymbolID="1009"/>
+              <Item Value="24.4" SymbolID="1010"/>
+              <Item Value="28.4" SymbolID="1011"/>
+              <Item Value="32.6" SymbolID="1012"/>
+              <Item Value="36.9" SymbolID="1013"/>
+              <Item Value="41.4" SymbolID="1014"/>
+              <Item Value="46.1" SymbolID="1015"/>
+              <Item Value="50.9" SymbolID="1016"/>
+              <Item Value="56.0" SymbolID="1017"/>
+            </Symbol>
+          </Layer>
+				</LayerGroup>
+				<LayerGroup Name="MGCTop"/>
+			</LayerGroups>
+		</Map>
+	</Maps>
+	<Layouts>
+		<Layout Version="20150901" Name="test">
+			<Bounds>
+        <Rect left="0.000000" bottom="203.200000" right="270.933333" top="0.000000"/>
+			</Bounds>
+			<BackgroundStyle>
+				<FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+			</BackgroundStyle>
+			<Geometries>
+				<Geometry Version="20150901" Type="GeoMap" Visible="true" MapName="test">
+					<Bounds>
+            <Rect left="0" bottom="0" right="0" top="0"/>
+					</Bounds>
+					<Margin>
+						<Rect left="2" bottom="2" right="2" top="2"/>
+					</Margin>
+          <Padding>
+            <Rect left="0" bottom="0" right="0" top="0"/>
+          </Padding>
+					<BorderStyle>
+						<LineStyle Width="1" color="RGBA(0,0,0,255)" SymbolID="0"/>
+					</BorderStyle>
+				</Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="0 3" Text="MainTitle">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="宋体" FontSize="7" Weight="0" Alignment="TopCenter" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="0 11" Text="SubTitle">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="宋体" FontSize="5" Weight="0" Alignment="TopCenter" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="230 193" Text="Organization">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="微软雅黑" FontSize="5" Weight="0" Alignment="BottomRight" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="230 200" Text="PublishTime">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="微软雅黑" FontSize="5" Weight="0" Alignment="BottomRight" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoLegend" Visible="true" Origin="0 0" Alignment="BottomRight" Offset="5 5" LegendType="Range" Orientation="Vertical" Title="图例" SubTitle="" ItemSize="0 6" ItemSpace="2 0" ItemCaptionStep="1" MaxValueCaption="250">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <BackgroundStyle>
+            <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+          </BackgroundStyle>
+          <BorderStyle>
+            <LineStyle Width="1" color="RGBA(0,0,0,255)" SymbolID="0"/>
+          </BorderStyle>
+          <Margin>
+            <Rect left="2.000000" bottom="2.000000" right="2.000000" top="2.000000"/>
+          </Margin>
+          <ItemTextStyle>
+            <TextStyle FontName="宋体" FontSize="3.8" Weight="0" Alignment="TopLeft" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+          </ItemTextStyle>
+          <LegendItem/>
+        </Geometry>
+			</Geometries>
+		</Layout>
+	</Layouts>
+	<Symbols>
+		<Symbol FileName="./test_symbol.svg"/>
+	</Symbols>
+	<Terrains/>
+	<Scenes/>
+</Workspace>

@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="gb2312"?>
+<DecisionTree>
+  <Variants>
+    <Variant Name="r72" Caption="过去72小时降雨量">
+      <Grade Range="(*,0.1]" Value="0"/>
+      <Grade Range="(0.1,10]" Value="1"/>
+      <Grade Range="(10,25]" Value="2"/>
+      <Grade Range="(25,*)" Value="3"/>
+    </Variant>
+    <Variant Name="r48" Caption="过去48小时降雨量">
+      <Grade Range="(*,0.1]" Value="0"/>
+      <Grade Range="(0.1,10]" Value="1"/>
+      <Grade Range="(10,25]" Value="2"/>
+      <Grade Range="(25,*)" Value="3"/>
+    </Variant>
+    <Variant Name="r24" Caption="过去24小时降雨量">
+      <Grade Range="(*,0.1]" Value="0"/>
+      <Grade Range="(0.1,10]" Value="1"/>
+      <Grade Range="(10,25]" Value="2"/>
+      <Grade Range="(25,*)" Value="3"/>
+    </Variant>
+    <Variant Name="r1" Caption="未来第一天降雨量">
+      <Grade Range="(*,0.1]" Value="0"/>
+      <Grade Range="(0.1,10]" Value="1"/>
+      <Grade Range="(10,25]" Value="2"/>
+      <Grade Range="(25,*)" Value="3"/>
+    </Variant>
+    <Variant Name="result" Caption="适宜度">
+      <Grade Range="" Value="0"/>
+      <Grade Range="" Value="1"/>
+      <Grade Range="" Value="2"/>
+    </Variant>
+  </Variants>
+
+  <Node Variant="" Value="-1">
+    <Node Variant="r72" Value="0">
+      <Node Variant="r48" Value="0">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+      <Node Variant="r48" Value="1">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+      <Node Variant="r48" Value="2">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+      <Node Variant="r48" Value="3">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+    </Node>
+    <Node Variant="r72" Value="1">
+      <Node Variant="r48" Value="0">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+      <Node Variant="r48" Value="1">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+      <Node Variant="r48" Value="2">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+      <Node Variant="r48" Value="3">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+    </Node>
+    <Node Variant="r72" Value="2">
+      <Node Variant="r48" Value="0">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+      <Node Variant="r48" Value="1">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+      <Node Variant="r48" Value="2">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+      <Node Variant="r48" Value="3">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+    </Node>
+    <Node Variant="r72" Value="3">
+      <Node Variant="r48" Value="0">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+      <Node Variant="r48" Value="1">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+      <Node Variant="r48" Value="2">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+      <Node Variant="r48" Value="3">
+        <Node Variant="r24" Value="0">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="1">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="0"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="2">
+          <Node Variant="r1" Value="0">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="1">
+            <Node Variant="result" Value="1"/>
+          </Node>
+          <Node Variant="r1" Value="2">
+            <Node Variant="result" Value="2"/>
+          </Node>
+          <Node Variant="r1" Value="3">
+            <Node Variant="result" Value="2"/>
+          </Node>
+        </Node>
+        <Node Variant="r24" Value="3">
+          <Node Variant="result" Value="2"/>
+        </Node>
+      </Node>
+    </Node>
+  </Node>
+</DecisionTree>

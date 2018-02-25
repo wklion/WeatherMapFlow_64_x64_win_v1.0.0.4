@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="gb2312"?>
+<Workspace Version="20150901">
+	<Datasources>
+		<Datasource Type="ESRI Shapefile" Alias="China_Province_pt" Server="./China_Province_pt.shp" ReadOnly="true"/>
+    <Datasource Type="ESRI Shapefile" Alias="China_Province_pl" Server="./China_Province_pl.shp" ReadOnly="true"/>
+    <Datasource Type="ESRI Shapefile" Alias="Ocean" Server="./Ocean.shp" ReadOnly="true"/>
+    <Datasource Type="ESRI Shapefile" Alias="nine-dashed_line" Server="./nine-dashed_line.shp" ReadOnly="true"/>
+	</Datasources>
+	<Volumes/>
+	<Maps>
+    <Map Version="20150901" Name="main_land" Projection="+proj=lcc +ellps=krass +lon_0=110 +lat_1=30 +lat_2=60 +units=m +no_defs" Size="0 0" MinScale="0.000000" MaxScale="0.000000">
+			<Bounds>
+				<Rect left="-3037317" bottom="2268269" right="1883612" top="6408665"/>
+			</Bounds>
+			<BackgroundStyle>
+				<FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+			</BackgroundStyle>
+			<FixedScales/>
+			<ClipRegion Datasource="" Dataset="" Where=""/>
+			<LayerGroups>
+				<LayerGroup Name="MGCBottom">
+          <Layer Version="20150901" Type="Region" Name="Ocean" Datasource="Ocean" Dataset="Ocean" MinScale="0.000000" MaxScale="0.000000" Filter="">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGBA(0,0,0,0)"/>
+            <LineStyle Width="0" color="RGB(0,0,0)" SymbolID="0"/>
+            <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGB(192,235,252)" SymbolID="0"/>
+          </Layer>
+          <Layer Version="20150901" Type="VectorRange" Name="VectorRange" Datasource="" Dataset="" MinScale="0" MaxScale="0" Filter="" RangeExpression="MGMinValue" FilledContour="true">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGB(0,0,255)"/>
+            <VectorRangeItem>
+              <Item Value="10" Caption="10">
+                <FillStyle ForeColor="RGBA(164,164,255,255)"/>
+              </Item>
+              <Item Value="15" Caption="15">
+                <FillStyle ForeColor="RGBA(100,100,192,255)"/>
+              </Item>
+              <Item Value="20" Caption="20">
+                <FillStyle ForeColor="RGBA(64,128,255,255)"/>
+              </Item>
+              <Item Value="25" Caption="25">
+                <FillStyle ForeColor="RGBA(32,64,128,255)"/>
+              </Item>
+              <Item Value="30" Caption="30">
+                <FillStyle ForeColor="RGBA(0,255,0,255)"/>
+              </Item>
+              <Item Value="35" Caption="35">
+                <FillStyle ForeColor="RGBA(0,128,0,255)"/>
+              </Item>
+			  <Item Value="40" Caption="40">
+                <FillStyle ForeColor="RGBA(255,255,0,255)"/>
+              </Item>
+			  <Item Value="45" Caption="45">
+                <FillStyle ForeColor="RGBA(255,128,0,255)"/>
+              </Item>
+			  <Item Value="50" Caption="50">
+                <FillStyle ForeColor="RGBA(255,0,0,255)"/>
+              </Item>
+			  <Item Value="55" Caption="55">
+                <FillStyle ForeColor="RGBA(160,0,0,255)"/>
+              </Item>
+			  <Item Value="60" Caption="60">
+                <FillStyle ForeColor="RGBA(255,0,255,255)"/>
+              </Item>
+			  <Item Value="65" Caption="65">
+                <FillStyle ForeColor="RGBA(128,0,128,255)"/>
+              </Item>
+            </VectorRangeItem>
+          </Layer>
+          <Layer Version="20150901" Type="Region" Name="China_Province_pl" Datasource="China_Province_pl" Dataset="China_Province_pl" MinScale="0.000000" MaxScale="0.000000" Filter="">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGBA(0,0,0,0)"/>
+            <LineStyle Width="1" color="RGB(64,64,64)" SymbolID="0"/>
+            <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,0)" SymbolID="0"/>
+          </Layer>
+          <Layer Version="20150901" Type="Line" Name="nine-dashed_line" Datasource="nine-dashed_line" Dataset="nine-dashed_line" MinScale="0.000000" MaxScale="0.000000">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGBA(0,0,0,0)"/>
+            <LineStyle Width="2" color="RGB(64,64,64)" SymbolID="0"/>
+          </Layer>
+          <Layer Version="20150901" Type="Label" Name="China_Province_label" Datasource="China_Province_pt" Dataset="China_Province_pt" MinScale="0.000000" MaxScale="0.000000" LOD="true" LabelExpression="AdminName" PointRadius="1.500000" Alignment="TopCenter|BottomCenter|MiddleLeft" PointVisible="true" InterpolationMode="NearestNeighbor">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGBA(0,0,0,0)"/>
+            <TextStyle FontName="微软雅黑" FontSize="3.5" Weight="0" Alignment="TopLeft" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+            <PointStyle Angle="0.000000" Size="1.000000" SymbolID="0"/>
+            <LineStyle Width="1" color="RGBA(0,0,0,255)" SymbolID="0"/>
+            <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" SymbolID="0"/>
+          </Layer>
+          <Layer Version="20150901" Type="Plot" Name="Plot" Datasource="" Dataset="" MinScale="0" MaxScale="0" LOD="true" LODOrderBy="Level" InterpolationMode="NearestNeighbor">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGB(0,0,0)"/>
+            <!--坐标定义：x向右，y向下，单位毫米。-->
+            <PlotItem Caption="站点值" Visible="true" Field="Value1" AngleField="" x="0" y="0">
+              <Label>
+                <TextStyle Alignment="MiddleCenter" ForeColor="RGB(0,0,255)"/>
+              </Label>
+            </PlotItem>
+          </Layer>
+        </LayerGroup>
+				<LayerGroup Name="MGCTop"/>
+			</LayerGroups>
+		</Map>
+    <Map Version="20150901" Name="south_china_sea" Projection="+proj=lcc +ellps=krass +lon_0=110 +lat_1=30 +lat_2=60 +units=m +no_defs" Size="0 0" MinScale="0.000000" MaxScale="0.000000">
+      <Bounds>
+        <Rect left="-344197" bottom="431667" right="1342081" top="2879207"/>
+      </Bounds>
+      <BackgroundStyle>
+        <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+      </BackgroundStyle>
+      <FixedScales/>
+      <ClipRegion Datasource="" Dataset="" Where=""/>
+      <LayerGroups>
+        <LayerGroup Name="MGCBottom">
+          <Layer Version="20150901" Type="Region" Name="Ocean" Datasource="Ocean" Dataset="Ocean" MinScale="0.000000" MaxScale="0.000000" Filter="">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGBA(0,0,0,0)"/>
+            <LineStyle Width="0" color="RGB(0,0,0)" SymbolID="0"/>
+            <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGB(192,235,252)" SymbolID="0"/>
+          </Layer>
+          <Layer Version="20150901" Type="VectorRange" Name="VectorRange" Datasource="" Dataset="" MinScale="0" MaxScale="0" Filter="" RangeExpression="MGMinValue" FilledContour="true">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGB(0,0,255)"/>
+            <VectorRangeItem>
+              <Item Value="10" Caption="10">
+                <FillStyle ForeColor="RGBA(164,164,255,255)"/>
+              </Item>
+              <Item Value="15" Caption="15">
+                <FillStyle ForeColor="RGBA(100,100,192,255)"/>
+              </Item>
+              <Item Value="20" Caption="20">
+                <FillStyle ForeColor="RGBA(64,128,255,255)"/>
+              </Item>
+              <Item Value="25" Caption="25">
+                <FillStyle ForeColor="RGBA(32,64,128,255)"/>
+              </Item>
+              <Item Value="30" Caption="30">
+                <FillStyle ForeColor="RGBA(0,255,0,255)"/>
+              </Item>
+              <Item Value="35" Caption="35">
+                <FillStyle ForeColor="RGBA(0,128,0,255)"/>
+              </Item>
+			  <Item Value="40" Caption="40">
+                <FillStyle ForeColor="RGBA(255,255,0,255)"/>
+              </Item>
+			  <Item Value="45" Caption="45">
+                <FillStyle ForeColor="RGBA(255,128,0,255)"/>
+              </Item>
+			  <Item Value="50" Caption="50">
+                <FillStyle ForeColor="RGBA(255,0,0,255)"/>
+              </Item>
+			  <Item Value="55" Caption="55">
+                <FillStyle ForeColor="RGBA(160,0,0,255)"/>
+              </Item>
+			  <Item Value="60" Caption="60">
+                <FillStyle ForeColor="RGBA(255,0,255,255)"/>
+              </Item>
+			  <Item Value="65" Caption="65">
+                <FillStyle ForeColor="RGBA(128,0,128,255)"/>
+              </Item>
+            </VectorRangeItem>
+          </Layer>
+          <Layer Version="20150901" Type="Region" Name="China_Province_pl" Datasource="China_Province_pl" Dataset="China_Province_pl" MinScale="0.000000" MaxScale="0.000000" Filter="">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGBA(0,0,0,0)"/>
+            <LineStyle Width="1" color="RGB(64,64,64)" SymbolID="0"/>
+            <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,0)" SymbolID="0"/>
+          </Layer>
+          <Layer Version="20150901" Type="Line" Name="nine-dashed_line" Datasource="nine-dashed_line" Dataset="nine-dashed_line" MinScale="0.000000" MaxScale="0.000000">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGBA(0,0,0,0)"/>
+            <LineStyle Width="2" color="RGB(64,64,64)" SymbolID="0"/>
+          </Layer>
+          <Layer Version="20150901" Type="Label" Name="China_Province_label" Datasource="China_Province_pt" Dataset="China_Province_pt" MinScale="0.000000" MaxScale="0.000000" LOD="true" LabelExpression="AdminName" PointRadius="1.500000" Alignment="TopCenter|BottomCenter|MiddleLeft" PointVisible="true" InterpolationMode="NearestNeighbor">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGBA(0,0,0,0)"/>
+            <TextStyle FontName="微软雅黑" FontSize="3.5" Weight="0" Alignment="TopLeft" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+            <PointStyle Angle="0.000000" Size="1.000000" SymbolID="0"/>
+            <LineStyle Width="1" color="RGBA(0,0,0,255)" SymbolID="0"/>
+            <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" SymbolID="0"/>
+          </Layer>
+        </LayerGroup>
+        <LayerGroup Name="MGCTop"/>
+      </LayerGroups>
+    </Map>
+	</Maps>
+	<Layouts>
+		<Layout Version="20150901" Name="layout">
+			<Bounds>
+        <Rect left="0.000000" bottom="203.200000" right="270.933333" top="0.000000"/>
+			</Bounds>
+			<BackgroundStyle>
+				<FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+			</BackgroundStyle>
+			<Geometries>
+				<Geometry Version="20150901" Type="GeoMap" Visible="true" MapName="main_land">
+					<Bounds>
+            <Rect left="0" bottom="0" right="0" top="0"/>
+					</Bounds>
+					<Margin>
+						<Rect left="12" bottom="5" right="12" top="5"/>
+					</Margin>
+          <Padding>
+            <Rect left="0" bottom="0" right="0" top="0"/>
+          </Padding>
+					<BorderStyle>
+						<LineStyle Width="1" color="RGBA(0,0,0,255)" SymbolID="0"/>
+					</BorderStyle>
+				</Geometry>
+        <Geometry Version="20150901" Type="GeoMapDivision" Visible="true" MapName="main_land" AutoCalc="false" Base="50.000000 0.000000" Interval="10.000000 10.000000">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <LineStyle Width="1" color="RGBA(160,160,160,255)" SymbolID="0"/>
+          <TextStyle FontName="宋体" FontSize="3.8" Weight="0" Alignment="MiddleLeft" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(160,160,160,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+          <LabelOffset>
+            <Rect left="1.000000" bottom="1.000000" right="1.000000" top="1.000000"/>
+          </LabelOffset>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoMap" Visible="true" MapName="south_china_sea">
+          <Bounds>
+            <Rect left="0" bottom="0" right="0" top="0"/>
+          </Bounds>
+          <Margin>
+            <Rect left="9" bottom="6" right="215" top="130"/>
+          </Margin>
+          <Padding>
+            <Rect left="0" bottom="0" right="0" top="0"/>
+          </Padding>
+          <BorderStyle>
+            <LineStyle Width="1" color="RGBA(0,0,0,255)" SymbolID="0"/>
+          </BorderStyle>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="0 8" Text="MainTitle">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="宋体" FontSize="8" Weight="0" Alignment="TopCenter" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="0 18" Text="SubTitle">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="宋体" FontSize="6" Weight="0" Alignment="TopCenter" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="0 26" Text="Organization">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="微软雅黑" FontSize="6" Weight="0" Alignment="TopCenter" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="260 195" Text="PublishTime">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="微软雅黑" FontSize="5" Weight="0" Alignment="BottomRight" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoPicture" Visible="true" FileName="./LOGO.png" Origin="13 9" Alignment="TopLeft" Offset="0.000000 0.000000" Size="48 48">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoLegend" Visible="true" Origin="57 0" Alignment="BottomLeft" Offset="0 6" LegendType="Range" Orientation="Vertical" Title="图例" SubTitle="(单位:mm)" ItemSize="0 6" ItemSpace="2 0" ItemCaptionStep="1" MaxValueCaption="250">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <BackgroundStyle>
+            <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(192,192,192,255)" SymbolID="0"/>
+          </BackgroundStyle>
+          <BorderStyle>
+            <LineStyle Width="1" color="RGBA(0,0,0,255)" SymbolID="0"/>
+          </BorderStyle>
+          <Margin>
+            <Rect left="2.000000" bottom="2.000000" right="2.000000" top="2.000000"/>
+          </Margin>
+          <TitleTextStyle>
+            <TextStyle FontName="宋体" FontSize="5.0" Weight="0" Alignment="TopCenter" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+          </TitleTextStyle>
+          <ItemTextStyle>
+            <TextStyle FontName="宋体" FontSize="3.8" Weight="0" Alignment="TopLeft" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+          </ItemTextStyle>
+          <LegendItem>
+            <Item Type="Region" SymbolID="0" Caption="10">
+              <FillStyle ForeColor="RGBA(164,164,255,255)"/>
+            </Item>
+            <Item Type="Region" SymbolID="0" Caption="15">
+              <FillStyle ForeColor="RGBA(100,100,192,255)"/>
+            </Item>
+            <Item Type="Region" SymbolID="0" Caption="20">
+              <FillStyle ForeColor="RGBA(64,128,255,255)"/>
+            </Item>
+            <Item Type="Region" SymbolID="0" Caption="25">
+              <FillStyle ForeColor="RGBA(32,64,128,255)"/>
+            </Item>
+            <Item Type="Region" SymbolID="0" Caption="30">
+              <FillStyle ForeColor="RGBA(0,255,0,255)"/>
+            </Item>
+            <Item Type="Region" SymbolID="0" Caption="35">
+              <FillStyle ForeColor="RGBA(0,128,0,255)"/>
+            </Item>
+			<Item Type="Region" SymbolID="0" Caption="40">
+              <FillStyle ForeColor="RGBA(255,255,0,255)"/>
+            </Item>
+			<Item Type="Region" SymbolID="0" Caption="45">
+              <FillStyle ForeColor="RGBA(255,128,0,255)"/>
+            </Item>
+			<Item Type="Region" SymbolID="0" Caption="50">
+              <FillStyle ForeColor="RGBA(255,0,0,255)"/>
+            </Item>
+			<Item Type="Region" SymbolID="0" Caption="55">
+              <FillStyle ForeColor="RGBA(160,0,0,255)"/>
+            </Item>
+			<Item Type="Region" SymbolID="0" Caption="60">
+              <FillStyle ForeColor="RGBA(255,0,255,255)"/>
+            </Item>
+			<Item Type="Region" SymbolID="0" Caption="65">
+              <FillStyle ForeColor="RGBA(128,0,128,255)"/>
+            </Item>
+          </LegendItem>
+        </Geometry>
+        
+			</Geometries>
+		</Layout>
+	</Layouts>
+	<Symbols>
+		<Symbol FileName="./test_symbol.svg"/>
+	</Symbols>
+	<Terrains/>
+	<Scenes/>
+</Workspace>

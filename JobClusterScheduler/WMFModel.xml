@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--WeatherMapFlow Model Setting-->
+<WMFModel>
+  <Plugins>
+    <Plugin FileName=".\wmf-pluginexample1.jar" Enable="true"/>
+    <Plugin FileName=".\wmf-pluginexample2.jar" Enable="true"/>
+    <Plugin FileName=".\wmf-pluginexample3.jar" Enable="true"/>
+    <Plugin FileName=".\wmf-plugintest.jar" Enable="true"/>
+  </Plugins>
+  <GlobalObjects>
+    <GlobalObject ClassName="com.wmf.pluginexample3.ConnectionObject" Name="mysql_connection">
+      <Params>
+        <Param Name="Driver" Value="com.mysql.jdbc.Driver"/>
+        <Param Name="Url" Value="jdbc:mysql://localhost:3306/china"/>
+        <Param Name="User" Value="root"/>
+        <Param Name="Password" Value="wqf"/>
+        <Param Name="MaxIdleTime" Value="1800"/>
+        <Param Name="MaxPoolSize" Value="10"/>
+      </Params>
+    </GlobalObject>
+  </GlobalObjects>  
+</WMFModel>

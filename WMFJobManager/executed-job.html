@@ -1,0 +1,572 @@
+<!--
+//-------------------------------------------------------------
+// \project WeatherMapFlow JobManager
+// \file executed-job.html
+// \brief 已执行任务
+// \author 王庆飞
+// \date 2016-5-17
+// \attention
+// Copyright(c) WeatherMap Group
+// All Rights Reserved
+// \version 1.0
+//-------------------------------------------------------------
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        body
+        {
+            font-size: 15px;
+        }
+        input[type="button"]
+        {
+            padding: 5px 10px 5px 10px;
+            background-color: rgb(190,225,247);
+            color: rgb(0,0,0);
+            border-radius: 5px;
+            border: none;
+        }
+        input:active[type="button"]
+        {
+            background-color: rgb(0,163,254);
+            color: rgb(255,255,255);
+        }
+        table
+        {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th
+        {
+            background-color: rgb(247,247,247);
+            border: 1px solid rgb(223,223,223);
+            font-weight: normal;
+        }
+        td
+        {
+            background-color: rgb(255,255,255);
+            border: 1px solid rgb(223,223,223);
+        }
+        
+        div#DialogOverlay
+        {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0%;
+            left: 0%;
+            background-color: #808080;
+            opacity: 0.7;
+            display: none;
+        }
+        div#LogDialog
+        {
+            position: absolute;
+            width: 800px;
+            height: 600px;
+            margin: -300px 0px 0px -400px;
+            top: 50%;
+            left: 50%;
+            padding: 8px;
+            background-color: #ffffff;
+            border: 1px dotted #000000;
+            overflow: auto;
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="js/wmf-job-manager.js"></script>
+    <script type="text/javascript">
+        var m_request = new XMLHttpRequest();
+        m_request.onreadystatechange = OnReadyStateChange;
+
+        var str = window.location.href;
+        var m_strUrl = str.substring(0, str.lastIndexOf('/') + 1) + "JobManager";
+
+        if (typeof Method == "undefined") {
+            var Method = {};
+            Method.GetJobGroupNames = 0;
+            Method.GetExecutedJobs = 2;
+            Method.GetLog = 3;
+            Method.DelExecutedJob = 4;
+            Method.ExecuteAgain = 5;
+            Method.CancelExecuteAgain = 6;
+        }
+        var m_eMethod;
+
+        var m_ws; //websocket
+
+        var m_nPageSize = 1000;
+        var m_nPage = 0;
+        var m_nPageCount = -1;
+
+        function InitWebSocket() {
+            var str = window.location.href;
+            var strUrl = "ws" + str.substring(4, str.lastIndexOf('/') + 1) + "websocket/Annotation";
+            m_ws = new WebSocket(strUrl);
+            m_ws.onopen = function () {
+            }
+            m_ws.onclose = function () {
+            }
+            m_ws.onerror = function () {
+            }
+            m_ws.onmessage = function (message) {
+                var job = JSON.parse(message.data);
+                if (job.ID == null)
+                    return;
+                var table = document.getElementById("JobTable");
+                for (i = 0; i < table.rows.length; i++) {
+                    if (table.rows[i].cells[1].innerText == job.ID) {
+                        if (job.Status != null) {
+                            table.rows[i].cells[8].innerHTML = ExecuteStatusToString(job.Status);
+                            table.rows[i].cells[8].style.backgroundColor = ExecuteStatusToBackgroundColor(job.Status);
+                            table.rows[i].cells[8].style.color = "#c0c0c0";
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        function OnLoad() {
+            document.getElementById("textPageSize").value = m_nPageSize;
+
+            m_eMethod = Method.GetJobGroupNames;
+            m_request.open("get", m_strUrl + "?Method=GetJobGroupNames", false);
+            m_request.send();
+
+            var date = new Date();
+            document.getElementById("dateMax").value = Format("0000", date.getFullYear()) + "-" + Format("00", date.getMonth() + 1) + "-" + Format("00", date.getDate());
+            document.getElementById("timeMax").value = Format("00", date.getHours()) + ":00";
+
+            var dateMin = new Date(date.getTime() - 3 * 24 * 3600 * 1000);
+            document.getElementById("dateMin").value = Format("0000", dateMin.getFullYear()) + "-" + Format("00", dateMin.getMonth() + 1) + "-" + Format("00", dateMin.getDate());
+            document.getElementById("timeMin").value = Format("00", dateMin.getHours()) + ":00";
+
+            var select = document.getElementById("selectExecuteStatus");
+            for (i = ExecuteStatus.Invalid; i <= ExecuteStatus.CanceledAgain; i++)
+                select.options.add(new Option(ExecuteStatusToString(i)));
+            select.selectedIndex = 0;
+
+            InitWebSocket();
+
+            OnResize();
+        }
+        function OnResize() {
+            var div = document.getElementById("divJobTable");
+            div.style.height = (window.innerHeight - 140).toString() + "px";
+        }
+        function OnReadyStateChange() {
+            if (this.readyState == this.DONE) {
+                if (this.responseText == "AccessDenied") {
+                    alert("该请求未授权！");
+                    return;
+                }
+
+                if (m_eMethod == Method.GetJobGroupNames) {
+                    if (this.responseText == "")
+                        return;
+                    var select = document.getElementById("JobGroup");
+                    var arr = this.responseText.split(',');
+                    for (i = 0; i < arr.length; i++) {
+                        select.options.add(new Option(arr[i]));
+                    }
+                }
+                else if (m_eMethod == Method.GetExecutedJobs) {
+                    if (m_nPageCount == -1) {
+                        var lCount = parseInt(this.responseText);
+                        m_nPageCount = parseInt(lCount / m_nPageSize);
+                        if (lCount % m_nPageSize != 0)
+                            ++m_nPageCount;
+                    }
+                    else {
+                        var table = document.getElementById("JobTable");
+                        for (i = table.rows.length - 1; i >= 0; i--)
+                            table.deleteRow(i);
+                        var jobs = JSON.parse(this.responseText);
+                        var tableHead = document.getElementById("JobTableHead");
+                        for (i = 0; i < jobs.length; i++) {
+                            var row = table.insertRow();
+                            var cell = row.insertCell();
+                            cell.innerHTML = "<input type=\"checkbox\" value=\"" + i + "\" onclick=\"OnJobTableCheckBoxClick()\" />";
+                            var cell = row.insertCell();
+                            cell.innerHTML = jobs[i].ID;
+                            cell.style.display = "none";
+                            var cell = row.insertCell();
+                            cell.innerHTML = jobs[i].JOB_NAME;
+                            cell = row.insertCell();
+                            cell.innerHTML = jobs[i].JOB_GROUP;
+                            cell = row.insertCell();
+                            cell.innerHTML = jobs[i].START_TIME;
+                            cell = row.insertCell();
+                            cell.innerHTML = jobs[i].ELAPSED_TIME;
+                            cell = row.insertCell();
+                            cell.innerHTML = ExecuteStatusToString(jobs[i].EXECUTE_STATUS);
+                            cell.style.backgroundColor = ExecuteStatusToBackgroundColor(jobs[i].EXECUTE_STATUS);
+                            cell.style.color = "#c0c0c0";
+                            cell = row.insertCell();
+                            cell.innerHTML = "<input type=\"button\" id=\"" + i + "\" value=\"查看日志\" onclick=\"GetLog()\" />";
+                            cell = row.insertCell();
+                            cell.innerHTML = ExecuteStatusToString(jobs[i].Status);
+                            cell.style.backgroundColor = ExecuteStatusToBackgroundColor(jobs[i].Status);
+                            cell.style.color = "#c0c0c0";
+
+                            for (j = 0; j < row.cells.length; j++) {
+                                row.cells[j].width = tableHead.rows[0].cells[j].width;
+                            }
+                        }
+
+                        var label = document.getElementById("labelPage");
+                        label.innerHTML = (m_nPage + 1) + "/" + m_nPageCount;
+                    }
+                }
+                else if (m_eMethod == Method.GetLog) {
+                    var table = document.getElementById("LogTable");
+                    for (i = table.rows.length - 1; i >= 0; i--)
+                        table.deleteRow(i);
+                    var log = JSON.parse(this.responseText);
+                    var tableHead = document.getElementById("LogTableHead");
+                    for (i = 0; i < log.length; i++) {
+                        var row = table.insertRow();
+                        var cell = row.insertCell();
+                        cell.innerHTML = log[i].TIME;
+                        cell = row.insertCell();
+                        switch (log[i].LEVEL) {
+                            case 0:
+                                cell.innerHTML = "Debug";
+                                break;
+                            case 1:
+                                cell.innerHTML = "Info";
+                                break;
+                            case 2:
+                                cell.innerHTML = "Warning";
+                                break;
+                            case 3:
+                                cell.innerHTML = "Error";
+                                break;
+                            case 4:
+                                cell.innerHTML = "Fatal";
+                                break;
+                            default:
+                                cell.innerHTML = log[i].LEVEL;
+                                break;
+                        }
+                        cell = row.insertCell();
+                        cell.innerHTML = log[i].MESSAGE;
+
+                        for (j = 0; j < row.cells.length; j++) {
+                            row.cells[j].width = tableHead.rows[0].cells[j].width;
+                        }
+                    }
+
+                    var div = document.getElementById("LogDialog");
+                    div.style.display = "block";
+                    div = document.getElementById("DialogOverlay");
+                    div.style.display = "block";
+                }
+
+                else if (m_eMethod == Method.ExecuteAgain) {
+                    if (this.responseText == "false") {
+                        alert("再次执行触发失败！");
+                        return;
+                    }
+                    alert("再次执行触发成功。");
+                }
+                else if (m_eMethod == Method.CancelExecuteAgain) {
+                    if (this.responseText == "false") {
+                        alert("取消执行失败！");
+                        return;
+                    }
+                    alert("取消执行成功。");
+                }
+                else if (m_eMethod == Method.DelExecutedJob) {
+                    if (this.responseText == "false") {
+                        alert("删除任务失败！");
+                        return;
+                    }
+                    var table = document.getElementById("JobTable");
+                    for (i = table.rows.length - 1; i >= 0; i--) {
+                        if (!table.rows[i].cells[0].childNodes[0].checked)
+                            continue;
+                        table.deleteRow(i);
+                    }
+
+                    //update checkbox value
+                    for (i = 0; i < table.rows.length; i++) {
+                        table.rows[i].cells[0].childNodes[0].value = i;
+                    }
+                    //update button id
+                    for (i = 0; i < table.rows.length; i++) {
+                        table.rows[i].cells[7].childNodes[0].id = i;
+                    }
+                }
+            }
+        }
+        function GetExecutedJobs() {
+            m_eMethod = Method.GetExecutedJobs;
+
+            var select = document.getElementById("JobGroup");
+            var str = (select.selectedIndex == 0 ? "" : ("&GroupName=" + select.options[select.selectedIndex].text));
+
+            var text = document.getElementById("textJobName");
+            str += (text.value == "" ? "" : ("&Name=" + text.value));
+
+            str += "&MinDateTime=" + document.getElementById("dateMin").value + "%20" + (document.getElementById("timeMin").value + ":00").replace(/:/g, '%3A');
+            str += "&MaxDateTime=" + document.getElementById("dateMax").value + "%20" + (document.getElementById("timeMax").value + ":00").replace(/:/g, '%3A');
+
+            select = document.getElementById("selectExecuteStatus");
+            if (select.selectedIndex > 0) {
+                str += "&ExecuteStatus=" + (select.selectedIndex - 1);
+            }
+
+            str += "&Offset=" + (m_nPage * m_nPageSize);
+            if (m_nPageCount == -1)
+                str += "&Rows=0";
+            else
+                str += "&Rows=" + m_nPageSize;
+
+            m_request.open("post", m_strUrl, false);
+            m_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            m_request.send("Method=GetExecutedJobs" + str);
+        }
+        function GetLog() {
+            m_eMethod = Method.GetLog;
+
+            var r = parseInt(window.event.srcElement.id);
+            var table = document.getElementById("JobTable");
+            m_request.open("get", m_strUrl + "?Method=GetLog" + "&ExecutedJobID=" + table.rows[r].cells[1].innerText, false);
+            m_request.send();
+
+            var label = document.getElementById("LogDialogCaption");
+            label.innerHTML = table.rows[r].cells[2].innerText + "|" + table.rows[r].cells[3].innerText + "|" + table.rows[r].cells[4].innerText + "|日志";
+        }
+
+        function GetSelectedJobs() {
+            var strResult = "";
+            var table = document.getElementById("JobTable");
+            for (i = 0; i < table.rows.length; i++) {
+                if (!table.rows[i].cells[0].childNodes[0].checked)
+                    continue;
+                var row = table.rows[i];
+                if (strResult != "")
+                    strResult += "%2C"; //逗号分隔
+                strResult += row.cells[1].innerText;
+            }
+            return strResult;
+        }
+        function ExecuteAgain() {
+            var jobs = GetSelectedJobs();
+            if (jobs == "") {
+                alert("请勾选任务。");
+                return;
+            }
+            m_eMethod = Method.ExecuteAgain;
+            m_request.open("post", m_strUrl, false);
+            m_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            m_request.send("Method=ExecuteAgain&IDs=" + jobs);
+        }
+        function CancelExecuteAgain() {
+            var jobs = GetSelectedJobs();
+            if (jobs == "") {
+                alert("请勾选任务。");
+                return;
+            }
+            m_eMethod = Method.CancelExecuteAgain;
+            m_request.open("post", m_strUrl, false);
+            m_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            m_request.send("Method=CancelExecuteAgain&IDs=" + jobs);
+        }
+        function DelExecutedJob() {
+            var jobs = GetSelectedJobs();
+            if (jobs == "") {
+                alert("请勾选任务。");
+                return;
+            }
+            if (!confirm("删除后无法恢复，确定删除吗？"))
+                return;
+            m_eMethod = Method.DelExecutedJob;
+            m_request.open("post", m_strUrl, false);
+            m_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            m_request.send("Method=DelExecutedJob&IDs=" + jobs);
+        }
+
+        function OnJobTableHeadCheckBoxClick() {
+            var cbHead = document.getElementById("JobTableHeadCheckBox");
+            var bgc = cbHead.checked ? "#528bcb" : "#ffffff";
+            var fc = cbHead.checked ? "#ffffff" : "#000000";
+
+            var table = document.getElementById("JobTable");
+            for (i = 0; i < table.rows.length; i++) {
+                table.rows[i].cells[0].childNodes[0].checked = cbHead.checked;
+                for (j = 0; j < table.rows[i].cells.length; j++) {
+                    if (j == 6 || j == 8)
+                        continue;
+                    table.rows[i].cells[j].style.backgroundColor = bgc;
+                    table.rows[i].cells[j].style.color = fc;
+                }
+            }
+        }
+        function OnJobTableCheckBoxClick() {
+            var i = parseInt(window.event.srcElement.value);
+            var bgc = window.event.srcElement.checked ? "#528bcb" : "#ffffff";
+            var fc = window.event.srcElement.checked ? "#ffffff" : "#000000";
+            var table = document.getElementById("JobTable");
+            for (j = 0; j < table.rows[i].cells.length; j++) {
+                if (j == 6 || j == 8)
+                    continue;
+                table.rows[i].cells[j].style.backgroundColor = bgc;
+                table.rows[i].cells[j].style.color = fc;
+            }
+        }
+
+        function DialogOverlayOnClick() {
+            var div = document.getElementById("LogDialog");
+            div.style.display = "none";
+            div = document.getElementById("DialogOverlay");
+            div.style.display = "none";
+        }
+
+        function Query() {
+            m_nPageSize = document.getElementById("textPageSize").value;
+
+            m_nPageCount = -1;
+            GetExecutedJobs();
+            m_nPage = 0;
+            GetExecutedJobs();
+        }
+        function FirstPage() {
+            m_nPage = 0;
+            GetExecutedJobs();
+        }
+        function PrevPage() {
+            if (m_nPage <= 0)
+                return;
+            --m_nPage;
+            GetExecutedJobs();
+        }
+        function NextPage() {
+            if (m_nPage >= m_nPageCount)
+                return;
+            ++m_nPage;
+            GetExecutedJobs();
+        }
+        function LastPage() {
+            m_nPage = m_nPageCount - 1;
+            GetExecutedJobs();
+        }
+        function GotoPage() {
+            var text = document.getElementById("textPage");
+            m_nPage = parseInt(text.value) - 1;
+            GetExecutedJobs();
+        }
+
+    </script>
+</head>
+<body onload="OnLoad()" onresize="OnResize()">
+    <label>
+        任务组：</label>
+    <select id="JobGroup" style="width: 150px; height: 25px;">
+        <option></option>
+    </select>
+    <label>
+        名称：</label>
+    <input type="text" id="textJobName" style="width: 100px; height: 20px;" />
+    <label>
+        开始时间：</label>
+    <input type="date" id="dateMin" style="height: 25px;" /><input type="time" id="timeMin" style="height: 25px;" />
+    <label>
+        -</label>
+    <input type="date" id="dateMax" style="height: 25px;" /><input type="time" id="timeMax" style="height: 25px;" />
+    <label>
+        执行结果：</label>
+    <select id="selectExecuteStatus" style="width: 80px; height: 25px;">
+        <option></option>
+    </select>
+    <label>
+        页尺寸：</label>
+    <input type="text" id="textPageSize" style="width: 50px; height: 20px;" />
+    <input type="button" value="查询" onclick="Query()" />
+    <input type="button" value="再次执行" onclick="ExecuteAgain()" />
+    <input type="button" value="取消执行" onclick="CancelExecuteAgain()" />
+    <input type="button" value="删除" onclick="DelExecutedJob()" />
+    <div style="overflow-x: hidden; overflow-y: scroll; margin-top: 10px;">
+        <table id="JobTableHead">
+            <tr>
+                <th width="5%">
+                    <input type="checkbox" id="JobTableHeadCheckBox" onclick="OnJobTableHeadCheckBoxClick()" />
+                </th>
+                <th style="display: none;" width="0%">
+                    ID
+                </th>
+                <th width="20%">
+                    名称
+                </th>
+                <th width="20%">
+                    任务组
+                </th>
+                <th width="15%">
+                    开始时间
+                </th>
+                <th width="10%">
+                    耗时(ms)
+                </th>
+                <th width="10%">
+                    执行结果
+                </th>
+                <th width="10%">
+                    查看日志
+                </th>
+                <th width="10%">
+                    再次执行状态
+                </th>
+            </tr>
+        </table>
+    </div>
+    <div id="divJobTable" style="overflow-x: hidden; overflow-y: scroll;">
+        <table id="JobTable">
+        </table>
+    </div>
+    <p style="float: right;">
+        <input type="button" value="首页" onclick="FirstPage()" />
+        <input type="button" value="上一页" onclick="PrevPage()" />
+        <input type="button" value="下一页" onclick="NextPage()" />
+        <input type="button" value="末页" onclick="LastPage()" />
+        <label>
+            跳转到第</label>
+        <input type="text" id="textPage" style="width: 50px; height: 20px;" />
+        <label>
+            页</label>
+        <input type="button" value="跳转" onclick="GotoPage()" />
+        <label id="labelPage">
+            0/0
+        </label>
+    </p>
+    <div id="DialogOverlay" onclick="DialogOverlayOnClick()">
+    </div>
+    <div id="LogDialog">
+        <label id="LogDialogCaption">日志
+        </label>
+        <div style="overflow-x: hidden; overflow-y: scroll; margin-top: 4px;">
+            <table id="LogTableHead" style="margin: 4px 0px 0px 0px;">
+                <tr>
+                    <th width="20%">
+                        时间
+                    </th>
+                    <th width="10%">
+                        级别
+                    </th>
+                    <th width="70%">
+                        内容
+                    </th>
+                </tr>
+            </table>
+        </div>
+        <div id="divLogTable" style="overflow-x: hidden; overflow-y: scroll; height: 546px;">
+            <table id="LogTable">
+            </table>
+        </div>
+    </div>
+</body>
+</html>

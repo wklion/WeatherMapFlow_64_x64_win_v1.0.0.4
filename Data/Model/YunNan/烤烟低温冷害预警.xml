@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value=""/>
+		<Param Name="Author" Value="Administrator"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2016-10-25 16:22:54"/>
+		<Param Name="DataStartTime" Value="2016-10-27 14:16:31"/>
+		<Param Name="DataEndTime" Value="2016-10-27 14:16:31"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample3.ModuleQuery" x="224" y="48">
+			<Params>
+				<Param Name="ConnectionName" Value="mysql_connection"/>
+				<Param Name="Sql" Value="select number as StationNum,x,y from station_info"/>
+				<Param Name="Name" Value="查询"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="JDBCResultSet"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.pluginexample3.ModuleQuery" x="224" y="144">
+			<Params>
+				<Param Name="ConnectionName" Value="mysql_connection"/>
+				<Param Name="Sql" Value="SELECT number as StationNum,concat(lpad(year,4,'0'),'-',lpad(month,2,'0'),'-',lpad(day,2,'0')) as Time,t FROM observation where year=2001"/>
+				<Param Name="Name" Value="查询"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="JDBCResultSet"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="3" ClassName="com.wmf.pluginexample3.ModulePeriodStatistics" x="432" y="48">
+			<Params>
+				<Param Name="Name" Value="站点信息"/>
+				<Param Name="Name" Value="2000-2007日数据"/>
+				<Param Name="ExpressionItemCount" Value="1"/>
+				<Param Name="Expression" Value="t-tc"/>
+				<Param Name="Condition" Value=""/>
+				<Param Name="Model" Value="">
+					<Model ClassName="com.wmf.plugintest.ModelCoeff">
+						<Params>
+							<Param Name="Description" Value=""/>
+							<Param Name="Author" Value="Administrator"/>
+							<Param Name="Company" Value=""/>
+							<Param Name="Background" Value="255 255 255"/>
+							<Param Name="GridSize" Value="16 16"/>
+							<Param Name="ShowGrid" Value="true"/>
+							<Param Name="SnapToGrid" Value="true"/>
+							<Param Name="Lock" Value="false"/>
+							<Param Name="StartTime" Value="2001-12-31 00:00:00"/>
+							<Param Name="DataStartTime" Value="2001-12-31 00:00:00"/>
+							<Param Name="DataEndTime" Value="2001-12-31 00:00:00"/>
+						</Params>
+						<Modules/>
+						<Pipes/>
+					</Model>
+				</Param>
+				<Param Name="StationNumField" Value="StationNum"/>
+				<Param Name="XField" Value="x"/>
+				<Param Name="YField" Value="y"/>
+				<Param Name="TimeField" Value="Time"/>
+				<Param Name="TimeFieldFormat" Value="yyyy-MM-dd"/>
+				<Param Name="StatsMethod" Value="Sum"/>
+				<Param Name="MovingAvgCondition" Value="t&gt;=300"/>
+				<Param Name="MovingAvgStepCount" Value="5"/>
+				<Param Name="MovingAvgStartStep" Value="-4"/>
+				<Param Name="PersistenceCondition" Value=""/>
+				<Param Name="OutputField" Value="Value"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="JDBCResultSet"/>
+				<InputPort ID="2" Type="JDBCResultSet"/>
+				<InputPort ID="3" Type="Unknown"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="CSV"/>
+			</OutputPorts>
+		</Module>
+	</Modules>
+	<Pipes>
+		<Pipe ID="4" IncomingModule="1" IncomingPort="1" OutgoingModule="3" OutgoingPort="1"/>
+		<Pipe ID="5" IncomingModule="2" IncomingPort="1" OutgoingModule="3" OutgoingPort="2"/>
+	</Pipes>
+</Model>

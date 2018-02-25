@@ -1,0 +1,852 @@
+<!--
+//-------------------------------------------------------------
+// \project WeatherMapFlow JobManager
+// \file cron-maker.html
+// \brief Cron表达式生成器
+// \author 王庆飞
+// \date 2016-6-14
+// \attention
+// Copyright(c) WeatherMap Group
+// All Rights Reserved
+// \version 1.0
+//-------------------------------------------------------------
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        body
+        {
+            font-size: 12px;
+        }
+        input
+        {
+            vertical-align: middle;
+        }
+        input[type="button"]
+        {
+            padding: 5px 10px 5px 10px;
+            background-color: rgb(190,225,247);
+            color: rgb(0,0,0);
+            border-radius: 5px;
+            border: none;
+        }
+        input:active[type="button"]
+        {
+            background-color: rgb(0,163,254);
+            color: rgb(255,255,255);
+        }
+        .row
+        {
+            margin: 4px;
+        }
+        .tab
+        {
+            display: inline-block;
+            height: 20px;
+            text-align: center;
+            margin-left: 4px;
+            margin-top: 4px;
+            padding: 4px 15px 0px 15px;
+            cursor: pointer;
+        }
+        .active-tab
+        {
+            background-color: rgb(255,255,255);
+            border-left: 1px rgb(202,196,196) solid;
+            border-top: 1px rgb(202,196,196) solid;
+            border-right: 1px rgb(202,196,196) solid;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+    </style>
+    <script type="text/javascript">
+        var m_request = new XMLHttpRequest();
+        m_request.onreadystatechange = OnReadyStateChange;
+
+        var str = window.location.href;
+        var m_strUrl = str.substring(0, str.lastIndexOf('/') + 1) + "JobManager";
+
+        var m_nActiveTab = "0";
+
+        function OnReadyStateChange() {
+            if (this.readyState == this.DONE) {
+                var td = document.getElementById("tdLastValidTime");
+                td.innerText = this.responseText.replace(/,/g, '\r');
+            }
+        }
+
+        function OnLoad() {
+            document.getElementById(0).className = "tab active-tab";
+            for (i = 1; i <= 6; i++) {
+                document.getElementById("tab" + i).style.display = "none";
+                document.getElementById(i).className = "tab";
+            }
+
+            var inputs = document.getElementsByTagName("input");
+            for (i = 0; i < inputs.length; i++) {
+                if (inputs[i].type == "radio" || inputs[i].type == "checkbox")
+                    inputs[i].onclick = OnInput;
+                else if (inputs[i].type == "number")
+                    inputs[i].onchange = OnInput;
+            }
+
+            Parse();
+        }
+
+        function GetChecked() {
+            var strResult = "";
+            var tab = document.getElementById("tab" + m_nActiveTab);
+            for (j = 0; j < tab.childNodes.length; j++) {
+                if (tab.childNodes[j].nodeType == 1) {
+                    var div = tab.childNodes[j];
+                    for (k = 0; k < div.childNodes.length; k++) {
+                        if (div.childNodes[k].nodeType == 1 && div.childNodes[k].type == "checkbox") {
+                            if (div.childNodes[k].checked) {
+                                if (strResult != "")
+                                    strResult += ",";
+                                strResult += div.childNodes[k].value;
+                            }
+                        }
+                    }
+                }
+            }
+            if (strResult == "")
+                strResult = "?";
+            return strResult;
+        }
+        function SetChecked(str, tab, nCount, nOffset) {
+            var i = 0;
+            var arrCheckbox = new Array(nCount);
+            for (j = 0; j < tab.childNodes.length; j++) {
+                if (tab.childNodes[j].nodeType == 1) {
+                    var div = tab.childNodes[j];
+                    for (k = 0; k < div.childNodes.length; k++) {
+                        if (div.childNodes[k].nodeType == 1 && div.childNodes[k].type == "checkbox") {
+                            div.childNodes[k].checked = false;
+                            arrCheckbox[i++] = div.childNodes[k];
+                        }
+                    }
+                }
+            }
+            if (str != "?") {
+                var arrValue = str.split(',');
+                for (i = 0; i < arrValue.length; i++) {
+                    arrCheckbox[arrValue[i] - nOffset].checked = true;
+                }
+            }
+        }
+        function OnInput() {
+            if (m_nActiveTab == "0" || m_nActiveTab == "1" || m_nActiveTab == "2" || m_nActiveTab == "3" || m_nActiveTab == "4") {
+                var strType = "";
+                if (m_nActiveTab == "0")
+                    strType = "second";
+                else if (m_nActiveTab == "1")
+                    strType = "minute";
+                else if (m_nActiveTab == "2")
+                    strType = "hour";
+                else if (m_nActiveTab == "3")
+                    strType = "day";
+                else if (m_nActiveTab == "4")
+                    strType = "month";
+                if (strType == "")
+                    return;
+
+                var text = document.getElementById("text_" + strType);
+                var radios = document.getElementsByName(strType);
+                for (i = 0; i < radios.length; i++) {
+                    if (radios[i].checked)
+                        break;
+                }
+                if (i == 0) {
+                    text.value = "*";
+                }
+                else if (i == 1) {
+                    text.value = document.getElementById(strType + "1_Start").value + "-" + document.getElementById(strType + "1_End").value;
+                }
+                else if (i == 2) {
+                    text.value = document.getElementById(strType + "2_Start").value + "/" + document.getElementById(strType + "2_End").value;
+                }
+                else if (i == 3) {
+                    text.value = GetChecked();
+                }
+                else if (i == 4) {
+                    text.value = document.getElementById(strType + "4").value + "W";
+                }
+                else if (i == 5) {
+                    text.value = "L";
+                }
+            }
+            else if (m_nActiveTab == "5") {
+                var text = document.getElementById("text_week");
+                var radios = document.getElementsByName("week");
+                for (i = 0; i < radios.length; i++) {
+                    if (radios[i].checked)
+                        break;
+                }
+                if (i == 0) {
+                    text.value = "*";
+                }
+                else if (i == 1) {
+                    text.value = document.getElementById("week1_Start").value + "-" + document.getElementById("week1_End").value;
+                }
+                else if (i == 2) {
+                    text.value = GetChecked();
+                }
+                else if (i == 3) {
+                    text.value = document.getElementById("week3_Start").value + "#" + document.getElementById("week3_End").value;
+                }
+                else if (i == 4) {
+                    text.value = document.getElementById("week4").value + "L";
+                }
+            }
+            else if (m_nActiveTab == "6") {
+                var text = document.getElementById("text_year");
+                var radios = document.getElementsByName("year");
+                for (i = 0; i < radios.length; i++) {
+                    if (radios[i].checked)
+                        break;
+                }
+                if (i == 0) {
+                    text.value = "*";
+                }
+                else if (i == 1) {
+                    text.value = document.getElementById("year1_Start").value + "-" + document.getElementById("year1_End").value;
+                }
+                else if (i == 2) {
+                    text.value = "";
+                }
+            }
+
+            document.getElementById("textCronExpression").value = document.getElementById("text_second").value + " " +
+                document.getElementById("text_minute").value + " " +
+                document.getElementById("text_hour").value + " " +
+                document.getElementById("text_day").value + " " +
+                document.getElementById("text_month").value + " " +
+                document.getElementById("text_week").value;
+            if (document.getElementById("text_year").value != "")
+                document.getElementById("textCronExpression").value += " " + document.getElementById("text_year").value;
+
+            m_request.open("get", m_strUrl + "?Method=GetLastValidTime&CronExpression=" + document.getElementById("textCronExpression").value + "&Count=5", false);
+            m_request.send();
+        }
+        function Parse() {
+            var arr = document.getElementById("textCronExpression").value.split(' ');
+            if (arr.length != 6 && arr.length != 7) {
+                alert("Cron表达式不正确！");
+                return;
+            }
+            for (t = 0; t <= 4; t++) {
+                var strType = "";
+                if (t == 0)
+                    strType = "second";
+                else if (t == 1)
+                    strType = "minute";
+                else if (t == 2)
+                    strType = "hour";
+                else if (t == 3)
+                    strType = "day";
+                else if (t == 4)
+                    strType = "month";
+
+                var radios = document.getElementsByName(strType);
+                if (arr[t] == "*")
+                    radios[0].checked = true;
+                else {
+                    var i = arr[t].indexOf('-');
+                    if (i != -1) {
+                        radios[1].checked = true;
+                        document.getElementById(strType + "1_Start").value = arr[t].substring(0, i);
+                        document.getElementById(strType + "1_End").value = arr[t].substring(i + 1);
+                    }
+                    else {
+                        i = arr[t].indexOf('/');
+                        if (i != -1) {
+                            radios[2].checked = true;
+                            document.getElementById(strType + "2_Start").value = arr[t].substring(0, i);
+                            document.getElementById(strType + "2_End").value = arr[t].substring(i + 1);
+                        }
+                        else {
+                            if (t == 3 && arr[t].substring(arr[5].length - 1) == "W") {
+                                radios[4].checked = true;
+                                document.getElementById(strType + "4").value = arr[t].substring(0, arr[t].length - 1);
+                            }
+                            else {
+                                if (t == 3 && arr[t] == "L") {
+                                    radios[5].checked = true;
+                                }
+                                else {
+                                    radios[3].checked = true;
+                                    var tab = document.getElementById("tab" + t);
+                                    SetChecked(arr[t], tab, t == 2 ? 24 : (t == 3 ? 31 : (t == 4 ? 12 : 60)), (t == 3 || t == 4) ? 1 : 0);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            var radios = document.getElementsByName("week");
+            if (arr[5] == "*")
+                radios[0].checked = true;
+            else {
+                var i = arr[5].indexOf('-');
+                if (i != -1) {
+                    radios[1].checked = true;
+                    document.getElementById("week1_Start").value = arr[5].substring(0, i);
+                    document.getElementById("week1_End").value = arr[5].substring(i + 1);
+                }
+                else {
+                    i = arr[5].indexOf('#');
+                    if (i != -1) {
+                        radios[3].checked = true;
+                        document.getElementById("week3_Start").value = arr[5].substring(0, i);
+                        document.getElementById("week3_End").value = arr[5].substring(i + 1);
+                    }
+                    else {
+                        if (arr[5].substring(arr[5].length - 1) == "L") {
+                            radios[4].checked = true;
+                            document.getElementById("week4").value = arr[5].substring(0, arr[5].length - 1);
+                        }
+                        else {
+                            radios[2].checked = true;
+                            var tab = document.getElementById("tab5");
+                            SetChecked(arr[5], tab, 7, 1);
+                        }
+                    }
+                }
+            }
+
+            var radios = document.getElementsByName("year");
+            if (arr.length == 7) {
+                if (arr[6] == "*")
+                    radios[0].checked = true;
+                else {
+                    var i = arr[6].indexOf('-');
+                    if (i != -1) {
+                        radios[1].checked = true;
+                        document.getElementById("year1_Start").value = arr[6].substring(0, i);
+                        document.getElementById("year1_End").value = arr[6].substring(i + 1);
+                    }
+                }
+            }
+            else {
+                radios[2].checked = true;
+            }
+
+            document.getElementById("text_second").value = arr[0];
+            document.getElementById("text_minute").value = arr[1];
+            document.getElementById("text_hour").value = arr[2];
+            document.getElementById("text_day").value = arr[3];
+            document.getElementById("text_month").value = arr[4];
+            document.getElementById("text_week").value = arr[5];
+            if (arr.length == 7)
+                document.getElementById("text_year").value = arr[6];
+
+            m_request.open("get", m_strUrl + "?Method=GetLastValidTime&CronExpression=" + document.getElementById("textCronExpression").value + "&Count=5", false);
+            m_request.send();
+        }
+
+        function OnClickTab() {
+            if (m_nActiveTab == window.event.srcElement.id)
+                return;
+            var div = document.getElementById(m_nActiveTab);
+            div.className = "tab";
+            document.getElementById("tab" + m_nActiveTab).style.display = "none";
+
+            window.event.srcElement.className = "tab active-tab";
+            m_nActiveTab = window.event.srcElement.id;
+            document.getElementById("tab" + m_nActiveTab).style.display = "block";
+        }
+    </script>
+</head>
+<body onload="OnLoad()">
+    <div style="width: 810px; height: 270px; border: 1px rgb(202, 196, 196) solid; border-radius: 5px;">
+        <div style="height: 28px; background-color: rgb(242,242,242); border-bottom: 1px rgb(202, 196, 196) solid;">
+            <div id="0" onclick="OnClickTab()">
+                秒</div>
+            <div id="1" onclick="OnClickTab()">
+                分钟</div>
+            <div id="2" onclick="OnClickTab()">
+                小时</div>
+            <div id="3" onclick="OnClickTab()">
+                日</div>
+            <div id="4" onclick="OnClickTab()">
+                月</div>
+            <div id="5" onclick="OnClickTab()">
+                周</div>
+            <div id="6" onclick="OnClickTab()">
+                年</div>
+        </div>
+        <div title="秒" id="tab0">
+            <div class="row">
+                <input type="radio" checked="checked" name="second">
+                每秒</div>
+            <div class="row">
+                <input type="radio" name="second">
+                周期 从
+                <input type="number" min="1" max="58" style="width: 60px;" value="1" id="second1_Start">
+                -
+                <input type="number" min="2" max="59" style="width: 60px;" value="2" id="second1_End">
+                秒</div>
+            <div class="row">
+                <input type="radio" name="second">
+                从
+                <input type="number" min="0" max="59" style="width: 60px;" value="0" id="second2_Start">
+                秒开始,每
+                <input type="number" min="1" max="59" style="width: 60px;" value="1" id="second2_End">
+                秒执行一次</div>
+            <div class="row">
+                <input type="radio" name="second">
+                指定</div>
+            <div class="row">
+                <input type="checkbox" value="0">00
+                <input type="checkbox" value="1">01
+                <input type="checkbox" value="2">02
+                <input type="checkbox" value="3">03
+                <input type="checkbox" value="4">04
+                <input type="checkbox" value="5">05
+                <input type="checkbox" value="6">06
+                <input type="checkbox" value="7">07
+                <input type="checkbox" value="8">08
+                <input type="checkbox" value="9">09
+            </div>
+            <div class="row">
+                <input type="checkbox" value="10">10
+                <input type="checkbox" value="11">11
+                <input type="checkbox" value="12">12
+                <input type="checkbox" value="13">13
+                <input type="checkbox" value="14">14
+                <input type="checkbox" value="15">15
+                <input type="checkbox" value="16">16
+                <input type="checkbox" value="17">17
+                <input type="checkbox" value="18">18
+                <input type="checkbox" value="19">19
+            </div>
+            <div class="row">
+                <input type="checkbox" value="20">20
+                <input type="checkbox" value="21">21
+                <input type="checkbox" value="22">22
+                <input type="checkbox" value="23">23
+                <input type="checkbox" value="24">24
+                <input type="checkbox" value="25">25
+                <input type="checkbox" value="26">26
+                <input type="checkbox" value="27">27
+                <input type="checkbox" value="28">28
+                <input type="checkbox" value="29">29
+            </div>
+            <div class="row">
+                <input type="checkbox" value="30">30
+                <input type="checkbox" value="31">31
+                <input type="checkbox" value="32">32
+                <input type="checkbox" value="33">33
+                <input type="checkbox" value="34">34
+                <input type="checkbox" value="35">35
+                <input type="checkbox" value="36">36
+                <input type="checkbox" value="37">37
+                <input type="checkbox" value="38">38
+                <input type="checkbox" value="39">39
+            </div>
+            <div class="row">
+                <input type="checkbox" value="40">40
+                <input type="checkbox" value="41">41
+                <input type="checkbox" value="42">42
+                <input type="checkbox" value="43">43
+                <input type="checkbox" value="44">44
+                <input type="checkbox" value="45">45
+                <input type="checkbox" value="46">46
+                <input type="checkbox" value="47">47
+                <input type="checkbox" value="48">48
+                <input type="checkbox" value="49">49
+            </div>
+            <div class="row">
+                <input type="checkbox" value="50">50
+                <input type="checkbox" value="51">51
+                <input type="checkbox" value="52">52
+                <input type="checkbox" value="53">53
+                <input type="checkbox" value="54">54
+                <input type="checkbox" value="55">55
+                <input type="checkbox" value="56">56
+                <input type="checkbox" value="57">57
+                <input type="checkbox" value="58">58
+                <input type="checkbox" value="59">59
+            </div>
+        </div>
+        <div title="分钟" id="tab1">
+            <div class="row">
+                <input type="radio" checked="checked" name="minute">
+                每分钟</div>
+            <div class="row">
+                <input type="radio" name="minute">
+                周期 从
+                <input type="number" min="1" max="58" style="width: 60px;" value="1" id="minute1_Start">
+                -
+                <input type="number" min="2" max="59" style="width: 60px;" value="2" id="minute1_End">
+                分钟</div>
+            <div class="row">
+                <input type="radio" name="minute">
+                从
+                <input type="number" min="0" max="59" style="width: 60px;" value="0" id="minute2_Start">
+                分钟开始,每
+                <input type="number" min="1" max="59" style="width: 60px;" value="1" id="minute2_End">
+                分钟执行一次</div>
+            <div class="row">
+                <input type="radio" name="minute">
+                指定</div>
+            <div class="row">
+                <input type="checkbox" value="0">00
+                <input type="checkbox" value="1">01
+                <input type="checkbox" value="2">02
+                <input type="checkbox" value="3">03
+                <input type="checkbox" value="4">04
+                <input type="checkbox" value="5">05
+                <input type="checkbox" value="6">06
+                <input type="checkbox" value="7">07
+                <input type="checkbox" value="8">08
+                <input type="checkbox" value="9">09
+            </div>
+            <div class="row">
+                <input type="checkbox" value="10">10
+                <input type="checkbox" value="11">11
+                <input type="checkbox" value="12">12
+                <input type="checkbox" value="13">13
+                <input type="checkbox" value="14">14
+                <input type="checkbox" value="15">15
+                <input type="checkbox" value="16">16
+                <input type="checkbox" value="17">17
+                <input type="checkbox" value="18">18
+                <input type="checkbox" value="19">19
+            </div>
+            <div class="row">
+                <input type="checkbox" value="20">20
+                <input type="checkbox" value="21">21
+                <input type="checkbox" value="22">22
+                <input type="checkbox" value="23">23
+                <input type="checkbox" value="24">24
+                <input type="checkbox" value="25">25
+                <input type="checkbox" value="26">26
+                <input type="checkbox" value="27">27
+                <input type="checkbox" value="28">28
+                <input type="checkbox" value="29">29
+            </div>
+            <div class="row">
+                <input type="checkbox" value="30">30
+                <input type="checkbox" value="31">31
+                <input type="checkbox" value="32">32
+                <input type="checkbox" value="33">33
+                <input type="checkbox" value="34">34
+                <input type="checkbox" value="35">35
+                <input type="checkbox" value="36">36
+                <input type="checkbox" value="37">37
+                <input type="checkbox" value="38">38
+                <input type="checkbox" value="39">39
+            </div>
+            <div class="row">
+                <input type="checkbox" value="40">40
+                <input type="checkbox" value="41">41
+                <input type="checkbox" value="42">42
+                <input type="checkbox" value="43">43
+                <input type="checkbox" value="44">44
+                <input type="checkbox" value="45">45
+                <input type="checkbox" value="46">46
+                <input type="checkbox" value="47">47
+                <input type="checkbox" value="48">48
+                <input type="checkbox" value="49">49
+            </div>
+            <div class="row">
+                <input type="checkbox" value="50">50
+                <input type="checkbox" value="51">51
+                <input type="checkbox" value="52">52
+                <input type="checkbox" value="53">53
+                <input type="checkbox" value="54">54
+                <input type="checkbox" value="55">55
+                <input type="checkbox" value="56">56
+                <input type="checkbox" value="57">57
+                <input type="checkbox" value="58">58
+                <input type="checkbox" value="59">59
+            </div>
+        </div>
+        <div title="小时" id="tab2">
+            <div class="row">
+                <input type="radio" checked="checked" name="hour">
+                每小时</div>
+            <div class="row">
+                <input type="radio" name="hour">
+                周期 从
+                <input type="number" min="0" max="23" style="width: 60px;" value="0" id="hour1_Start">
+                -
+                <input type="number" min="2" max="23" style="width: 60px;" value="2" id="hour1_End">
+                小时</div>
+            <div class="row">
+                <input type="radio" name="hour">
+                从
+                <input type="number" min="0" max="23" style="width: 60px;" value="0" id="hour2_Start">
+                小时开始,每
+                <input type="number" min="1" max="23" style="width: 60px;" value="1" id="hour2_End">
+                小时执行一次</div>
+            <div class="row">
+                <input type="radio" name="hour">
+                指定</div>
+            <div class="row">
+                AM:
+                <input type="checkbox" value="0">00
+                <input type="checkbox" value="1">01
+                <input type="checkbox" value="2">02
+                <input type="checkbox" value="3">03
+                <input type="checkbox" value="4">04
+                <input type="checkbox" value="5">05
+                <input type="checkbox" value="6">06
+                <input type="checkbox" value="7">07
+                <input type="checkbox" value="8">08
+                <input type="checkbox" value="9">09
+                <input type="checkbox" value="10">10
+                <input type="checkbox" value="11">11
+            </div>
+            <div class="row">
+                PM:
+                <input type="checkbox" value="12">12
+                <input type="checkbox" value="13">13
+                <input type="checkbox" value="14">14
+                <input type="checkbox" value="15">15
+                <input type="checkbox" value="16">16
+                <input type="checkbox" value="17">17
+                <input type="checkbox" value="18">18
+                <input type="checkbox" value="19">19
+                <input type="checkbox" value="20">20
+                <input type="checkbox" value="21">21
+                <input type="checkbox" value="22">22
+                <input type="checkbox" value="23">23
+            </div>
+        </div>
+        <div title="日" id="tab3">
+            <div class="row">
+                <input type="radio" checked="checked" name="day">
+                每日</div>
+            <div class="row">
+                <input type="radio" name="day">
+                周期 从
+                <input type="number" min="1" max="31" style="width: 60px;" value="1" id="day1_Start">
+                -
+                <input type="number" min="2" max="31" style="width: 60px;" value="2" id="day1_End">
+                日</div>
+            <div class="row">
+                <input type="radio" name="day">
+                从
+                <input type="number" min="1" max="31" style="width: 60px;" value="1" id="day2_Start">
+                日开始,每
+                <input type="number" min="1" max="31" style="width: 60px;" value="1" id="day2_End">
+                日执行一次</div>
+            <div class="row">
+                <input type="radio" name="day">
+                指定</div>
+            <div class="row">
+                <input type="checkbox" value="1">1
+                <input type="checkbox" value="2">2
+                <input type="checkbox" value="3">3
+                <input type="checkbox" value="4">4
+                <input type="checkbox" value="5">5
+                <input type="checkbox" value="6">6
+                <input type="checkbox" value="7">7
+                <input type="checkbox" value="8">8
+                <input type="checkbox" value="9">9
+                <input type="checkbox" value="10">10
+                <input type="checkbox" value="11">11
+                <input type="checkbox" value="12">12
+                <input type="checkbox" value="13">13
+                <input type="checkbox" value="14">14
+                <input type="checkbox" value="15">15
+                <input type="checkbox" value="16">16
+            </div>
+            <div class="row">
+                <input type="checkbox" value="17">17
+                <input type="checkbox" value="18">18
+                <input type="checkbox" value="19">19
+                <input type="checkbox" value="20">20
+                <input type="checkbox" value="21">21
+                <input type="checkbox" value="22">22
+                <input type="checkbox" value="23">23
+                <input type="checkbox" value="24">24
+                <input type="checkbox" value="25">25
+                <input type="checkbox" value="26">26
+                <input type="checkbox" value="27">27
+                <input type="checkbox" value="28">28
+                <input type="checkbox" value="29">29
+                <input type="checkbox" value="30">30
+                <input type="checkbox" value="31">31
+            </div>
+            <div class="row">
+                <input type="radio" name="day">
+                每月
+                <input type="number" min="1" max="31" style="width: 60px;" value="1" id="day4">
+                日最近的那个工作日</div>
+            <div class="row">
+                <input type="radio" name="day">
+                本月最后一日</div>
+        </div>
+        <div title="月" id="tab4">
+            <div class="row">
+                <input type="radio" checked="checked" name="month">
+                每月</div>
+            <div class="row">
+                <input type="radio" name="month">
+                周期 从
+                <input type="number" min="1" max="12" style="width: 60px;" value="1" id="month1_Start">
+                -
+                <input type="number" min="2" max="12" style="width: 60px;" value="2" id="month1_End">
+                月</div>
+            <div class="row">
+                <input type="radio" name="month">
+                从
+                <input type="number" min="1" max="12" style="width: 60px;" value="1" id="month2_Start">
+                月开始,每
+                <input type="number" min="1" max="12" style="width: 60px;" value="1" id="month2_End">
+                月执行一次</div>
+            <div class="row">
+                <input type="radio" name="month">
+                指定</div>
+            <div class="row">
+                <input type="checkbox" value="1">1
+                <input type="checkbox" value="2">2
+                <input type="checkbox" value="3">3
+                <input type="checkbox" value="4">4
+                <input type="checkbox" value="5">5
+                <input type="checkbox" value="6">6
+                <input type="checkbox" value="7">7
+                <input type="checkbox" value="8">8
+                <input type="checkbox" value="9">9
+                <input type="checkbox" value="10">10
+                <input type="checkbox" value="11">11
+                <input type="checkbox" value="12">12
+            </div>
+        </div>
+        <div title="周" id="tab5">
+            <div class="row">
+                <input type="radio" checked="checked" name="week">
+                每周</div>
+            <div class="row">
+                <input type="radio" name="week">
+                周期 从星期
+                <input type="number" min="1" max="7" style="width: 60px;" value="1" id="week1_Start">
+                -
+                <input type="number" min="2" max="7" style="width: 60px;" value="2" id="week1_End">
+            </div>
+            <div class="row">
+                <input type="radio" name="week">
+                指定</div>
+            <div class="row">
+                <input type="checkbox" value="1">1
+                <input type="checkbox" value="2">2
+                <input type="checkbox" value="3">3
+                <input type="checkbox" value="4">4
+                <input type="checkbox" value="5">5
+                <input type="checkbox" value="6">6
+                <input type="checkbox" value="7">7
+            </div>
+            <div class="row">
+                <input type="radio" name="week">
+                第
+                <input type="number" min="1" max="4" style="width: 60px;" value="1" id="week3_Start">
+                周 的星期
+                <input type="number" min="1" max="7" style="width: 60px;" value="1" id="week3_End">
+            </div>
+            <div class="row">
+                <input type="radio" name="week">
+                本月最后一个星期
+                <input type="number" min="1" max="7" style="width: 60px;" value="1" id="week4">
+            </div>
+        </div>
+        <div title="年" id="tab6">
+            <div class="row">
+                <input type="radio" checked="checked" name="year">
+                每年</div>
+            <div class="row">
+                <input type="radio" name="year">
+                周期 从
+                <input type="number" min="-10000" max="10000" style="width: 60px;" value="2013" id="year1_Start">
+                -
+                <input type="number" min="-10000" max="10000" style="width: 60px;" value="2014" id="year1_End">
+            </div>
+            <div class="row">
+                <input type="radio" name="year">
+                不指定</div>
+        </div>
+    </div>
+    <div style="margin-top: 4px; width: 810px; height: 200px; border: 1px rgb(202,196,196) solid;
+        border-radius: 5px;">
+        <table style="margin: 4px;">
+            <tr>
+                <td>
+                </td>
+                <td align="center">
+                    秒
+                </td>
+                <td align="center">
+                    分钟
+                </td>
+                <td align="center">
+                    小时
+                </td>
+                <td align="center">
+                    日
+                </td>
+                <td align="center">
+                    月
+                </td>
+                <td align="center">
+                    星期
+                </td>
+                <td align="center">
+                    年
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    表达式字段:
+                </td>
+                <td>
+                    <input type="text" id="text_second" style="width: 95px;" value="0/10" readonly="readonly" />
+                </td>
+                <td>
+                    <input type="text" id="text_minute" style="width: 95px;" value="*" readonly="readonly" />
+                </td>
+                <td>
+                    <input type="text" id="text_hour" style="width: 95px;" value="*" readonly="readonly" />
+                </td>
+                <td>
+                    <input type="text" id="text_day" style="width: 95px;" value="*" readonly="readonly" />
+                </td>
+                <td>
+                    <input type="text" id="text_month" style="width: 95px;" value="*" readonly="readonly" />
+                </td>
+                <td>
+                    <input type="text" id="text_week" style="width: 95px;" value="?" readonly="readonly" />
+                </td>
+                <td>
+                    <input type="text" id="text_year" style="width: 95px;" value="*" readonly="readonly" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Cron 表达式:
+                </td>
+                <td colspan="6">
+                    <input type="text" id="textCronExpression" style="width: 100%;" value="0/10 * * * * ? *" />
+                </td>
+                <td>
+                    <input type="button" style="width: 100%;" value="反解析到UI" onclick="Parse()" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8">
+                    最近5次运行时间:
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8" id="tdLastValidTime">
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

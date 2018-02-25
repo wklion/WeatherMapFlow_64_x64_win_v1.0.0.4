@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value=""/>
+		<Param Name="Author" Value="Administrator"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="false"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2018-01-11 13:37:35"/>
+		<Param Name="DataStartTime" Value="2018-01-11 13:37:35"/>
+		<Param Name="DataEndTime" Value="2018-01-11 13:37:35"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample2.ModuleCreateDS" x="32" y="16">
+			<Params>
+				<Param Name="Type" Value="Memory"/>
+				<Param Name="Alias" Value="temp"/>
+				<Param Name="Server" Value=""/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts/>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.pluginexample2.ModuleCreateDS" x="144" y="16">
+			<Params>
+				<Param Name="Type" Value="GTiff"/>
+				<Param Name="Alias" Value="tif"/>
+				<Param Name="Server" Value="d:/temp/temp.tif"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts/>
+		</Module>
+		<Module ID="3" ClassName="com.wmf.pluginexample2.ModuleCreateDS" x="256" y="16">
+			<Params>
+				<Param Name="Type" Value="ESRI Shapefile"/>
+				<Param Name="Alias" Value="shp"/>
+				<Param Name="Server" Value="d:/temp/temp.shp"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts/>
+		</Module>
+		<Module ID="4" ClassName="com.wmf.pluginexample2.ModuleOpenDS" x="32" y="128">
+			<Params>
+				<Param Name="Type" Value="Micaps"/>
+				<Param Name="Alias" Value="Datasource1"/>
+				<Param Name="Server" Value="D:\temp\Z_SEVP_C_BABJ_20180129233241_P_APWF-SFER-EAIRP-201801300000-02424.MIC"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetLine"/>
+				<OutputPort ID="2" Type="DatasetGeometry"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="5" ClassName="com.wmf.pluginexample2.ModulePolygonizer" x="240" y="128">
+			<Params>
+				<Param Name="Datasource" Value="Datasource1"/>
+				<Param Name="Dataset" Value="contour"/>
+				<Param Name="Datasource" Value=""/>
+				<Param Name="Dataset" Value=""/>
+				<Param Name="Datasource" Value=""/>
+				<Param Name="Dataset" Value=""/>
+				<Param Name="Field" Value="Label"/>
+				<Param Name="MinValue" Value="0.000000"/>
+				<Param Name="MaxValue" Value="0.000000"/>
+				<Param Name="NoDataValue" Value="-9999.000000"/>
+				<Param Name="CalcValue" Value="false"/>
+				<Param Name="Datasource" Value="shp"/>
+				<Param Name="Dataset" Value="Polygonizer3"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetLine"/>
+				<InputPort ID="2" Type="Unknown"/>
+				<InputPort ID="3" Type="DatasetRaster"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRegion"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="6" ClassName="com.wmf.pluginexample2.ModuleRasterizer" x="560" y="256">
+			<Params>
+				<Param Name="Datasource" Value="shp"/>
+				<Param Name="Dataset" Value="Polygonizer3"/>
+				<Param Name="Bounds" Value="75.560000 22.425000 131.281000 48.765000"/>
+				<Param Name="CellSize" Value="0.05 0.05"/>
+				<Param Name="ValueType" Value="Single"/>
+				<Param Name="Field" Value="MGMinValue"/>
+				<Param Name="NoDataValue" Value="-9999.000000"/>
+				<Param Name="Datasource" Value="tif"/>
+				<Param Name="Dataset" Value="Rasterizer4"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetRegion"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRaster"/>
+			</OutputPorts>
+		</Module>
+	</Modules>
+	<Pipes>
+		<Pipe ID="7" IncomingModule="5" IncomingPort="1" OutgoingModule="6" OutgoingPort="1"/>
+		<Pipe ID="8" IncomingModule="4" IncomingPort="1" OutgoingModule="5" OutgoingPort="1"/>
+	</Pipes>
+</Model>

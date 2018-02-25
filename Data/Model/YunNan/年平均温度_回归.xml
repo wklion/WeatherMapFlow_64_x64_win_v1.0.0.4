@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value=""/>
+		<Param Name="Author" Value="Administrator"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2017-05-30 10:27:28"/>
+		<Param Name="DataStartTime" Value="2017-05-30 10:27:28"/>
+		<Param Name="DataEndTime" Value="2017-05-30 10:27:28"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample1.ModuleImportCSV" x="48" y="112">
+			<Params>
+				<Param Name="FileName" Value="..\..\Input\YunNan\云南30年平均值.csv"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="CSV"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.pluginexample2.ModuleRegression" x="240" y="112">
+			<Params>
+				<Param Name="Method" Value="Linear"/>
+				<Param Name="VarNames" Value="x y z t"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="Unknown"/>
+			</InputPorts>
+			<OutputPorts/>
+		</Module>
+	</Modules>
+	<Pipes>
+		<Pipe ID="3" IncomingModule="1" IncomingPort="1" OutgoingModule="2" OutgoingPort="1"/>
+	</Pipes>
+</Model>

@@ -1,0 +1,24 @@
+#
+# The IceGrid locator proxy.
+#
+Ice.Default.Locator=WMFIceGrid/Locator:default -h 192.168.19.105 -p 4061
+
+Ice.Override.Timeout=10000
+
+#
+# IceGrid node configuration.
+#
+IceGrid.Node.Name=node2
+IceGrid.Node.Endpoints=default
+IceGrid.Node.Data=db/node2
+#IceGrid.Node.Output=db
+#IceGrid.Node.RedirectErrToOut=1
+
+#
+# Trace properties.
+#
+IceGrid.Node.Trace.Activator=1
+#IceGrid.Node.Trace.Adapter=2
+#IceGrid.Node.Trace.Server=3
+
+

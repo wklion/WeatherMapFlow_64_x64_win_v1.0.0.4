@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: . ./weathermap-objects-1.0.1.jar ./jettison-1.1.jar ./expressionJ.jar
+

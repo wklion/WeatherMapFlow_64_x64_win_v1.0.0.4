@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="gb2312"?>
+<LineSymbol>
+  <!--一个线符号由若干个点符号组合而成；点符号的子对象如果包含非水平线，宽高比最好<=2。-->
+  <!--________________________________________________________________________________________________________________-->
+  <Item ID="100" Name="测试">
+    <!--x:沿线切向偏移;y:沿线法向偏移;Angle:从切向开始逆时针旋转角度;Size:尺寸;单位统一为mm-->
+    <Symbol ID="20000" x="50" y="0" Angle="0" Size="50"/>
+  </Item>
+  <Item ID="1000" Name="测试线头尾符号">
+    <!--x:-1表示线头符号，0表示线尾符号-->
+    <Symbol ID="22002" x="10" y="0" Angle="0" Size="10"/>
+    <Symbol ID="22004" x="-1" y="0" Angle="180" Size="15"/>
+    <Symbol ID="902" x="0" y="0" Angle="90" Size="15"/>
+  </Item>
+  <!--________________________________________________________________________________________________________________-->
+  <Item ID="1001" Name="虚线">
+    <Symbol ID="20003" x="4" y="0" Angle="0" Size="2"/>
+  </Item>
+  <Item ID="1002" Name="宽点划线">
+    <Symbol ID="21001" x="6" y="0" Angle="0" Size="6"/>
+  </Item>
+  <Item ID="1003" Name="点划线">
+    <Symbol ID="21002" x="6" y="0" Angle="0" Size="6"/>
+  </Item>
+  <Item ID="1004" Name="双点划线">
+    <Symbol ID="21003" x="10" y="0" Angle="0" Size="10"/>
+  </Item>
+  <!--________________________________________________________________________________________________________________-->
+  <Item ID="2001" Name="铁路">
+    <Symbol ID="22001" x="10" y="0" Angle="0" Size="10"/>
+  </Item>
+  <Item ID="2002" Name="公路">
+    <Symbol ID="22002" x="10" y="0" Angle="0" Size="10"/>
+    <Symbol ID="20002" x="10" y="-1" Angle="0" Size="10" Stroke="RGB(222,169,85)"/>
+    <Symbol ID="20002" x="10" y="1" Angle="0" Size="10" Stroke="RGB(222,169,85)"/>
+  </Item>
+  <Item ID="2003" Name="长城">
+    <Symbol ID="22003" x="4" y="0" Angle="0" Size="4"/>
+  </Item>
+  <Item ID="2004" Name="箭头线">
+    <Symbol ID="22004" x="8" y="0" Angle="0" Size="4"/>
+  </Item>
+  <!--________________________________________________________________________________________________________________-->
+  <Item ID="3001" Name="暖锋">
+    <Symbol ID="20001" x="20" y="0" Angle="0" Size="20" Stroke="RGB(255,0,0)" Fill="RGB(255,0,0)"/>
+    <Symbol ID="23001" x="40" y="0" Angle="0" Size="15"/>
+  </Item>
+  <Item ID="3002" Name="锢囚锋">
+    <Symbol ID="20001" x="20" y="0" Angle="0" Size="20" Stroke="RGB(128,0,128)" Fill="RGB(128,0,128)"/>
+    <Symbol ID="23002" x="40" y="0" Angle="0" Size="15"/>
+  </Item>
+  <Item ID="3003" Name="静止锋">
+    <Symbol ID="20001" x="20" y="0" Angle="0" Size="20" Stroke="RGB(255,0,0)" Fill="RGB(255,0,0)"/>
+    <Symbol ID="20002" x="20" y="-0.4" Angle="0" Size="20" Stroke="RGB(0,0,255)"/>
+    <Symbol ID="20002" x="20" y="0.4" Angle="0" Size="20" Stroke="RGB(0,0,255)"/>
+    <Symbol ID="23003" x="40" y="0" Angle="0" Size="15"/>
+  </Item>
+  <Item ID="3004" Name="冷锋">
+    <Symbol ID="20001" x="20" y="0" Angle="0" Size="20" Stroke="RGB(0,0,255)" Fill="RGB(0,0,255)"/>
+    <Symbol ID="23004" x="40" y="0" Angle="0" Size="15"/>
+  </Item>
+  
+</LineSymbol>

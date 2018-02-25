@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value=""/>
+		<Param Name="Author" Value="Administrator"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2016-10-24 08:00:00"/>
+		<Param Name="DataStartTime" Value="2016-10-16 20:00:00"/>
+		<Param Name="DataEndTime" Value="2016-10-23 20:00:00"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample1.ModuleCalcTime" x="48" y="32">
+			<Params>
+				<Param Name="PeriodType" Value="Week"/>
+				<Param Name="PeriodCount" Value="1"/>
+				<Param Name="HourOffset" Value="-12"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts/>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.pluginexample2.ModuleCreateDS" x="160" y="32">
+			<Params>
+				<Param Name="Type" Value="Memory"/>
+				<Param Name="Alias" Value="temp"/>
+				<Param Name="Server" Value=""/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts/>
+		</Module>
+		<Module ID="3" ClassName="com.wmf.pluginexample1.ModuleImportCSV" x="16" y="208">
+			<Params>
+				<Param Name="FileName" Value="..\..\Input\GuangDong\gd.csv"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="CSV"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="4" ClassName="com.wmf.pluginexample2.ModuleImportPoint" x="144" y="208">
+			<Params>
+				<Param Name="XField" Value="x"/>
+				<Param Name="YField" Value="y"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="ImportPoint16"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="Unknown"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetPoint"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="5" ClassName="com.wmf.pluginexample2.ModuleKriging" x="304" y="208">
+			<Params>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="ImportPoint16"/>
+				<Param Name="Field" Value="value"/>
+				<Param Name="Bounds" Value="109.660000 20.217900 117.189440 25.520200"/>
+				<Param Name="CellSize" Value="0.05 0.05"/>
+				<Param Name="ValueType" Value="Single"/>
+				<Param Name="SearchMode" Value="RadiusVariable"/>
+				<Param Name="PointCount" Value="12"/>
+				<Param Name="MaxRadius" Value="0"/>
+				<Param Name="Radius" Value="5"/>
+				<Param Name="MinPointCount" Value="0"/>
+				<Param Name="SemiVariogramModel" Value="LinearRegression"/>
+				<Param Name="Range" Value="0.500000"/>
+				<Param Name="Nugget" Value="0.010000"/>
+				<Param Name="Sill" Value="0.500000"/>
+				<Param Name="a" Value="1.000000"/>
+				<Param Name="b" Value="1.000000"/>
+				<Param Name="CrossValidation" Value="false"/>
+				<Param Name="ResidualFileName" Value=""/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="Kriging13"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetPoint"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRaster"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="6" ClassName="com.wmf.pluginexample2.ModuleContour" x="480" y="208">
+			<Params>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="Kriging13"/>
+				<Param Name="Values" Value="0 1 2 3 4 5 6 7 8 9 10"/>
+				<Param Name="Smoothness" Value="3"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="Contour"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="ValidBorder"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetRaster"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetLine"/>
+				<OutputPort ID="2" Type="DatasetLine"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="7" ClassName="com.wmf.pluginexample2.ModulePolygonizer" x="640" y="256">
+			<Params>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="Contour"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="ValidBorder"/>
+				<Param Name="Datasource" Value=""/>
+				<Param Name="Dataset" Value=""/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="Kriging13"/>
+				<Param Name="Field" Value="ZValue"/>
+				<Param Name="MinValue" Value="0.883732"/>
+				<Param Name="MaxValue" Value="2.883732"/>
+				<Param Name="NoDataValue" Value="-9999.000000"/>
+				<Param Name="CalcValue" Value="true"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="FilledContour"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetLine"/>
+				<InputPort ID="2" Type="DatasetLine"/>
+				<InputPort ID="3" Type="Unknown"/>
+				<InputPort ID="4" Type="DatasetRaster"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRegion"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="8" ClassName="com.wmf.pluginexample2.ModuleGraphicProduct" x="832" y="48">
+			<Params>
+				<Param Name="TemplateFile" Value="../../GraphicProductTemplate/GuangDong/FilledContour.xml"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="ImportPoint16"/>
+				<Param Name="Unit" Value=""/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="FilledContour"/>
+				<Param Name="Unit" Value=""/>
+				<Param Name="Bounds" Value="0.000000 0.000000 0.000000 0.000000"/>
+				<Param Name="ClipRegion" Value="[NAME]='广东省'"/>
+				<Param Name="MainTitle" Value=""/>
+				<Param Name="SubTitle" Value=""/>
+				<Param Name="Organization" Value=""/>
+				<Param Name="PublishTime" Value=""/>
+				<Param Name="GeoLegendToLayer" Value="test.MGCBottom.VectorRange"/>
+				<Param Name="FileName" Value="../../Output/gd.png"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetPoint"/>
+				<InputPort ID="2" Type="DatasetRegion"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="ImageFile"/>
+			</OutputPorts>
+		</Module>
+	</Modules>
+	<Pipes>
+		<Pipe ID="9" IncomingModule="6" IncomingPort="1" OutgoingModule="7" OutgoingPort="1"/>
+		<Pipe ID="10" IncomingModule="6" IncomingPort="2" OutgoingModule="7" OutgoingPort="2"/>
+		<Pipe ID="11" IncomingModule="4" IncomingPort="1" OutgoingModule="5" OutgoingPort="1"/>
+		<Pipe ID="12" IncomingModule="3" IncomingPort="1" OutgoingModule="4" OutgoingPort="1"/>
+		<Pipe ID="13" IncomingModule="4" IncomingPort="1" OutgoingModule="8" OutgoingPort="1"/>
+		<Pipe ID="14" IncomingModule="7" IncomingPort="1" OutgoingModule="8" OutgoingPort="2"/>
+		<Pipe ID="15" IncomingModule="5" IncomingPort="1" OutgoingModule="6" OutgoingPort="1"/>
+		<Pipe ID="16" IncomingModule="5" IncomingPort="1" OutgoingModule="7" OutgoingPort="4"/>
+	</Pipes>
+</Model>

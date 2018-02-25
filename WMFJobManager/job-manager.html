@@ -1,0 +1,1112 @@
+<!--
+//-------------------------------------------------------------
+// \project WeatherMapFlow JobManager
+// \file job-manager.html
+// \brief 任务管理器
+// \author 王庆飞
+// \date 2016-5-17
+// \attention
+// Copyright(c) WeatherMap Group
+// All Rights Reserved
+// \version 1.0
+//-------------------------------------------------------------
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        body
+        {
+            font-size: 15px;
+        }
+        input[type="button"], input[type="submit"]
+        {
+            padding: 5px 10px 5px 10px;
+            background-color: rgb(190,225,247);
+            color: rgb(0,0,0);
+            border-radius: 5px;
+            border: none;
+        }
+        input:active[type="button"], input[type="submit"]
+        {
+            background-color: rgb(0,163,254);
+            color: rgb(255,255,255);
+        }
+        table
+        {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th
+        {
+            background-color: rgb(247,247,247);
+            border: 1px solid rgb(223,223,223);
+            font-weight: normal;
+        }
+        td
+        {
+            background-color: rgb(255,255,255);
+            border: 1px solid rgb(223,223,223);
+        }
+        
+        p
+        {
+            margin: 10px auto;
+            white-space: nowrap;
+        }
+        
+        div#DialogOverlay
+        {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0%;
+            left: 0%;
+            background-color: #808080;
+            opacity: 0.7;
+            display: none;
+        }
+        div#JobDialog
+        {
+            position: absolute;
+            height: 276px;
+            width: 294px;
+            margin: -138px 0px 0px -147px;
+            top: 50%;
+            left: 50%;
+            padding: 8px;
+            background-color: #ffffff;
+            border: 1px dotted #000000;
+            overflow: hidden;
+            display: none;
+        }
+        div#DateTimeDialog
+        {
+            position: absolute;
+            height: 106px;
+            width: 210px;
+            margin: -53px 0px 0px -105px;
+            top: 50%;
+            left: 50%;
+            padding: 8px;
+            background-color: #ffffff;
+            border: 1px dotted #000000;
+            overflow: hidden;
+            display: none;
+        }
+        div#PatchDialog
+        {
+            position: absolute;
+            height: 144px;
+            width: 286px;
+            margin: -72px 0px 0px -143px;
+            top: 50%;
+            left: 50%;
+            padding: 8px;
+            background-color: #ffffff;
+            border: 1px dotted #000000;
+            overflow: hidden;
+            display: none;
+        }
+        div#CronDialog
+        {
+            position: absolute;
+            width: 820px;
+            height: 560px;
+            margin: -280px 0px 0px -410px;
+            top: 50%;
+            left: 50%;
+            padding: 8px;
+            background-color: #ffffff;
+            border: 1px dotted #000000;
+            overflow: hidden;
+            display: none;
+        }
+        div#MoveJobDialog
+        {
+            position: absolute;
+            width: 800px;
+            height: 600px;
+            margin: -300px 0px 0px -400px;
+            top: 50%;
+            left: 50%;
+            padding: 8px;
+            background-color: #ffffff;
+            border: 1px dotted #000000;
+            overflow: hidden;
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="js/wmf-job-manager.js"></script> 
+    <script type="text/javascript">
+        var m_request = new XMLHttpRequest();
+        m_request.onreadystatechange = OnReadyStateChange;
+
+        var str = window.location.href;
+        var m_strUrl = str.substring(0, str.lastIndexOf('/') + 1) + "JobManager";
+
+        if (typeof Method == "undefined") {
+            var Method = {};
+            Method.GetJobGroupNames = 0;
+            Method.GetJobs = 1;
+            Method.DelJob = 2;
+
+            Method.StartSchedule = 3;
+            Method.PauseSchedule = 4;
+            Method.ManualTrigger = 5;
+            Method.Patch = 6;
+            Method.CancelExecute = 7;
+
+            Method.MoveJob = 8;
+        }
+        var m_eMethod;
+
+        var m_ws; //websocket
+
+        var m_nModifiedJob = -1;
+
+        function InitWebSocket() {
+            var str = window.location.href;
+            var strUrl = "ws" + str.substring(4, str.lastIndexOf('/') + 1) + "websocket/Annotation";
+            m_ws = new WebSocket(strUrl);
+            m_ws.onopen = function () {
+            }
+            m_ws.onclose = function () {
+            }
+            m_ws.onerror = function () {
+            }
+            m_ws.onmessage = function (message) {
+                var job = JSON.parse(message.data);
+                if (job.Name == null || job.GroupName == null)
+                    return;
+                var table = document.getElementById("JobTable");
+                for (i = 0; i < table.rows.length; i++) {
+                    if (table.rows[i].cells[1].innerText == job.Name && table.rows[i].cells[2].innerText == job.GroupName) {
+                        if (job.Status != null) {
+                            table.rows[i].cells[7].innerHTML = ExecuteStatusToString(job.Status);
+                            table.rows[i].cells[7].style.backgroundColor = ExecuteStatusToBackgroundColor(job.Status);
+                            table.rows[i].cells[7].style.color = "#c0c0c0";
+                        }
+                        if (job.NextTime != null)
+                            table.rows[i].cells[8].innerHTML = job.NextTime;
+                        if (job.PrevTime != null)
+                            table.rows[i].cells[9].innerHTML = job.PrevTime;
+                        if (job.PrevStatus != null) {
+                            table.rows[i].cells[10].innerHTML = ExecuteStatusToString(job.PrevStatus);
+                            table.rows[i].cells[10].style.backgroundColor = ExecuteStatusToBackgroundColor(job.PrevStatus);
+                            table.rows[i].cells[10].style.color = "#c0c0c0";
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        function OnLoad() {
+            m_eMethod = Method.GetJobGroupNames;
+            m_request.open("get", m_strUrl + "?Method=GetJobGroupNames", false);
+            m_request.send();
+
+            m_eMethod = Method.GetJobs;
+            m_request.open("get", m_strUrl + "?Method=GetJobs", false);
+            m_request.send();
+
+            InitWebSocket();
+
+            OnResize();
+        }
+        function OnResize() {
+            var div = document.getElementById("divJobTable");
+            div.style.height = (window.innerHeight - 70).toString() + "px";
+        }
+        function OnJobGroupChange() {
+            var select = document.getElementById("JobGroup");
+            m_eMethod = Method.GetJobs;
+            m_request.open("post", m_strUrl, false);
+            m_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            m_request.send("Method=GetJobs" + (select.selectedIndex == 0 ? "" : ("&GroupName=" + select.options[select.selectedIndex].text)));
+        }
+
+        function OnJobTableHeadCheckBoxClick() {
+            var cbHead = document.getElementById("JobTableHeadCheckBox");
+            var bgc = cbHead.checked ? "#528bcb" : "#ffffff";
+            var fc = cbHead.checked ? "#ffffff" : "#000000";
+
+            var table = document.getElementById("JobTable");
+            for (i = 0; i < table.rows.length; i++) {
+                table.rows[i].cells[0].childNodes[0].checked = cbHead.checked;
+                for (j = 0; j < table.rows[i].cells.length; j++) {
+                    if (j == 7 || j == 10)
+                        continue;
+                    table.rows[i].cells[j].style.backgroundColor = bgc;
+                    table.rows[i].cells[j].style.color = fc;
+                }
+            }
+        }
+        function OnJobTableCheckBoxClick() {
+            var i = parseInt(window.event.srcElement.value);
+            var bgc = window.event.srcElement.checked ? "#528bcb" : "#ffffff";
+            var fc = window.event.srcElement.checked ? "#ffffff" : "#000000";
+            var table = document.getElementById("JobTable");
+            for (j = 0; j < table.rows[i].cells.length; j++) {
+                if (j == 7 || j == 10)
+                    continue;
+                table.rows[i].cells[j].style.backgroundColor = bgc;
+                table.rows[i].cells[j].style.color = fc;
+            }
+        }
+
+        function AddJobGroup() {
+            var select = document.getElementById("JobGroup");
+            var str = prompt("请输入任务组名称：", "JobGroup" + (select.options.length + 1));
+            if (str == null) //取消
+                return;
+            if (str == "") {
+                alert("任务组名称不能为空。");
+                return;
+            }
+            for (i = 0; i < select.options.length; i++) {
+                if (select.options[i].text == str) {
+                    alert("任务组名称不能重复。");
+                    return;
+                }
+            }
+            select.options.add(new Option(str));
+            select.selectedIndex = select.options.length - 1;
+            select.onchange();
+        }
+        function DelJobGroup() {
+            var select = document.getElementById("JobGroup");
+            if (select.selectedIndex < 0 || select.selectedIndex >= select.options.length) {
+                alert("没有选中任务组。");
+                return;
+            }
+            if (select.selectedIndex == 0) {
+                alert("不能删除全部任务组。");
+                return;
+            }
+            var table = document.getElementById("JobTable");
+            if (table.rows.length > 0) {
+                alert("当前任务组的任务数大于0，不能删除。");
+                return;
+            }
+            if (!confirm("删除后无法恢复，确定删除吗？"))
+                return;
+            var i = select.selectedIndex;
+            select.options.remove(select.selectedIndex);
+            select.selectedIndex = i % select.options.length;
+            select.onchange();
+        }
+        function OpenJobDialog() {
+            var selectDst = document.getElementById("JobDialogJobGroup");
+            for (i = selectDst.length - 1; i >= 0; i--) {
+                selectDst.remove(i);
+            }
+            var select = document.getElementById("JobGroup");
+            for (i = 1; i < select.options.length; i++) {
+                selectDst.options.add(new Option(select.options[i].text));
+            }
+
+            var labelCaption = document.getElementById("JobDialogCaption");
+            var textMethod = document.getElementById("JobDialog_textMethod");
+            var textJobName = document.getElementById("JobDialog_textJobName");
+            if (textMethod.value == "AddJob") {
+                labelCaption.innerHTML = "添加任务";
+
+                textJobName.value = "";
+                textJobName.disabled = "";
+
+                selectDst.selectedIndex = select.selectedIndex == 0 ? 0 : (select.selectedIndex - 1);
+                selectDst.disabled = "";
+
+                document.getElementById("JobDialog_textModel").value = "";
+                document.getElementById("JobDialog_textCreator").value = self.parent.m_strUser;
+                document.getElementById("JobDialog_selectVisibility").value = "0";
+            }
+            else if (textMethod.value == "ModifyJob") {
+                labelCaption.innerHTML = "修改任务";
+
+                var table = document.getElementById("JobTable");
+                textJobName.value = table.rows[m_nModifiedJob].cells[1].innerText;
+                textJobName.disabled = "disabled";
+
+                for (j = 0; j < selectDst.options.length; j++) {
+                    if (selectDst.options[j].text == table.rows[m_nModifiedJob].cells[2].innerText) {
+                        selectDst.selectedIndex = j;
+                        selectDst.disabled = "disabled";
+                        break;
+                    }
+                }
+
+                document.getElementById("JobDialog_textModel").value = table.rows[m_nModifiedJob].cells[3].innerText;
+                document.getElementById("JobDialog_textCronExpression").value = table.rows[m_nModifiedJob].cells[4].innerText;
+                document.getElementById("JobDialog_textCreator").value = table.rows[m_nModifiedJob].cells[11].innerText;
+                document.getElementById("JobDialog_selectVisibility").value = table.rows[m_nModifiedJob].cells[12].innerText;
+            }
+            var fileModel = document.getElementById("JobDialog_fileModel");
+            fileModel.value = "";
+            fileModel.disabled = "";
+
+            var div = document.getElementById("JobDialog");
+            div.style.display = "block";
+            div = document.getElementById("DialogOverlay");
+            div.style.display = "block";
+        }
+        function AddJob() {
+            document.getElementById("JobDialog_textMethod").value = "AddJob";
+            OpenJobDialog();
+        }
+        function ModifyJob() {
+            m_nModifiedJob = parseInt(window.event.srcElement.id);
+            document.getElementById("JobDialog_textMethod").value = "ModifyJob";
+            OpenJobDialog();
+        }
+
+        var m_cellEditing = null;
+        var m_nEditingCol = -1;
+        function SetEditingCell(cell, c) {
+            if (cell == m_cellEditing)
+                return;
+            if (m_cellEditing != null) {
+                if (m_nEditingCol == 2) {
+                    var textMoveJob = document.getElementById("textMoveJob");
+                    if (textMoveJob != null)
+                        m_cellEditing.innerHTML = textMoveJob.value;
+                }
+                else if (m_nEditingCol == 3) {
+                    var selectMoveJob = document.getElementById("selectMoveJob");
+                    if (selectMoveJob != null)
+                        m_cellEditing.innerHTML = selectMoveJob.value;
+                }
+            }
+
+            if (c == 2) {
+                cell.innerHTML = "<input type=\"text\" id=\"textMoveJob\" value=\"" + cell.innerHTML + "\" onblur=\"OnTextMoveJobBlur()\" />";
+                var textMoveJob = document.getElementById("textMoveJob");
+                textMoveJob.style.width = "180px";
+                textMoveJob.select();
+                textMoveJob.focus();
+            }
+            else if (c == 3) {
+                var str = "<select id=\"selectMoveJob\" onblur=\"OnSelectMoveJobBlur()\">";
+                var select = document.getElementById("JobGroup");
+                for (i = 1; i < select.options.length; i++) {
+                    str += "<option>" + select.options[i].text + "</option>";
+                }
+                str += "</select>";
+
+                var strCell = cell.innerHTML;
+                cell.innerHTML = str;
+
+                var selectMoveJob = document.getElementById("selectMoveJob");
+                for (i = 0; i < selectMoveJob.options.length; i++) {
+                    if (selectMoveJob.options[i].text == strCell) {
+                        selectMoveJob.selectedIndex = i;
+                        break;
+                    }
+                }
+                selectMoveJob.style.width = "180px";
+                selectMoveJob.focus();
+            }
+            m_cellEditing = cell;
+            m_nEditingCol = c;
+        }
+        function MoveJob() {
+            var table = document.getElementById("MoveJobTable");
+            for (i = table.rows.length - 1; i >= 0; i--)
+                table.deleteRow(i);
+
+            var tableSrc = document.getElementById("JobTable");
+            var tableHead = document.getElementById("MoveJobTableHead");
+            for (i = 0; i < tableSrc.rows.length; i++) {
+                if (!tableSrc.rows[i].cells[0].childNodes[0].checked)
+                    continue;
+                var rowSrc = tableSrc.rows[i];
+
+                var row = table.insertRow();
+                var cell = row.insertCell();
+                cell.innerHTML = rowSrc.cells[1].innerText;
+                cell = row.insertCell();
+                cell.innerHTML = rowSrc.cells[2].innerText;
+                cell = row.insertCell();
+                cell.innerHTML = rowSrc.cells[1].innerText;
+                cell.onclick = function () {
+                    SetEditingCell(this, 2);
+                }
+                cell = row.insertCell();
+                cell.innerHTML = rowSrc.cells[2].innerText;
+                cell.onclick = function () {
+                    SetEditingCell(this, 3);
+                }
+
+                for (j = 0; j < row.cells.length; j++) {
+                    row.cells[j].width = tableHead.rows[0].cells[j].width;
+                    row.cells[j].height = "22px";
+                }
+            }
+            if (table.rows.length == 0) {
+                alert("请勾选任务。");
+                return;
+            }
+
+            SetEditingCell(table.rows[0].cells[2], 2);
+
+            document.getElementById("checkboxDelSrcJob").checked = true;
+
+            var div = document.getElementById("MoveJobDialog");
+            div.style.display = "block";
+            div = document.getElementById("DialogOverlay");
+            div.style.display = "block";
+        }
+        function OnTextMoveJobBlur() {
+            if (m_cellEditing != null)
+                m_cellEditing.innerHTML = document.getElementById("textMoveJob").value;
+        }
+        function OnSelectMoveJobBlur() {
+            if (m_cellEditing != null)
+                m_cellEditing.innerHTML = document.getElementById("selectMoveJob").value;
+        }
+
+        function DownloadModel() {
+            var table = document.getElementById("JobTable");
+            var i = parseInt(window.event.srcElement.id);
+            document.getElementById("DownloadModelDialog_textJobName").value = table.rows[i].cells[1].innerText;
+            document.getElementById("DownloadModelDialog_textJobGroup").value = table.rows[i].cells[2].innerText;
+
+            document.getElementById("DownloadModelDialog_buttonOK").click();
+        }
+
+        function GetSelectedJobs(jobs) {
+            var table = document.getElementById("JobTable");
+            for (i = 0; i < table.rows.length; i++) {
+                if (!table.rows[i].cells[0].childNodes[0].checked)
+                    continue;
+                var row = table.rows[i];
+                if (jobs.strNames != "")
+                    jobs.strNames += "%2C"; //逗号分隔
+                jobs.strNames += row.cells[1].innerText;
+                if (jobs.strGroupNames != "")
+                    jobs.strGroupNames += "%2C"; //逗号分隔
+                jobs.strGroupNames += row.cells[2].innerText;
+            }
+        }
+
+        function DelJob() {
+            var jobs = { strNames: "", strGroupNames: "" };
+            GetSelectedJobs(jobs);
+            if (jobs.strNames == "" || jobs.strGroupNames == "") {
+                alert("请勾选任务。");
+                return;
+            }
+            if (!confirm("删除后无法恢复，确定删除吗？"))
+                return;
+            m_eMethod = Method.DelJob;
+            m_request.open("post", m_strUrl, false);
+            m_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            m_request.send("Method=DelJob&Names=" + jobs.strNames + "&GroupNames=" + jobs.strGroupNames);
+        }
+
+        function OnReadyStateChange() {
+            if (this.readyState == this.DONE) {
+                if (this.responseText == "AccessDenied") {
+                    alert("该请求未授权！");
+                    return;
+                }
+
+                if (m_eMethod == Method.GetJobGroupNames) {
+                    if (this.responseText == "")
+                        return;
+                    var select = document.getElementById("JobGroup");
+                    var arr = this.responseText.split(',');
+                    for (i = 0; i < arr.length; i++) {
+                        select.options.add(new Option(arr[i]));
+                    }
+                }
+                else if (m_eMethod == Method.GetJobs) {
+                    var table = document.getElementById("JobTable");
+                    for (i = table.rows.length - 1; i >= 0; i--)
+                        table.deleteRow(i);
+                    var jobs = JSON.parse(this.responseText);
+                    var tableHead = document.getElementById("JobTableHead");
+                    for (i = 0; i < jobs.length; i++) {
+                        var row = table.insertRow();
+                        var cell = row.insertCell();
+                        cell.innerHTML = "<input type=\"checkbox\" value=\"" + i + "\" onclick=\"OnJobTableCheckBoxClick()\" />";
+                        cell = row.insertCell();
+                        cell.innerHTML = jobs[i].Name;
+                        cell = row.insertCell();
+                        cell.innerHTML = jobs[i].GroupName;
+                        cell = row.insertCell();
+                        cell.innerHTML = jobs[i].ModelName;
+                        cell.style.display = "none";
+                        cell = row.insertCell();
+                        cell.innerHTML = jobs[i].CronExpression;
+                        cell.style.display = "none";
+                        cell = row.insertCell();
+                        cell.innerHTML = "<input type=\"button\" id=\"" + i + "\" value=\"修改任务\" onclick=\"ModifyJob()\" />";
+                        cell = row.insertCell();
+                        cell.innerHTML = "<input type=\"button\" id=\"" + i + "\" value=\"下载模型\" onclick=\"DownloadModel()\" />";
+                        cell = row.insertCell();
+                        cell.innerHTML = ExecuteStatusToString(jobs[i].Status);
+                        cell.style.backgroundColor = ExecuteStatusToBackgroundColor(jobs[i].Status);
+                        cell.style.color = "#c0c0c0";
+                        cell = row.insertCell();
+                        cell.innerHTML = jobs[i].NextTime;
+                        cell = row.insertCell();
+                        cell.innerHTML = jobs[i].PrevTime;
+                        cell = row.insertCell();
+                        cell.innerHTML = ExecuteStatusToString(jobs[i].PrevStatus);
+                        cell.style.backgroundColor = ExecuteStatusToBackgroundColor(jobs[i].PrevStatus);
+                        cell.style.color = "#c0c0c0";
+                        cell = row.insertCell();
+                        cell.innerHTML = jobs[i].Creator;
+                        cell.style.display = "none";
+                        cell = row.insertCell();
+                        cell.innerHTML = jobs[i].Visibility;
+                        cell.style.display = "none";
+
+                        for (j = 0; j < row.cells.length; j++) {
+                            row.cells[j].width = tableHead.rows[0].cells[j].width;
+                        }
+                    }
+                }
+                else if (m_eMethod == Method.DelJob) {
+                    if (this.responseText.indexOf("false") >= 0) {
+                        alert("删除任务失败！");
+                        return;
+                    }
+                    var select = document.getElementById("JobGroup");
+                    select.onchange();
+                }
+                else if (m_eMethod == Method.MoveJob) {
+                    if (this.responseText.indexOf("false") >= 0) {
+                        alert("移动任务失败！");
+                        return;
+                    }
+                    var select = document.getElementById("JobGroup");
+                    select.onchange();
+                }
+
+                else if (m_eMethod == Method.StartSchedule) {
+                    if (this.responseText == "false") {
+                        alert("开始调度失败！");
+                        return;
+                    }
+                    alert("开始调度成功。");
+                }
+                else if (m_eMethod == Method.PauseSchedule) {
+                    if (this.responseText == "false") {
+                        alert("暂停调度失败！");
+                        return;
+                    }
+                    alert("暂停调度成功。");
+                }
+                else if (m_eMethod == Method.ManualTrigger) {
+                    if (this.responseText == "false") {
+                        alert("手动触发失败！");
+                        return;
+                    }
+                    alert("手动触发成功。");
+                }
+                else if (m_eMethod == Method.Patch) {
+                    if (this.responseText == "false") {
+                        alert("补执行触发失败！");
+                        return;
+                    }
+                    alert("补执行触发成功。");
+                }
+                else if (m_eMethod == Method.CancelExecute) {
+                    if (this.responseText == "false") {
+                        alert("取消执行失败！");
+                        return;
+                    }
+                    alert("取消执行成功。");
+                }
+            }
+        }
+
+        function StartSchedule() {
+            var jobs = { strNames: "", strGroupNames: "" };
+            GetSelectedJobs(jobs);
+            if (jobs.strNames == "" || jobs.strGroupNames == "") {
+                alert("请勾选任务。");
+                return;
+            }
+            m_eMethod = Method.StartSchedule;
+            m_request.open("post", m_strUrl, false);
+            m_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            m_request.send("Method=StartSchedule&Names=" + jobs.strNames + "&GroupNames=" + jobs.strGroupNames);
+        }
+        function PauseSchedule() {
+            var jobs = { strNames: "", strGroupNames: "" };
+            GetSelectedJobs(jobs);
+            if (jobs.strNames == "" || jobs.strGroupNames == "") {
+                alert("请勾选任务。");
+                return;
+            }
+            m_eMethod = Method.PauseSchedule;
+            m_request.open("post", m_strUrl, false);
+            m_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            m_request.send("Method=PauseSchedule&Names=" + jobs.strNames + "&GroupNames=" + jobs.strGroupNames);
+        }
+        function ManualTrigger() {
+            var table = document.getElementById("JobTable");
+            for (i = 0; i < table.rows.length; i++) {
+                if (table.rows[i].cells[0].childNodes[0].checked) {
+                    break;
+                }
+            }
+            if (i == table.rows.length) {
+                alert("请勾选任务。");
+                return;
+            }
+
+            var date = new Date();
+            document.getElementById("Date").value = Format("0000", date.getFullYear()) + "-" + Format("00", date.getMonth() + 1) + "-" + Format("00", date.getDate());
+            document.getElementById("Time").value = Format("00", date.getHours()) + ":00";
+
+            var div = document.getElementById("DateTimeDialog");
+            div.style.display = "block";
+            div = document.getElementById("DialogOverlay");
+            div.style.display = "block";
+        }
+        function Patch() {
+            var table = document.getElementById("JobTable");
+            for (i = 0; i < table.rows.length; i++) {
+                if (table.rows[i].cells[0].childNodes[0].checked) {
+                    break;
+                }
+            }
+            if (i == table.rows.length) {
+                alert("请勾选任务。");
+                return;
+            }
+
+            var date = new Date();
+            document.getElementById("PatchDialog_StartDate").value = Format("0000", date.getFullYear()) + "-" + Format("00", date.getMonth() + 1) + "-" + Format("00", date.getDate());
+            document.getElementById("PatchDialog_EndDate").value = document.getElementById("PatchDialog_StartDate").value;
+            document.getElementById("PatchDialog_StartTime").value = Format("00", date.getHours()) + ":00";
+            document.getElementById("PatchDialog_EndTime").value = document.getElementById("PatchDialog_StartTime").value;
+
+            var div = document.getElementById("PatchDialog");
+            div.style.display = "block";
+            div = document.getElementById("DialogOverlay");
+            div.style.display = "block";
+        }
+        function CancelExecute() {
+            var jobs = { strNames: "", strGroupNames: "" };
+            GetSelectedJobs(jobs);
+            if (jobs.strNames == "" || jobs.strGroupNames == "") {
+                alert("请勾选任务。");
+                return;
+            }
+            m_eMethod = Method.CancelExecute;
+            m_request.open("post", m_strUrl, false);
+            m_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            m_request.send("Method=CancelExecute&Names=" + jobs.strNames + "&GroupNames=" + jobs.strGroupNames);
+        }
+
+        function CloseJobDialog() {
+            var div = document.getElementById("JobDialog");
+            div.style.display = "none";
+            div = document.getElementById("DialogOverlay");
+            div.style.display = "none";
+        }
+        function JobDialogOnCron() {
+            var labelCaption = document.getElementById("CronDialogCaption");
+            var select = document.getElementById("JobDialogJobGroup");
+            labelCaption.innerHTML = document.getElementById("JobDialog_textJobName").value + "|" + select.options[select.selectedIndex].text + "|Cron表达式生成器";
+
+            var text = document.getElementById("iframeCronMaker").contentDocument.getElementById("textCronExpression");
+            text.value = document.getElementById("JobDialog_textCronExpression").value;
+
+            document.getElementById("iframeCronMaker").contentWindow.onload();
+
+            var div = document.getElementById("CronDialog");
+            div.style.display = "block";
+        }
+        function JobDialogOnOK() {
+            var textMethod = document.getElementById("JobDialog_textMethod");
+            var fileModel = document.getElementById("JobDialog_fileModel");
+            if (textMethod.value == "AddJob") {
+                if (document.getElementById("JobDialog_textJobName").value == "") {
+                    alert("请输入任务名称。");
+                    return false;
+                }
+                if (document.getElementById("JobDialogJobGroup").selectedIndex == -1) {
+                    alert("请选择任务分组。");
+                    return false;
+                }
+                if (fileModel.value == "") {
+                    alert("请选择模型。");
+                    return false;
+                }
+            }
+            else if (textMethod.value == "ModifyJob") {
+                if (fileModel.value == "") //未选择模型
+                    fileModel.disabled = "disabled"; //不提交模型
+            }
+            document.getElementById("JobDialog_textJobName").disabled = "";
+            document.getElementById("JobDialogJobGroup").disabled = "";
+            return true;
+        }
+        function JobDialogOnCancel() {
+            CloseJobDialog();
+        }
+        function JobDialog_iframeSubmitOnLoad() {
+            var text = document.getElementById("JobDialog_textMethod");
+            if (text.value != "AddJob" && text.value != "ModifyJob")
+                return;
+            var iframe = document.getElementById("JobDialog_iframeSubmit");
+            if (iframe.contentDocument.body.innerText == "")
+                return;
+            if (iframe.contentDocument.body.innerText == "AccessDenied") {
+                alert("该请求未授权！");
+                return;
+            }
+            var nResult = parseInt(iframe.contentDocument.body.innerText);
+            if (nResult != Result.OK) {
+                if (nResult == Result.JobExisted)
+                    alert("任务已存在，提交失败！");
+                else if (nResult == Result.JobNotExisted)
+                    alert("任务不存在，提交失败！");
+                else if (nResult == Result.InvalidModel)
+                    alert("无效的模型，提交失败！");
+                else if (nResult == Result.InvalidCronExpression)
+                    alert("无效的Cron表达式，提交失败！");
+                else 
+                    alert("未知错误，提交失败！");
+                return;
+            }
+            CloseJobDialog();
+            var select = document.getElementById("JobGroup");
+            select.onchange();
+            text.value = "";
+        }
+        function JobDialog_fileModelOnChange() {
+            var textModel = document.getElementById("JobDialog_textModel");
+            var textJobName = document.getElementById("JobDialog_textJobName");
+            var fileModel = document.getElementById("JobDialog_fileModel");
+            var str = fileModel.value.replace(/\\/g, '/');
+            var nStart = str.lastIndexOf('/');
+            var nEnd = str.lastIndexOf('.');
+            str = str.substring(nStart == -1 ? 0 : (nStart + 1), nEnd == -1 ? str.length : nEnd);
+            if (document.getElementById("JobDialog_textMethod").value == "AddJob") {
+                if (textJobName.value == "" || textJobName.value == textModel.value)
+                    textJobName.value = str;
+            }
+            textModel.value = str;
+        }
+
+        function CloseCronDialog() {
+            var div = document.getElementById("CronDialog");
+            div.style.display = "none";
+        }
+        function CronDialogOnOK() {
+            CloseCronDialog();
+
+            var text = document.getElementById("iframeCronMaker").contentDocument.getElementById("textCronExpression");
+            document.getElementById("JobDialog_textCronExpression").value = text.value;
+        }
+        function CronDialogOnCancel() {
+            CloseCronDialog();
+        }
+
+        function CloseDateTimeDialog() {
+            var div = document.getElementById("DateTimeDialog");
+            div.style.display = "none";
+            div = document.getElementById("DialogOverlay");
+            div.style.display = "none";
+        }
+        function DateTimeDialogOnOK() {
+            CloseDateTimeDialog();
+
+            var jobs = { strNames: "", strGroupNames: "" };
+            GetSelectedJobs(jobs);
+
+            m_eMethod = Method.ManualTrigger;
+            m_request.open("post", m_strUrl, false);
+            m_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            m_request.send("Method=ManualTrigger&Names=" + jobs.strNames + "&GroupNames=" + jobs.strGroupNames + "&DateTime=" +
+                document.getElementById("Date").value + "%20" + (document.getElementById("Time").value + ":00").replace(/:/g, '%3A'));
+        }
+        function DateTimeDialogOnCancel() {
+            CloseDateTimeDialog();
+        }
+
+        function ClosePatchDialog() {
+            var div = document.getElementById("PatchDialog");
+            div.style.display = "none";
+            div = document.getElementById("DialogOverlay");
+            div.style.display = "none";
+        }
+        function PatchDialogOnOK() {
+            ClosePatchDialog();
+
+            var jobs = { strNames: "", strGroupNames: "" };
+            GetSelectedJobs(jobs);
+
+            m_eMethod = Method.Patch;
+            m_request.open("post", m_strUrl, true);
+            m_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            m_request.send("Method=Patch&Names=" + jobs.strNames + "&GroupNames=" + jobs.strGroupNames +
+                "&StartDateTime=" + document.getElementById("PatchDialog_StartDate").value + "%20" + (document.getElementById("PatchDialog_StartTime").value + ":00").replace(/:/g, '%3A') +
+                "&EndDateTime=" + document.getElementById("PatchDialog_EndDate").value + "%20" + (document.getElementById("PatchDialog_EndTime").value + ":00").replace(/:/g, '%3A'));
+        }
+        function PatchDialogOnCancel() {
+            ClosePatchDialog();
+        }
+
+        function CloseMoveJobDialog() {
+            var div = document.getElementById("MoveJobDialog");
+            div.style.display = "none";
+            div = document.getElementById("DialogOverlay");
+            div.style.display = "none";
+        }
+        function MoveJobDialogOnOK() {
+            var strSrcNames = "", strSrcGroupNames = "", strDstNames = "", strDstGroupNames = "";
+            var table = document.getElementById("MoveJobTable");
+            for (i = 0; i < table.rows.length; i++) {
+                var row = table.rows[i];
+                if (row.cells[0].innerText == row.cells[2].innerText && row.cells[1].innerText == row.cells[3].innerText) {
+                    alert("第" + (i + 1).toString() + "行源任务和目标任务雷同。");
+                    return;
+                }
+
+                if (strSrcNames != "")
+                    strSrcNames += "%2C"; //逗号分隔
+                strSrcNames += row.cells[0].innerText;
+                if (strSrcGroupNames != "")
+                    strSrcGroupNames += "%2C"; //逗号分隔
+                strSrcGroupNames += row.cells[1].innerText;
+                if (strDstNames != "")
+                    strDstNames += "%2C"; //逗号分隔
+                strDstNames += row.cells[2].innerText;
+                if (strDstGroupNames != "")
+                    strDstGroupNames += "%2C"; //逗号分隔
+                strDstGroupNames += row.cells[3].innerText;
+            }
+
+            CloseMoveJobDialog();
+
+            m_eMethod = Method.MoveJob;
+            m_request.open("post", m_strUrl, false);
+            m_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            m_request.send("Method=MoveJob&SrcNames=" + strSrcNames + "&SrcGroupNames=" + strSrcGroupNames +
+                "&DstNames=" + strDstNames + "&DstGroupNames=" + strDstGroupNames +
+                "&DelSrcJob=" + (document.getElementById("checkboxDelSrcJob").checked ? "true" : "false"));
+        }
+        function MoveJobDialogOnCancel() {
+            CloseMoveJobDialog();
+        }
+    </script>
+</head>
+<body onload="OnLoad()" onresize="OnResize()">
+    <label>
+        任务组：</label>
+    <select id="JobGroup" style="width: 150px; height: 25px;" onchange="OnJobGroupChange()">
+        <option>全部</option>
+    </select>
+    <input type="button" value="添加任务组" onclick="AddJobGroup()" />
+    <input type="button" value="删除任务组" onclick="DelJobGroup()" />
+    <input type="button" value="添加任务" onclick="AddJob()" />
+    <input type="button" value="移动任务" onclick="MoveJob()" />
+    <input type="button" value="删除任务" onclick="DelJob()" />
+    <input type="button" value="开始调度" onclick="StartSchedule()" />
+    <input type="button" value="暂停调度" onclick="PauseSchedule()" />
+    <input type="button" value="手动触发" onclick="ManualTrigger()" />
+    <input type="button" value="补执行" onclick="Patch()" />
+    <input type="button" value="取消执行" onclick="CancelExecute()" />
+    <div style="overflow-x: hidden; overflow-y: scroll; margin-top: 10px;">
+        <table id="JobTableHead">
+            <tr>
+                <th width="4%">
+                    <input type="checkbox" id="JobTableHeadCheckBox" onclick="OnJobTableHeadCheckBoxClick()" />
+                </th>
+                <th width="15%">
+                    名称
+                </th>
+                <th width="15%">
+                    任务组
+                </th>
+                <th style="display: none;" width="0%">
+                    ModelName
+                </th>
+                <th style="display: none;" width="0%">
+                    CronExpression
+                </th>
+                <th width="8%">
+                    修改任务
+                </th>
+                <th width="8%">
+                    下载模型
+                </th>
+                <th width="10%">
+                    执行状态
+                </th>
+                <th width="15%">
+                    下次执行时间
+                </th>
+                <th width="15%">
+                    上次执行时间
+                </th>
+                <th width="10%">
+                    上次执行结果
+                </th>
+                <th style="display: none;" width="0%">
+                    Creator
+                </th>
+                <th style="display: none;" width="0%">
+                    Visibility
+                </th>
+            </tr>
+        </table>
+    </div>
+    <div id="divJobTable" style="overflow-x: hidden; overflow-y: scroll;">
+        <table id="JobTable">
+        </table>
+    </div>
+    <div id="DialogOverlay">
+    </div>
+    <div id="JobDialog">
+        <label id="JobDialogCaption">添加任务
+        </label>
+        <form enctype="multipart/form-data" action="JobManager" method="post" target="JobDialog_iframeSubmit">
+        <input type="text" name="Method" id="JobDialog_textMethod" style="display: none;" />
+        <p>
+            <label style="width: 85px; display: inline-block;">
+                任务名称：</label>
+            <input type="text" name="JobName" id="JobDialog_textJobName" style="width: 200px; height: 25px; box-sizing: border-box;" />
+        </p>
+        <p>
+            <label style="width: 85px; display: inline-block;">
+                任务组：</label>
+            <select name="JobGroup" id="JobDialogJobGroup" style="width: 200px; height: 25px; box-sizing: border-box;">
+            </select>
+        </p>
+        <p>
+            <label style="width: 85px; display: inline-block;">
+                模型：</label>
+            <input type="text" readonly="readonly" id="JobDialog_textModel" style="width: 175px;
+                height: 25px; box-sizing: border-box;" /><input type="button" style="width: 25px;" value="..." onclick="ModelFile.click()" />
+            <input type="file" name="ModelFile" style="display: none;" id="JobDialog_fileModel"
+                onchange="JobDialog_fileModelOnChange()" />
+        </p>
+        <p>
+            <label style="width: 85px; display: inline-block;">
+                Cron表达式：</label>
+            <input type="text" name="CronExpression" value="0/10 * * * * ? *" id="JobDialog_textCronExpression"
+                style="width: 175px; height: 25px; box-sizing: border-box;" /><input type="button"
+                    style="width: 25px; box-sizing: border-box;" value="..." onclick="JobDialogOnCron()" />
+        </p>
+        <p>
+            <label style="width: 85px; display: inline-block;">
+                创建者：</label>
+            <input type="text" id="JobDialog_textCreator" readonly="readonly" style="width: 200px;
+                height: 25px; box-sizing: border-box;" />
+        </p>
+        <p>
+            <label style="width: 85px; display: inline-block;">
+                可见性：</label>
+            <select name="Visibility" id="JobDialog_selectVisibility" style="width: 200px; height: 25px; box-sizing: border-box;">
+                <option value="0">所有用户可见</option>
+                <option value="1">同组用户可见</option>
+                <option value="2">本用户可见</option>
+            </select>
+        </p>
+        <p style="float: right;">
+            <input type="submit" style="width: 80px" id="JobDialogOK" value="提交" onclick="return JobDialogOnOK()"  />
+            <input type="button" style="width: 80px" id="JobDialogCancel" value="取消" onclick="JobDialogOnCancel()" />
+        </p>
+        </form>
+        <iframe id="JobDialog_iframeSubmit" name="JobDialog_iframeSubmit" style="display: none;" src="#" onload="JobDialog_iframeSubmitOnLoad()">
+        </iframe>
+    </div>
+    <div id="DateTimeDialog">
+        <label>
+            选择日期时间
+        </label>
+        <p>
+            <input type="date" id="Date" style="height: 25px;"/><input type="time" id="Time" style="height: 25px;"/>
+        </p>
+        <p style="float: right;">
+            <input type="button" style="width: 80px" value="确定" onclick="DateTimeDialogOnOK()" />
+            <input type="button" style="width: 80px" value="取消" onclick="DateTimeDialogOnCancel()" />
+        </p>
+    </div>
+    <div id="PatchDialog">
+        <label>
+            补执行
+        </label>
+        <p>
+            <label style="width: 75px; display: inline-block;">
+                开始时间:</label>
+            <input type="date" id="PatchDialog_StartDate" style="height: 25px;"/><input type="time" id="PatchDialog_StartTime" style="height: 25px;"/>
+        </p>
+        <p>
+            <label style="width: 75px; display: inline-block;">
+                结束时间:</label>
+            <input type="date" id="PatchDialog_EndDate" style="height: 25px;"/><input type="time" id="PatchDialog_EndTime" style="height: 25px;"/>
+        </p>
+        <p style="float: right;">
+            <input type="button" style="width: 80px" value="确定" onclick="PatchDialogOnOK()" />
+            <input type="button" style="width: 80px" value="取消" onclick="PatchDialogOnCancel()" />
+        </p>
+    </div>
+    <div id="CronDialog">
+        <label id="CronDialogCaption">
+            Cron表达式生成器
+        </label>
+        <iframe src="cron-maker.html" id="iframeCronMaker" style="width: 820px;
+            height: 500px; border: 0px; margin-left:-4px;"></iframe>
+        <p style="float: right;">
+            <input type="button" style="width: 80px" value="确定" onclick="CronDialogOnOK()" />
+            <input type="button" style="width: 80px" value="取消" onclick="CronDialogOnCancel()" />
+        </p>
+    </div>
+    <div style="display: none;">
+        <form action="JobManager" method="post">
+        <input type="text" name="Method" value="DownloadModel" />
+        <input type="text" name="JobName" id="DownloadModelDialog_textJobName" />
+        <input type="text" name="JobGroup" id="DownloadModelDialog_textJobGroup" />
+        <input type="submit" id="DownloadModelDialog_buttonOK" />
+        </form>
+    </div>
+
+    <div id="MoveJobDialog">
+        <label id="MoveJobDialogCaption">
+            移动任务
+        </label>
+        <div style="overflow-x: hidden; overflow-y: scroll; margin-top: 4px;">
+            <table id="MoveJobTableHead" style="margin: 4px 0px 0px 0px;">
+                <tr>
+                    <th width="25%">
+                        源名称
+                    </th>
+                    <th width="25%">
+                        源任务组
+                    </th>
+                    <th width="25%">
+                        目标名称
+                    </th>
+                    <th width="25%">
+                        目标任务组
+                    </th>
+                </tr>
+            </table>
+        </div>
+        <div id="divMoveJobTable" style="overflow-x: hidden; overflow-y: scroll; height: 510px;">
+            <table id="MoveJobTable">
+            </table>
+        </div>
+        <div style="margin-top: 10px;">
+            <input type="checkbox" id="checkboxDelSrcJob" onclick="OnDelSrcJobCheckBoxClick()">是否删除源任务</input>
+            <input type="button" style="width: 80px; float: right; margin-left: 10px;" value="取消"
+                onclick="MoveJobDialogOnCancel()" />
+            <input type="button" style="width: 80px; float: right;" value="确定" onclick="MoveJobDialogOnOK()" />
+        </div>
+    </div>
+</body>
+</html>

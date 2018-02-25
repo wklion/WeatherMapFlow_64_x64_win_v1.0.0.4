@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value=""/>
+		<Param Name="Author" Value="Administrator"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2018-01-16 15:35:45"/>
+		<Param Name="DataStartTime" Value="2018-01-16 15:35:45"/>
+		<Param Name="DataEndTime" Value="2018-01-16 15:35:45"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample2.ModuleOpenDS" x="48" y="32">
+			<Params>
+				<Param Name="Type" Value="ESRI Shapefile"/>
+				<Param Name="Alias" Value="Datasource1"/>
+				<Param Name="Server" Value="../../Input/HeBei/灾害点.shp"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetPoint"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.pluginexample2.ModuleOpenDS" x="48" y="144">
+			<Params>
+				<Param Name="Type" Value="ESRI Shapefile"/>
+				<Param Name="Alias" Value="Datasource2"/>
+				<Param Name="Server" Value="../../Input/HeBei/京津冀区县.shp"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRegion"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="3" ClassName="com.wmf.pluginexample2.ModuleGraphicProduct" x="272" y="96">
+			<Params>
+				<Param Name="TemplateFile" Value="..\..\GraphicProductTemplate\HeBei\点单值_面分段.xml"/>
+				<Param Name="Datasource" Value="Datasource1"/>
+				<Param Name="Dataset" Value="灾害点"/>
+				<Param Name="Unit" Value=""/>
+				<Param Name="Datasource" Value="Datasource2"/>
+				<Param Name="Dataset" Value="京津冀区县"/>
+				<Param Name="Unit" Value=""/>
+				<Param Name="Bounds" Value="0.000000 0.000000 0.000000 0.000000"/>
+				<Param Name="ClipRegion" Value=""/>
+				<Param Name="MainTitle" Value=""/>
+				<Param Name="SubTitle" Value=""/>
+				<Param Name="Organization" Value=""/>
+				<Param Name="PublishTime" Value=""/>
+				<Param Name="GeoLegendToLayer" Value="test.MGCBottom.灾害点"/>
+				<Param Name="GeoLegendToLayer" Value="test.MGCBottom.大风"/>
+				<Param Name="FileName" Value="../../Output/[yyMMdd].png"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetPoint"/>
+				<InputPort ID="2" Type="DatasetRegion"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="ImageFile"/>
+			</OutputPorts>
+		</Module>
+	</Modules>
+	<Pipes>
+		<Pipe ID="4" IncomingModule="1" IncomingPort="1" OutgoingModule="3" OutgoingPort="1"/>
+		<Pipe ID="5" IncomingModule="2" IncomingPort="1" OutgoingModule="3" OutgoingPort="2"/>
+	</Pipes>
+</Model>

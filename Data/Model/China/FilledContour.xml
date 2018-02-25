@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value="FilledContour"/>
+		<Param Name="Author" Value="Administrator"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2008-08-01 20:00:00"/>
+		<Param Name="DataStartTime" Value="2016-10-27 14:16:13"/>
+		<Param Name="DataEndTime" Value="2016-10-27 14:16:13"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample2.ModuleCreateDS" x="16" y="16">
+			<Params>
+				<Param Name="Type" Value="Memory"/>
+				<Param Name="Alias" Value="temp"/>
+				<Param Name="Server" Value=""/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts/>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.pluginexample2.ModuleOpenDS" x="512" y="112">
+			<Params>
+				<Param Name="Type" Value="ESRI Shapefile"/>
+				<Param Name="Alias" Value="China_Country_pl"/>
+				<Param Name="Server" Value="../../GraphicProductTemplate/China/China_Country_pl.shp"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRegion"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="3" ClassName="com.wmf.pluginexample2.ModuleOpenDS" x="16" y="144">
+			<Params>
+				<Param Name="Type" Value="Micaps"/>
+				<Param Name="Alias" Value="test"/>
+				<Param Name="Server" Value="../../Input/China/08080120.000"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetPoint"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="4" ClassName="com.wmf.pluginexample2.ModuleIDW" x="160" y="144">
+			<Params>
+				<Param Name="Datasource" Value="test"/>
+				<Param Name="Dataset" Value="08080120.000"/>
+				<Param Name="Field" Value="Value1"/>
+				<Param Name="Bounds" Value="73.210000 17.880000 135.531000 54.330000"/>
+				<Param Name="CellSize" Value="0.200000 0.200000"/>
+				<Param Name="ValueType" Value="Single"/>
+				<Param Name="SearchMode" Value="RadiusFixed"/>
+				<Param Name="PointCount" Value="12"/>
+				<Param Name="MaxRadius" Value="0"/>
+				<Param Name="Radius" Value="5"/>
+				<Param Name="MinPointCount" Value="0"/>
+				<Param Name="Power" Value="2"/>
+				<Param Name="CrossValidation" Value="false"/>
+				<Param Name="ResidualFileName" Value=""/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="output_idw"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetPoint"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRaster"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="5" ClassName="com.wmf.pluginexample2.ModuleContour" x="336" y="144">
+			<Params>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="output_idw"/>
+				<Param Name="Values" Value="0 0.1 10 25 50 100"/>
+				<Param Name="Smoothness" Value="3"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="Contour"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="ValidBorder"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetRaster"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetLine"/>
+				<OutputPort ID="2" Type="DatasetLine"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="6" ClassName="com.wmf.pluginexample2.ModulePolygonizer" x="496" y="192">
+			<Params>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="Contour"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="ValidBorder"/>
+				<Param Name="Datasource" Value=""/>
+				<Param Name="Dataset" Value=""/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="output_idw"/>
+				<Param Name="Field" Value="ZValue"/>
+				<Param Name="MinValue" Value="0.000000"/>
+				<Param Name="MaxValue" Value="250.000000"/>
+				<Param Name="NoDataValue" Value="-9999.000000"/>
+				<Param Name="CalcValue" Value="true"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="FilledContour"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetLine"/>
+				<InputPort ID="2" Type="DatasetLine"/>
+				<InputPort ID="3" Type="Unknown"/>
+				<InputPort ID="4" Type="DatasetRaster"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRegion"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="7" ClassName="com.wmf.pluginexample2.ModuleClip" x="656" y="160">
+			<Params>
+				<Param Name="Datasource" Value="China_Country_pl"/>
+				<Param Name="Dataset" Value="China_Country_pl"/>
+				<Param Name="Where" Value=""/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="FilledContour"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="Clip"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetRegion"/>
+				<InputPort ID="2" Type="DatasetRegion"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRegion"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="8" ClassName="com.wmf.pluginexample2.ModuleExportToGeoJSON" x="816" y="224">
+			<Params>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="Clip"/>
+				<Param Name="CoordFormat" Value="%.1f"/>
+				<Param Name="Fields" Value="MGMinValue|MGMaxValue"/>
+				<Param Name="FileName" Value="../../Output/[yyyyMM]/[yyMMddHH].json"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetRegion"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="JSONFile"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="9" ClassName="com.wmf.pluginexample2.ModuleGraphicProduct" x="992" y="160">
+			<Params>
+				<Param Name="TemplateFile" Value="../../GraphicProductTemplate/China/FilledContour.xml"/>
+				<Param Name="Datasource" Value=""/>
+				<Param Name="Dataset" Value=""/>
+				<Param Name="Unit" Value=""/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="Clip"/>
+				<Param Name="Unit" Value="mm"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="Clip"/>
+				<Param Name="Unit" Value=""/>
+				<Param Name="Bounds" Value="0.000000 0.000000 0.000000 0.000000"/>
+				<Param Name="ClipRegion" Value=""/>
+				<Param Name="MainTitle" Value="全国降水量预报图"/>
+				<Param Name="SubTitle" Value="[yyyy年M月d日HH时]"/>
+				<Param Name="Organization" Value="中央气象台"/>
+				<Param Name="PublishTime" Value="[yyyy年M月d日HH时]发布"/>
+				<Param Name="FileName" Value="../../Output/[yyyyMM]/[yyMMddHH].png"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="Unknown"/>
+				<InputPort ID="2" Type="DatasetRegion"/>
+				<InputPort ID="3" Type="DatasetRegion"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="ImageFile"/>
+			</OutputPorts>
+		</Module>
+	</Modules>
+	<Pipes>
+		<Pipe ID="10" IncomingModule="3" IncomingPort="1" OutgoingModule="4" OutgoingPort="1"/>
+		<Pipe ID="11" IncomingModule="4" IncomingPort="1" OutgoingModule="5" OutgoingPort="1"/>
+		<Pipe ID="12" IncomingModule="5" IncomingPort="1" OutgoingModule="6" OutgoingPort="1"/>
+		<Pipe ID="13" IncomingModule="5" IncomingPort="2" OutgoingModule="6" OutgoingPort="2"/>
+		<Pipe ID="14" IncomingModule="4" IncomingPort="1" OutgoingModule="6" OutgoingPort="4"/>
+		<Pipe ID="15" IncomingModule="2" IncomingPort="1" OutgoingModule="7" OutgoingPort="1"/>
+		<Pipe ID="16" IncomingModule="6" IncomingPort="1" OutgoingModule="7" OutgoingPort="2"/>
+		<Pipe ID="17" IncomingModule="7" IncomingPort="1" OutgoingModule="8" OutgoingPort="1"/>
+		<Pipe ID="18" IncomingModule="7" IncomingPort="1" OutgoingModule="9" OutgoingPort="2"/>
+		<Pipe ID="19" IncomingModule="8" IncomingPort="1" OutgoingModule="9" OutgoingPort="2"/>
+		<Pipe ID="20" IncomingModule="7" IncomingPort="1" OutgoingModule="9" OutgoingPort="3"/>
+	</Pipes>
+</Model>

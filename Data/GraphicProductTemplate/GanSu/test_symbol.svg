@@ -1,0 +1,675 @@
+<?xml version="1.0" encoding="gb2312"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="符号库" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+  
+  <g id="C10-圆点">
+    <circle fill="#000000" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="10"/>
+  </g>
+  
+  <g id="C100-台风1">
+    <path fill="#000000" stroke="#000000" stroke-miterlimit="10" d="M-2.5,62.24c23.5,56,88.75,32,90-12.25
+	    c0-15.358-9.232-28.561-22.451-34.358l-0.003,0.006c20.728,0,29.196,10.561,37.454,22.103v0.01c-23.5-56-88.75-32-90,12.25
+	    c0,15.358,9.233,28.561,22.451,34.358l0.003-0.006C14.227,84.353,5.758,73.792-2.5,62.25z"/>
+  </g>
+  <g id="C101-台风2">
+    <path fill="#000000" stroke="#000000" stroke-miterlimit="10" d="M-2.5,62.24c23.5,56,88.75,32,90-12.25
+	    c0-15.358-9.232-28.561-22.451-34.358l-0.003,0.006c20.728,0,29.196,10.561,37.454,22.103v0.01c-23.5-56-88.75-32-90,12.25
+	    c0,15.358,9.233,28.562,22.451,34.358l0.003-0.006C14.227,84.354,5.758,73.792-2.5,62.25V62.24z M50,35c8.284,0,15,6.716,15,15
+	    s-6.716,15-15,15s-15-6.716-15-15S41.716,35,50,35z"/>
+  </g>
+  
+  <g id="C901-文本风格_圆角矩形背景">
+    <path fill="#FF0000" stroke="#FF0000" stroke-miterlimit="10" d="M100,65c0,5.523-4.478,10-10,10H10C4.478,75,0,70.523,0,65V35
+	    c0-5.522,4.478-10,10-10h80c5.522,0,10,4.478,10,10V65z"/>
+    <path fill="none" stroke="#FFFFFF" stroke-miterlimit="10" d="M98,65c0,4.418-3.582,8-8,8H10c-4.418,0-8-3.582-8-8V35
+	    c0-4.418,3.582-8,8-8h80c4.418,0,8,3.582,8,8V65z"/>
+  </g>
+  <g id="C902-文本风格_五角星背景">
+    <polygon fill="#FF0000" stroke="#FFFF00" stroke-miterlimit="0" points="50,4.775 64.694,34.549 97.553,39.324 73.776,62.5 
+      79.39,95.227 50,79.775 20.611,95.227 26.224,62.5 2.447,39.324 35.305,34.549 "/>
+  </g>
+    
+  <g id="C1000-0级风">
+  </g>
+  <g id="C1001-1级风">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="89.629" y1="-28.714" x2="50.218" y2="-18.149"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="50" x2="50" y2="-40.563"/>
+  </g>
+  <g id="C1002-2级风">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="89.629" y1="-28.713" x2="50.219" y2="-18.148"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="50" x2="50" y2="-40.562"/>
+  </g>
+  <g id="C1003-3级风">
+	  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.155" y1="-35.288" x2="50.116" y2="-24.017"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="50" x2="50" y2="-24.323"/>
+  </g>
+  <g id="C1004-4级风">
+	  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.156" y1="-35.288" x2="50.118" y2="-24.017"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.156" y1="-24.017" x2="50.118" y2="-12.746"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="50" x2="50" y2="-24.323"/>
+  </g>
+  <g id="C1005-5级风">
+	  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.156" y1="-35.288" x2="50.118" y2="-24.017"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.156" y1="-24.017" x2="50.118" y2="-12.746"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="71.137" y1="-7.109" x2="50.118" y2="-1.473"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="50" x2="50" y2="-24.323"/>
+  </g>
+  <g id="C1006-6级风">
+	  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.155" y1="-35.288" x2="50.116" y2="-24.017"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.155" y1="-24.017" x2="50.116" y2="-12.746"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.155" y1="-12.746" x2="50.116" y2="-1.474"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="50" x2="50" y2="-24.323"/>
+  </g>
+  <g id="C1007-7级风">
+	  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.273" y1="-35.288" x2="50.233" y2="-24.017"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.273" y1="-24.017" x2="50.233" y2="-12.746"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.273" y1="-12.746" x2="50.233" y2="-1.474"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.041" y1="-1.474" x2="50" y2="9.799"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50.117" y1="50" x2="50.117" y2="-24.323"/>
+  </g>
+  <g id="C1008-8级风">
+	  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-16.035" x2="50.233" y2="-4.765"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="50" x2="50" y2="-16.035"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="-16.035" x2="92.506" y2="-16.035"/>
+  </g>
+  <g id="C1009-9级风">
+	  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.755" y1="-16.035" x2="50.715" y2="-4.765"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="71.019" y1="1.741" x2="50" y2="7.377"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50.481" y1="50" x2="50.481" y2="-16.035"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50.481" y1="-16.035" x2="92.986" y2="-16.035"/>
+  </g>
+  <g id="C1010-10级风">
+	  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-16.035" x2="50.233" y2="-4.765"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-4.086" x2="50.233" y2="7.185"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="71.253" y1="12.82" x2="50.233" y2="18.456"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="50" x2="50" y2="-16.035"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="-16.035" x2="92.506" y2="-16.035"/>
+  </g>
+  <g id="C1011-11级风">
+	  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.485" y1="-16.035" x2="50.447" y2="-4.765"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.485" y1="-4.086" x2="50.447" y2="7.185"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.485" y1="7.185" x2="50.447" y2="18.456"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="71.021" y1="24.21" x2="50" y2="29.847"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50.213" y1="50" x2="50.213" y2="-16.035"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50.213" y1="-16.035" x2="92.72" y2="-16.035"/>
+  </g>
+  <g id="C1012-12级风">
+	  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-47.234" x2="50.232" y2="-35.965"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-35.287" x2="50.232" y2="-24.016"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-24.016" x2="50.232" y2="-12.745"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-12.745" x2="50.232" y2="-1.473"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.04" y1="-1.473" x2="50" y2="9.8"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="50" x2="50" y2="-47.234"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="-47.234" x2="92.505" y2="-47.234"/>
+  </g>
+  <g id="C1013-13级风">
+	  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="-14.887" x2="92.506" y2="-14.887"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-26.835" x2="50.233" y2="-15.565"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-14.887" x2="50.233" y2="-3.615"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="50" x2="50" y2="-26.5"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="-26.835" x2="92.506" y2="-26.835"/>
+  </g>
+  <g id="C1014-14级风">
+	  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="-35.287" x2="92.506" y2="-35.287"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-47.234" x2="50.233" y2="-35.965"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-35.287" x2="50.233" y2="-24.015"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-24.015" x2="50.233" y2="-12.745"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-12.745" x2="50.233" y2="-1.473"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="71.253" y1="4.162" x2="50.233" y2="9.8"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="50" x2="50" y2="-47.234"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="-47.234" x2="92.506" y2="-47.234"/>
+  </g>
+  <g id="C1015-15级风">
+	  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="-35.286" x2="92.506" y2="-35.286"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-47.233" x2="50.233" y2="-35.964"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-35.286" x2="50.233" y2="-24.015"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-24.015" x2="50.233" y2="-12.744"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-12.744" x2="50.233" y2="-1.473"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.04" y1="-1.473" x2="50" y2="9.8"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="50" x2="50" y2="-47.233"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="-47.233" x2="92.506" y2="-47.233"/>
+  </g>
+  <g id="C1016-16级风">
+	  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="-35.286" x2="92.506" y2="-35.286"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-47.235" x2="50.233" y2="-35.965"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-35.286" x2="50.233" y2="-24.015"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-24.015" x2="50.233" y2="-12.745"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-12.745" x2="50.233" y2="-1.473"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.04" y1="-1.473" x2="50" y2="9.799"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.04" y1="9.799" x2="50" y2="21.069"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="50" x2="50" y2="-47.235"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="-47.235" x2="92.506" y2="-47.235"/>
+  </g>
+  <g id="C1017-17级风">
+	  <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="50" x2="50" y2="-47.234"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="-47.234" x2="92.506" y2="-47.234"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="-35.285" x2="92.506" y2="-35.285"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-47.234" x2="50.232" y2="-35.964"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-35.285" x2="50.232" y2="-24.014"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-24.014" x2="50.232" y2="-12.744"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.274" y1="-12.744" x2="50.232" y2="-1.472"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.04" y1="-1.472" x2="50" y2="9.8"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="92.04" y1="9.8" x2="50" y2="21.07"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="71.253" y1="26.705" x2="50.232" y2="32.342"/>
+  </g>
+  
+  <g id="C1100-风箭头">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="49.25" x2="50" y2="139.813"/>
+    <polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="37.5,118.162 50,139.813 62.5,118.162 "/>
+  </g>
+
+	<g id="C2001-露">
+    
+  </g>
+	<g id="C2002-霜">
+    
+  </g>
+	<g id="C2003-结冰">
+    
+  </g>
+	<g id="C2004-烟">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M29.247,97.5v-64C39.56,33.5,39.56,50,49.87,50
+			c10.313,0,10.313-16.5,20.624-16.5c5.154,0,7.732,4.121,10.31,8.244"/>
+  </g>
+	<g id="C2005-霾">
+    <circle fill="none" stroke="#000000" stroke-miterlimit="10" cx="30" cy="50" r="20"/>
+		<circle fill="none" stroke="#000000" stroke-miterlimit="10" cx="70" cy="50" r="20"/>
+  </g>
+	<g id="C2006-浮尘">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M25,75c0,13.818,11.182,25,25,25s25-11.182,25-25S63.818,50,50,50
+			S25,38.818,25,25S36.182,0,50,0s25,11.182,25,25"/>
+  </g>
+	<g id="C2007-扬沙">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M33.8,70.2c0,8.954,7.246,16.2,16.2,16.2s16.2-7.246,16.2-16.2
+			S58.954,54,50,54s-16.2-7.246-16.2-16.2c0-8.954,7.246-16.2,16.2-16.2s16.2,7.246,16.2,16.2"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="98.18" x2="50" y2="1.82"/>
+		<polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="35.744,16.077 50,1.82 64.256,16.077 "/>
+  </g>
+	<g id="C2008-尘卷风">
+    
+  </g>
+	<g id="C2010-轻雾">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="26.049" y1="50" x2="73.95" y2="50"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="26.049" y1="64.86" x2="73.95" y2="64.86"/>
+  </g>
+	<g id="C2013-闪电">
+    
+  </g>
+	<g id="C2014-极光">
+    
+  </g>
+	<g id="C2015-大风">
+    
+  </g>
+	<g id="C2016-积雪">
+    
+  </g>
+	<g id="C2017-雷暴">
+    <polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="87.5,70.833 87.5,87.5 70.833,87.5 "/>
+		<polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="87.5,87.5 50,50 87.5,12.5 12.5,12.5 12.5,87.5 "/>
+  </g>
+	<g id="C2018-飑">
+    
+  </g>
+	<g id="C2019-龙卷">
+    
+  </g>
+	<g id="C2031-沙尘暴">
+		<path fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" d="M25,75c0,13.818,11.182,25,25,25s25-11.182,25-25S63.818,50,50,50
+			S25,38.818,25,25S36.182,0,50,0s25,11.182,25,25"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="6.2" y1="50" x2="93.8" y2="50"/>
+		<polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="80.839,37.04 93.8,50 80.839,62.96 "/>
+  </g>
+	<g id="C2038-吹雪">
+    
+  </g>
+	<g id="C2039-雪暴">
+    
+  </g>
+	<g id="C2042-雾">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="15.625" y1="25" x2="84.375" y2="25"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="15.625" y1="50" x2="84.375" y2="50"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="15.625" y1="75" x2="84.375" y2="75"/>
+  </g>
+	<g id="C2048-雾凇">
+    
+  </g>
+	<g id="C2050-毛毛雨">
+    <path fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" d="M60,50c0,11.331-6.877,20.5-15.375,20.5C47.596,70.5,50,65.804,50,60
+			c-5.527,0-10-4.473-10-10c0-5.523,4.477-10,10-10C55.523,40,60,44.477,60,50z"/>
+  </g>
+	<g id="C2056-雨凇">
+    
+  </g>
+	<g id="C2060-小雨">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="10"/>
+  </g>
+	<g id="C2068-雨夹雪">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="49.66" cy="15.704" r="10.89"/>
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="8.822" y1="65.894" x2="91.178" y2="66.165"/>
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="20.446" y1="95.185" x2="78.872" y2="37.142"/>
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="20.446" y1="36.678" x2="78.488" y2="95.104"/>
+  </g>
+	<g id="C2070-小雪">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="15.436" y1="50" x2="84.556" y2="50"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="25.557" y1="74.438" x2="74.433" y2="25.561"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="25.555" y1="25.561" x2="74.431" y2="74.438"/>
+  </g>
+	<g id="C2076-冰针">
+    
+  </g>
+	<g id="C2077-米雪">
+    
+  </g>
+	<g id="C2079-冰粒">
+    
+  </g>
+	<g id="C2080-阵雨">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="20.188" r="7.5"/>
+	  <polygon fill="none" stroke="#000000" stroke-miterlimit="10" points="82.475,42.5 50,98.749 17.524,42.5 	"/>
+  </g>
+	<g id="C2083-阵性雨夹雪">
+    
+  </g>
+	<g id="C2085-阵雪">
+    <polygon fill="none" stroke="#000000" stroke-miterlimit="10" points="82.475,42.5 50,98.749 17.524,42.5 "/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="32.72" y1="20.188" x2="67.28" y2="20.188"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="37.781" y1="32.407" x2="62.219" y2="7.969"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="37.78" y1="7.969" x2="62.218" y2="32.407"/>
+  </g>
+	<g id="C2087-霰">
+    
+  </g>
+	<g id="C2089-冰雹">
+    
+  </g>
+	<g id="C2208-阵性降水">
+    <polygon fill="none" stroke="#000000" stroke-miterlimit="10" points="82.475,42.5 50,98.749 17.524,42.5 	"/>
+  </g>
+
+  <g id="C2800-晴">
+    <circle fill="none" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="37.5"/>
+  </g>
+  <g id="C2801-多云">
+    <circle fill="none" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="37.5"/>
+    <path fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" d="M87.5,50c0-20.711-16.79-37.5-37.5-37.5v75C70.71,87.5,87.5,70.71,87.5,50z"/>
+  </g>
+  <g id="C2802-阴">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="37.5"/>
+  </g>
+  <g id="C2804-雷阵雨">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="49.759" cy="17.251" r="7.718"/>
+    <polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="79.182,97.609 50.242,68.668 78.699,40.211 20.818,40.211 20.818,98.091 "/>
+    <polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="67.509,97.609 79.182,97.609 79.182,85.937 "/>
+  </g>
+  <g id="C2805-雷阵雨并有冰雹">
+    <polygon fill="none" stroke="#000000" stroke-miterlimit="10" points="37.875,32.867 50,11.867 62.123,32.867 "/>
+    <polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="76.469,96.603 50.219,70.353 76.031,44.539 23.531,44.539 23.531,97.038 "/>
+    <polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="65.881,96.603 76.469,96.603 76.469,86.014 "/>
+  </g>
+  <g id="C2808-中雨">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="71.65" cy="50" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="28.35" cy="50" r="10"/>
+  </g>
+  <g id="C2809-大雨">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="71.65" cy="62.5" r="10"/>
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="24.597" r="10"/>
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="28.35" cy="62.5" r="10"/>
+  </g>
+  <g id="C2810-暴雨">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="20" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="20" cy="50" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="49.999" cy="80" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="79.998" cy="50" r="10"/>
+  </g>
+  <g id="C2811-大暴雨">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="20" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="20" cy="50" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="49.999" cy="80" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="79.998" cy="50" r="10"/>
+  </g>
+  <g id="C2812-特大暴雨">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="75" cy="16.648" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="25" cy="50" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="25" cy="83.348" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="25" cy="16.649" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="74.999" cy="49.998" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="75" cy="83.348" r="10.001"/>
+  </g>
+  <g id="C2815-中雪">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="7.72" y1="50" x2="42.28" y2="50"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="12.781" y1="62.219" x2="37.219" y2="37.781"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="12.78" y1="37.781" x2="37.218" y2="62.219"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="57.72" y1="50" x2="92.279" y2="50"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="62.78" y1="62.219" x2="87.218" y2="37.781"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="62.778" y1="37.781" x2="87.217" y2="62.219"/>
+  </g>
+  <g id="C2816-大雪">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="32.72" y1="20" x2="67.28" y2="20"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="37.781" y1="32.219" x2="62.219" y2="7.781"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="37.78" y1="7.781" x2="62.218" y2="32.219"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="6.739" y1="65" x2="41.299" y2="65"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="11.8" y1="77.219" x2="36.237" y2="52.781"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="11.798" y1="52.781" x2="36.236" y2="77.219"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="58.7" y1="65" x2="93.26" y2="65"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="63.761" y1="77.219" x2="88.198" y2="52.781"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="63.759" y1="52.781" x2="88.197" y2="77.219"/>
+  </g>
+  <g id="C2817-暴雪">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="32.72" y1="20" x2="67.279" y2="20"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="37.78" y1="32.218" x2="62.219" y2="7.781"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="37.779" y1="7.781" x2="62.217" y2="32.218"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="32.72" y1="79.999" x2="67.279" y2="79.999"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="37.781" y1="92.218" x2="62.219" y2="67.78"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="37.779" y1="67.78" x2="62.217" y2="92.218"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="2.72" y1="50" x2="37.28" y2="50"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="7.781" y1="62.219" x2="32.218" y2="37.781"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="7.779" y1="37.781" x2="32.217" y2="62.219"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="62.721" y1="49.999" x2="97.28" y2="49.999"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="67.781" y1="62.218" x2="92.22" y2="37.78"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="67.779" y1="37.78" x2="92.218" y2="62.218"/>
+  </g>
+  <g id="C2819-冻雨">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M100,50c0,13.818-11.182,25-25,25S50,63.818,50,50S38.818,25,25,25S0,36.182,0,50"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="25" cy="50" r="8"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="75" cy="50" r="8"/>
+  </g>
+  <g id="C2821-小到中雨">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="6.2" y1="56.71" x2="93.8" y2="56.71"/>
+		<polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="80.839,43.75 93.8,56.71 80.839,69.67 "/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="33.75" r="10"/>
+  </g>
+  <g id="C2822-中到大雨">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="6.2" y1="56.71" x2="93.8" y2="56.71"/>
+		<polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="80.839,43.75 93.8,56.71 80.839,69.67 "/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="66.675" cy="33.75" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="33.325" cy="33.75" r="10"/>
+  </g>
+  <g id="C2823-大到暴雨">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="6.2" y1="63.71" x2="93.8" y2="63.71"/>
+		<polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="80.839,50.75 93.8,63.71 80.839,76.67 "/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="66.675" cy="40.75" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="33.325" cy="40.75" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50.028" cy="15.25" r="10"/>
+  </g>
+  <g id="C2824-暴雨到大暴雨">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="6.2" y1="74.71" x2="93.8" y2="74.71"/>
+		<polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="80.839,61.75 93.8,74.71 80.839,87.67 "/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="28.787" cy="35.676" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="56.889" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="14.463" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="71.215" cy="35.676" r="10"/>
+  </g>
+  <g id="C2825-大暴雨到特大暴雨">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="6.2" y1="75.71" x2="93.8" y2="75.71"/>
+		<polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="80.839,62.75 93.8,75.71 80.839,88.67 "/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="12.506" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="73.957" cy="36.463" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="26.042" cy="36.463" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="36.463" r="10"/>
+		<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="60.42" r="10"/>
+  </g>
+  <g id="C2826-小到中雪">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="6.2" y1="63.71" x2="93.8" y2="63.71"/>
+		<polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="80.839,50.75 93.8,63.71 80.839,76.67 "/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="15.436" y1="30" x2="84.557" y2="30"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="25.557" y1="54.438" x2="74.434" y2="5.561"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="25.555" y1="5.561" x2="74.432" y2="54.438"/>
+  </g>
+  <g id="C2827-中到大雪">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="6.2" y1="63.71" x2="93.8" y2="63.71"/>
+		<polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="80.839,50.75 93.8,63.71 80.839,76.67 "/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="7.72" y1="32" x2="42.28" y2="32"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="12.781" y1="44.219" x2="37.219" y2="19.781"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="12.78" y1="19.781" x2="37.218" y2="44.219"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="57.721" y1="32" x2="92.279" y2="32"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="62.779" y1="44.219" x2="87.218" y2="19.781"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="62.777" y1="19.781" x2="87.217" y2="44.219"/>
+  </g>
+  <g id="C2828-大到暴雪">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="6.2" y1="81.04" x2="93.8" y2="81.04"/>
+		<polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="80.839,68.08 93.8,81.04 80.839,94 "/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="32.721" y1="18.665" x2="67.28" y2="18.665"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="37.782" y1="30.884" x2="62.22" y2="6.446"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="37.781" y1="6.446" x2="62.219" y2="30.884"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="13.858" y1="52" x2="48.418" y2="52"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="18.919" y1="64.219" x2="43.356" y2="39.782"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="18.917" y1="39.782" x2="43.355" y2="64.219"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="51.583" y1="51.335" x2="86.143" y2="51.335"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="56.645" y1="63.554" x2="81.081" y2="39.117"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="56.642" y1="39.117" x2="81.08" y2="63.554"/>
+  </g>
+  <g id="C2831-强沙尘暴">
+		<path fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" d="M25,75c0,13.818,11.182,25,25,25c13.818,0,25-11.182,25-25
+			S63.818,50,50,50c-13.818,0-25-11.182-25-25S36.182,0,50,0c13.818,0,25,11.182,25,25"/>
+		<polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="82.783,34.447 98.336,49.998 82.783,65.553 "/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="9.44" y1="43.434" x2="90.56" y2="43.434"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="9.44" y1="56.566" x2="90.56" y2="56.566"/>
+  </g>
+  <g id="C2832-台风">
+    <circle fill="none" stroke="#FF0000" stroke-miterlimit="10" cx="50" cy="50" r="37.5"/>
+    <line fill="none" stroke="#FF0000" stroke-miterlimit="10" x1="23.484" y1="129.584" x2="76.518" y2="76.551"/>
+    <line fill="none" stroke="#FF0000" stroke-miterlimit="10" x1="23.484" y1="23.517" x2="76.518" y2="-29.517"/>
+  </g>
+  <g id="C2850-霜冻">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="10"/>
+  </g>
+  <g id="C2852-大雾">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="10"/>
+  </g>
+  <g id="C2853-晴间多云">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="10"/>
+  </g>
+  <g id="C2854-晴到少云">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="10"/>
+  </g>
+  <g id="C2855-多云间晴">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="10"/>
+  </g>
+  <g id="C2856-多云间阴">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="10"/>
+  </g>
+  <g id="C2857-阴间多云">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="10"/>
+  </g>
+
+	<g id="C3000-总云量0">
+    <circle fill="none" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="37.5"/>
+  </g>	
+	<g id="C3001-总云量1">
+    <circle fill="none" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="37.5"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="12.5" x2="50" y2="87.5"/>
+  </g>	
+	<g id="C3002-总云量2">
+		<circle fill="none" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="37.5"/>
+		<path fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" d="M87.467,50H50V12.5c20.729,0,37.5,16.772,37.5,37.5H87.467z"/>
+  </g>	
+	<g id="C3004-总云量4">
+		<circle fill="none" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="37.5"/>
+		<path fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" d="M87.467,49.999H50v-37.5c20.728,0,37.5,16.772,37.5,37.5H87.467z"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="49.999" x2="50" y2="87.5"/>
+  </g>	
+	<g id="C3005-总云量5">
+    <circle fill="none" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="37.5"/>
+    <path fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" d="M87.5,50c0-20.711-16.79-37.5-37.5-37.5v75C70.71,87.5,87.5,70.71,87.5,50z"/>
+  </g>	
+	<g id="C3006-总云量6">
+    <circle fill="none" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="37.5"/>
+		<path fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" d="M87.5,50c0-20.711-16.79-37.5-37.5-37.5v75
+			C70.71,87.5,87.5,70.71,87.5,50z"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="12.5" y1="50" x2="50" y2="50"/>
+  </g>	
+	<g id="C3007-总云量7">
+    <path fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" d="M12.5,50c0,20.711,16.79,37.5,37.5,37.5
+			c20.711,0,37.5-16.789,37.5-37.5S70.711,12.5,50,12.5V50H12.5z"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M12.5,50c0-20.728,16.772-37.5,37.5-37.5"/>
+  </g>	
+	<g id="C3009-总云量9">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M62.501,85.366C58.591,86.748,54.383,87.5,50,87.5
+			c-4.381,0-8.587-0.751-12.496-2.132"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M37.498,14.634c2.933-1.037,6.033-1.719,9.249-1.995
+			C47.819,12.547,48.904,12.5,50,12.5c4.384,0,8.592,0.752,12.502,2.135"/>
+		<path fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" d="M37.504,85.367l-0.006-70.734C22.934,19.782,12.5,33.672,12.5,49.999
+			C12.5,66.328,22.938,80.219,37.504,85.367z"/>
+		<path fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" d="M62.501,85.367V14.634C77.063,19.783,87.499,33.672,87.499,50
+			C87.499,66.328,77.063,80.219,62.501,85.367z"/>
+  </g>	
+	<g id="C3010-总云量10">
+    <circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="50" cy="50" r="37.5"/>
+  </g>	
+
+	<g id="C3111-高云状(毛卷云)">
+    <polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="25,50 75,50 62.667,37.667 "/>
+  </g>	
+	<g id="C3112-高云状(密卷云)">
+    <polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="25,50 75,50 62.667,37.667 "/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50.334" y1="37.667" x2="62.667" y2="50"/>
+  </g>	
+	<g id="C3113-高云状(伪卷云)">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M8.75,31.25H71.13c10.354,0,18.75,8.395,18.75,18.75
+			c0,10.355-8.396,18.75-18.75,18.75"/>
+  </g>	
+	<g id="C3114-高云状(钩卷云)">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M15,50c0-19.33,15.669-35,35-35c19.329,0,35,15.67,35,35"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="85" y1="50" x2="50" y2="85"/>
+  </g>	
+	<g id="C3115-高云状(卷云或卷层云，云层高度不及45°)">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="18.81" y1="68.75" x2="81.189" y2="68.75"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M18.81,31.249c10.355,0,18.75,8.395,18.75,18.751
+			c0,10.354-8.395,18.75-18.75,18.75"/>
+  </g>	
+	<g id="C3116-高云状(卷云或卷层云，云层高度超过45°)">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M31.138,22.477c7.322-7.322,19.194-7.322,26.516,0.001
+			c7.322,7.321,7.323,19.194,0.001,26.517"/>
+		<polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="69.399,76.049 31.139,76.049 30.601,76.049 57.655,48.995 
+			"/>
+  </g>	
+	<g id="C3117-高云状(卷层云布满天空)">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M12.364,31.25c10.354,0,18.749,8.395,18.749,18.75
+			c0.001,10.355-8.395,18.75-18.75,18.75"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M87.636,31.25c-10.354,0-18.748,8.395-18.748,18.75
+			C68.886,60.354,77.282,68.75,87.636,68.75"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="12.364" y1="68.75" x2="87.636" y2="68.75"/>
+  </g>	
+	<g id="C3118-高云状(卷层云未布满天空)">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M87.636,31.25c-10.354,0-18.748,8.395-18.748,18.75
+			C68.886,60.354,77.282,68.75,87.636,68.75"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="12.364" y1="68.75" x2="87.636" y2="68.75"/>
+  </g>	
+	<g id="C3119-高云状(卷积云)">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M75.98,64.16c4.142,7.175,1.685,16.349-5.49,20.49
+			c-7.176,4.143-16.35,1.685-20.49-5.49"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M50,79.159c-4.143,7.175-13.316,9.634-20.49,5.491
+			c-7.175-4.145-9.633-13.316-5.49-20.49"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="24.02" y1="64.16" x2="50.423" y2="37.757"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M29.26,16.543c5.857-5.858,15.355-5.858,21.213,0
+			c5.86,5.858,5.86,15.355,0,21.213"/>
+  </g>	
+	<g id="C3121-中云状(透光高层云)">
+    <polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="37.333,37.667 25,50 75,50 "/>
+  </g>	
+	<g id="C3122-中云状(蔽光高层云或雨层 云)">
+    <polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="37.333,37.667 25,50 75,50 "/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="37.333" y1="50" x2="49.666" y2="37.667"/>
+  </g>	
+	<g id="C3123-中云状(透光高积云 )">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M75.98,35.16c4.142,7.175,1.685,16.349-5.49,20.49
+			c-7.175,4.143-16.349,1.685-20.49-5.49"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M50,50.159c-4.143,7.175-13.316,9.634-20.49,5.491
+			c-7.175-4.143-9.633-13.316-5.49-20.49"/>
+  </g>	
+	<g id="C3124-中云状(荚状高积云)">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="15" y1="50" x2="50" y2="15"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M85,50c0,19.33-15.671,35-35,35c-19.331,0-35-15.67-35-35"/>
+  </g>	
+	<g id="C3125-中云状(成带或成层的透光高积云)">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M75.98,35.16c4.142,7.175,1.685,16.349-5.49,20.49
+			c-7.176,4.143-16.35,1.685-20.49-5.49"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M50,50.159c-4.143,7.175-13.316,9.634-20.49,5.491
+			c-7.175-4.144-9.633-13.316-5.49-20.49"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="24.02" y1="35.16" x2="50" y2="11.667"/>
+  </g>	
+	<g id="C3126-中云状(积云性高积云)">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M75.98,20.16c4.142,7.175,1.685,16.349-5.49,20.49
+			c-7.176,4.143-16.35,1.685-20.49-5.49"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M50,35.159c-4.143,7.175-13.316,9.634-20.49,5.491
+			c-7.175-4.144-9.633-13.316-5.49-20.49"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M15,78.75c0-19.33,15.67-35,35-35c19.33,0,35,15.67,35,35"/>
+  </g>	
+	<g id="C3127-中云状(复高积云或蔽光高积云)">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M75.98,41.16c4.142,7.175,1.685,16.349-5.49,20.49
+			c-7.176,4.143-16.35,1.685-20.49-5.49"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M50,56.159c-4.143,7.175-13.316,9.634-20.49,5.491
+			c-7.175-4.145-9.633-13.316-5.49-20.49"/>
+		<polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="37.333,25.667 25,38 75,38 "/>
+  </g>	
+	<g id="C3128-中云状(堡状或絮状高积云)">
+    <polyline fill="none" stroke="#000000" stroke-miterlimit="10" points="25.75,85.334 25.75,25.75 50,50 74.25,25.75 74.25,85.334 
+			"/>
+  </g>	
+	<g id="C3129-中云状(混乱天空的高积云)">
+    <path fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" d="M85,50c0,19.33-15.67,35-35,35S15,69.33,15,50"/>
+		<path fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" d="M68.75,50c0,10.356-8.395,18.75-18.75,18.75S31.25,60.355,31.25,50
+			"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="31.25" y1="50" x2="50" y2="29.5"/>
+  </g>
+	<g id="C3131-低云状(淡积云或碎积云)">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M87.5,50h-75c0-20.711,16.79-37.5,37.5-37.5
+			C70.711,12.5,87.5,29.289,87.5,50z"/>
+  </g>	
+	<g id="C3132-低云状(浓积云)">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M87.5,80.5h-75C12.5,59.789,29.29,43,50,43
+			C70.711,43,87.5,59.789,87.5,80.5z"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M26.425,51.341c-0.923-2.608-1.426-5.416-1.426-8.341
+			c0-13.807,11.193-25,25-25c13.807,0,25,11.193,25,25c0,2.924-0.502,5.731-1.425,8.339"/>
+  </g>	
+	<g id="C3133-低云状(秃积雨云)">
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M87.5,80.5h-75C12.5,59.789,29.29,43,50,43
+			C70.711,43,87.5,59.789,87.5,80.5z"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M26.425,51.341c-0.923-2.608-1.426-5.416-1.426-8.341
+			c0-13.807,11.193-25,25-25c13.807,0,25,11.193,25,25c0,2.924-0.502,5.731-1.425,8.339"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="50" y1="18" x2="50" y2="43"/>    
+  </g>	
+	<g id="C3134-低云状(积云性层积云)">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M12.5,50c0-20.711,16.79-37.5,37.5-37.5
+			c20.711,0,37.5,16.789,37.5,37.5"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M67.166,50c0,9.665-7.835,17.5-17.5,17.5
+			c-9.665,0-17.5-7.835-17.5-17.5"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="32.167" y1="50" x2="0" y2="50"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="67.166" y1="50" x2="100" y2="50"/>
+  </g>	
+	<g id="C3135-低云状(普通层积云)">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M67.166,50c0,9.665-7.835,17.5-17.5,17.5
+			c-9.665,0-17.5-7.835-17.5-17.5"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="32.167" y1="50" x2="0" y2="50"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="67.166" y1="50" x2="100" y2="50"/>
+  </g>	
+	<g id="C3136-低云状(层云或碎层云)">
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="12.5" y1="50" x2="87.5" y2="50"/>    
+  </g>	
+	<g id="C3137-低云状(碎雨云)">
+    <line fill="none" stroke="#000000" stroke-miterlimit="10" x1="12.5" y1="50" x2="27.497" y2="50"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="42.493" y1="50" x2="57.508" y2="50"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="72.504" y1="50" x2="87.5" y2="50"/>
+  </g>	
+	<g id="C3138-低云状(积云和普通层积云)">
+    <path fill="none" stroke="#000000" stroke-miterlimit="10" d="M12.5,79.999c0-20.711,16.79-37.5,37.5-37.5
+			c20.711,0,37.5,16.789,37.5,37.5"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M67.166,23.092c0,9.665-7.835,17.5-17.5,17.5s-17.5-7.835-17.5-17.5"
+			/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="32.167" y1="23.092" x2="0" y2="23.092"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="67.166" y1="23.092" x2="100" y2="23.092"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="12.5" y1="79.999" x2="87.5" y2="79.999"/>
+  </g>	
+	<g id="C3139-低云状(鬃积雨云)">
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M12.5,79.999c0-20.711,16.79-37.5,37.5-37.5
+			c20.711,0,37.5,16.789,37.5,37.5"/>
+		<path fill="none" stroke="#000000" stroke-miterlimit="10" d="M67.166,23.092c0,9.665-7.835,17.5-17.5,17.5s-17.5-7.835-17.5-17.5"
+			/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="12.5" y1="79.999" x2="87.5" y2="79.999"/>
+		<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="32.166" y1="23.092" x2="67.166" y2="23.092"/>
+  </g>		
+</svg>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="gb2312"?>
+<Workspace Version="20150901">
+	<Datasources>
+	</Datasources>
+	<Volumes/>
+	<Maps>
+    <Map Version="20150901" Name="test" Projection="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs" Size="0 0" MinScale="0.000000" MaxScale="0.000000">
+			<Bounds>
+				<Rect left="0" bottom="0" right="0" top="0"/>
+			</Bounds>
+			<BackgroundStyle>
+				<FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+			</BackgroundStyle>
+			<FixedScales/>
+			<ClipRegion Datasource="" Dataset="" Where=""/>
+			<LayerGroups>
+				<LayerGroup Name="MGCBottom">
+          <Layer Version="20150901" Type="VectorRange" Name="大风" Datasource="" Dataset="" MinScale="0" MaxScale="0" Filter="" RangeExpression="大风" FilledContour="true">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGB(0,0,255)"/>
+            <VectorRangeItem>
+              <Item Value="-9999" Caption="无观测站">
+                <LineStyle color="RGB(192,192,192)"/>
+                <FillStyle ForeColor="RGBA(0,0,0,255)" SymbolID="1003"/>
+              </Item>
+              <Item Value="0" Caption="&lt;=3">
+                <LineStyle color="RGB(192,192,192)"/>
+                <FillStyle ForeColor="RGBA(191,231,255,255)"/>
+              </Item>
+              <Item Value="4" Caption="4-5">
+                <LineStyle color="RGB(192,192,192)"/>
+                <FillStyle ForeColor="RGBA(254,255,115,255)"/>
+              </Item>
+              <Item Value="6" Caption="6-7">
+                <LineStyle color="RGB(192,192,192)"/>
+                <FillStyle ForeColor="RGBA(210,255,190,255)"/>
+              </Item>
+              <Item Value="8" Caption="8-9">
+                <LineStyle color="RGB(192,192,192)"/>
+                <FillStyle ForeColor="RGBA(255,170,1,255)"/>
+              </Item>
+              <Item Value="10" Caption="&gt;=10">
+                <LineStyle color="RGB(192,192,192)"/>
+                <FillStyle ForeColor="RGBA(110,1,4,255)"/>
+              </Item>
+            </VectorRangeItem>
+          </Layer>
+          <Layer Version="20150901" Type="VectorUnique" Name="灾害点" Datasource="" Dataset="" MinScale="0" MaxScale="0" Filter="" UniqueExpression="Disaster" FilledContour="true">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGB(0,0,255)"/>
+            <VectorUniqueItem>
+              <Item Value="1" Caption="雷暴">
+                <PointStyle Size="26.458333333333" SymbolID="10001"/>
+              </Item>
+              <Item Value="2" Caption="冰雹">
+                <PointStyle Size="26.458333333333" SymbolID="10002"/>
+              </Item>
+            </VectorUniqueItem>
+          </Layer>
+				</LayerGroup>
+				<LayerGroup Name="MGCTop"/>
+			</LayerGroups>
+		</Map>
+	</Maps>
+	<Layouts>
+		<Layout Version="20150901" Name="test">
+			<Bounds>
+        <Rect left="0.000000" bottom="203.200000" right="270.933333" top="0.000000"/>
+			</Bounds>
+			<BackgroundStyle>
+				<FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+			</BackgroundStyle>
+			<Geometries>
+				<Geometry Version="20150901" Type="GeoMap" Visible="true" MapName="test">
+					<Bounds>
+            <Rect left="0" bottom="0" right="0" top="0"/>
+					</Bounds>
+					<Margin>
+						<Rect left="2" bottom="2" right="2" top="2"/>
+					</Margin>
+          <Padding>
+            <Rect left="0" bottom="0" right="0" top="0"/>
+          </Padding>
+					<BorderStyle>
+						<LineStyle Width="1" color="RGBA(0,0,0,255)" SymbolID="0"/>
+					</BorderStyle>
+				</Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="0 3" Text="MainTitle">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="宋体" FontSize="7" Weight="0" Alignment="TopCenter" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="0 11" Text="SubTitle">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="宋体" FontSize="5" Weight="0" Alignment="TopCenter" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="230 193" Text="Organization">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="微软雅黑" FontSize="5" Weight="0" Alignment="BottomRight" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="230 200" Text="PublishTime">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="微软雅黑" FontSize="5" Weight="0" Alignment="BottomRight" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoLegend" Visible="true" Origin="0 0" Alignment="BottomRight" Offset="45 5" LegendType="Unique" Orientation="Vertical" Title="" SubTitle="" ItemSize="0 6" ItemSpace="2 2" ItemCaptionStep="1" MaxValueCaption="250">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <BackgroundStyle>
+            <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+          </BackgroundStyle>
+          <BorderStyle>
+            <LineStyle Width="1" color="RGBA(0,0,0,0)" SymbolID="0"/>
+          </BorderStyle>
+          <Margin>
+            <Rect left="2.000000" bottom="2.000000" right="2.000000" top="2.000000"/>
+          </Margin>
+          <ItemTextStyle>
+            <TextStyle FontName="宋体" FontSize="4.8" Weight="0" Alignment="TopLeft" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+          </ItemTextStyle>
+          <LegendItem/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoLegend" Visible="true" Origin="0 0" Alignment="BottomRight" Offset="5 5" LegendType="Unique" Orientation="Vertical" Title="极大风速(级)" SubTitle="" ItemSize="0 6" ItemSpace="2 2" ItemCaptionStep="1" MaxValueCaption="250">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <BackgroundStyle>
+            <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+          </BackgroundStyle>
+          <BorderStyle>
+            <LineStyle Width="1" color="RGBA(0,0,0,0)" SymbolID="0"/>
+          </BorderStyle>
+          <Margin>
+            <Rect left="2.000000" bottom="2.000000" right="2.000000" top="2.000000"/>
+          </Margin>
+          <TitleTextStyle>
+            <TextStyle FontName="宋体" FontSize="5.8" Weight="0" Alignment="TopCenter" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+          </TitleTextStyle>
+          <ItemTextStyle>
+            <TextStyle FontName="宋体" FontSize="4.8" Weight="0" Alignment="TopLeft" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+          </ItemTextStyle>
+          <LegendItem/>
+        </Geometry>
+			</Geometries>
+		</Layout>
+	</Layouts>
+	<Symbols>
+		<Symbol FileName="./点单值_面分段.svg"/>
+    <Symbol FileName="./test_symbol_for_fill.svg"/>
+    <FillSymbol FileName="./test_fill_symbol.xml"/>
+	</Symbols>
+	<Terrains/>
+	<Scenes/>
+</Workspace>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--WeatherMapFlow Modeler Setting-->
+<WMFModeler Caption="WMFModeler">
+  <Ports>
+    <Port Type="DatasetPoint" FileName="./resource/DatasetPoint.png"/>
+    <Port Type="DatasetLine" FileName="./resource/DatasetLine.png"/>
+    <Port Type="DatasetRegion" FileName="./resource/DatasetRegion.png"/>
+    <Port Type="DatasetGeometry" FileName="./resource/DatasetGeometry.png"/>
+    <Port Type="DatasetRaster" FileName="./resource/DatasetRaster.png"/>
+    <Port Type="DatasetTIN" FileName="./resource/DatasetTIN.png"/>
+    <Port Type="ImageFile" FileName="./resource/ImageFile.png"/>
+  </Ports>
+  <Expression>
+    <Operator>+,-,*,/,%,&lt;,&lt;=,&gt;,&gt;=,=,!=,not , and , or ,(),''</Operator>
+    <Func>abs() acos() asin() atan() cos() cosh() exp() floor() ln() log10() sin() sinh() sqrt() tan() tanh() atan2(,) fmod(,) pow(,)</Func>
+  </Expression>
+  <Proj>
+    <Ellipsoid>
+      <Item Name="WGS84" ForeignName="WGS84"/>
+      <Item Name="krass" ForeignName="krass"/>
+    </Ellipsoid>
+    <Datum>
+      <Item Name="WGS84" ForeignName="WGS84"/>
+      <Item Name="krass" ForeignName="krass"/>
+    </Datum>
+    <Projection>
+      <Item Name="longlat" ForeignName="等经纬度投影"/>
+      <Item Name="aea" ForeignName="Albers等积圆锥投影"/>
+      <Item Name="lcc" ForeignName="Lambert等角圆锥投影"/>
+      <Item Name="laea" ForeignName="Lambert等积方位投影"/>
+      <Item Name="merc" ForeignName="Mercator等角圆柱投影"/>
+      <Item Name="tmerc" ForeignName="横轴Mercator等角椭圆柱投影"/>
+    </Projection>
+  </Proj>
+</WMFModeler>

@@ -1,0 +1,699 @@
+<!--
+//-------------------------------------------------------------
+// \project WeatherMapFlow ModelServer
+// \file index.html
+// \brief 首页
+// \author 王庆飞
+// \date 2016-10-31
+// \attention
+// Copyright(c) WeatherMap Group
+// All Rights Reserved
+// \version 1.0
+//-------------------------------------------------------------
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        body
+        {
+            background-color: rgb(247,247,247);
+        }
+        input[type="button"], input[type="submit"]
+        {
+            padding: 5px 10px 5px 10px;
+            background-color: rgb(190,225,247);
+            color: rgb(0,0,0);
+            border-radius: 5px;
+            border: none;
+        }
+        input:active[type="button"], input[type="submit"]
+        {
+            background-color: rgb(0,163,254);
+            color: rgb(255,255,255);
+        }
+        table
+        {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th
+        {
+            background-color: rgb(247,247,247);
+            border: 1px solid rgb(223,223,223);
+            font-weight: normal;
+        }
+        td
+        {
+            background-color: rgb(255,255,255);
+            border: 1px solid rgb(223,223,223);
+        }
+        
+        p
+        {
+            margin: 10px auto;
+            white-space: nowrap;
+        }
+        
+        div#DialogOverlay
+        {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0%;
+            left: 0%;
+            background-color: #808080;
+            opacity: 0.7;
+            display: none;
+        }
+        div#ServiceDialog
+        {
+            position: absolute;
+            height: 208px;
+            width: 270px;
+            margin: -104px 0px 0px -135px;
+            top: 50%;
+            left: 50%;
+            padding: 8px;
+            background-color: #ffffff;
+            border: 1px dotted #000000;
+            overflow: hidden;
+            display: none;
+        }
+        div#ExecuteModelDialog
+        {
+            position: absolute;
+            width: 724px;
+            height: 420px;
+            margin: -210px 0px 0px -362px;
+            top: 50%;
+            left: 50%;
+            padding: 8px;
+            background-color: #ffffff;
+            border: 1px dotted #000000;
+            overflow: hidden;
+            display: none;
+        }
+        div#OutputDialog
+        {
+            position: absolute;
+            width: 724px;
+            height: 538px;
+            margin: -269px 0px 0px -362px;
+            top: 50%;
+            left: 50%;
+            padding: 8px;
+            background-color: #ffffff;
+            border: 1px dotted #000000;
+            overflow: hidden;
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        if (typeof Result == "undefined") {
+            var Result = {};
+            Result.OK = 0;
+            Result.ServiceExisted = 1;
+            Result.ServiceNotExisted = 2;
+            Result.InvalidModel = 3;
+        }
+
+        var m_request = new XMLHttpRequest();
+        m_request.onreadystatechange = OnReadyStateChange;
+
+        var str = window.location.href;
+        var m_strUrl = str.substring(0, str.lastIndexOf('/') + 1) + "ModelServer";
+
+        if (typeof Method == "undefined") {
+            var Method = {};
+            Method.GetGroups = 0;
+            Method.GetServices = 1;
+            Method.DelService = 2;
+            Method.ExecuteModel = 3;
+        }
+        var m_eMethod;
+
+        if (typeof ExecuteStatus == "undefined") {
+            var ExecuteStatus = {};
+            ExecuteStatus.Invalid = 0;
+            ExecuteStatus.Executing = 1;
+            ExecuteStatus.Succeeded = 2;
+            ExecuteStatus.Failed = 3;
+            ExecuteStatus.Canceled = 4;
+        }
+        function ExecuteStatusToString(es) {
+            switch (es) {
+                case ExecuteStatus.Invalid:
+                    return "无效状态";
+                case ExecuteStatus.Executing:
+                    return "正在执行";
+                case ExecuteStatus.Succeeded:
+                    return "成功";
+                case ExecuteStatus.Failed:
+                    return "失败";
+                case ExecuteStatus.Canceled:
+                    return "执行取消";
+                default:
+                    return "";
+            }
+        }
+
+        var m_strUserID;
+        var m_ws; //websocket
+
+        var m_nModifiedService = -1;
+
+        function InitWebSocket() {
+            var str = window.location.href;
+            var strUrl = "ws" + str.substring(4, str.lastIndexOf('/') + 1) + m_strUserID;
+            m_ws = new WebSocket(strUrl);
+            m_ws.onopen = function () {
+            }
+            m_ws.onclose = function () {
+            }
+            m_ws.onerror = function () {
+            }
+            m_ws.onmessage = function (message) {
+                var service = JSON.parse(message.data);
+                if (service.Name == null || service.Group == null)
+                    return;
+                var table = document.getElementById("ServiceTable");
+                for (i = 0; i < table.rows.length; i++) {
+                    if (table.rows[i].cells[1].innerText == service.Name && table.rows[i].cells[2].innerText == service.Group) {
+                        if (service.Status != null)
+                            table.rows[i].cells[8].innerHTML = ExecuteStatusToString(service.Status);
+                        break;
+                    }
+                }
+
+                document.getElementById("OutputDialog_textOutput").value = JSON.stringify(service.Output);
+
+                var div = document.getElementById("OutputDialog");
+                div.style.display = "block";
+                div = document.getElementById("DialogOverlay");
+                div.style.display = "block";
+            }
+        }
+
+        function OnLoad() {
+            m_eMethod = Method.GetGroups;
+            m_request.open("get", m_strUrl + "?Method=GetGroups", false);
+            m_request.send();
+
+            m_eMethod = Method.GetServices;
+            m_request.open("get", m_strUrl + "?Method=GetServices", false);
+            m_request.send();
+
+            var date = new Date();
+            m_strUserID = date.getTime();
+
+            InitWebSocket();
+
+            OnResize();
+        }
+        function OnResize() {
+            var div = document.getElementById("divServiceTable");
+            div.style.height = (window.innerHeight - 140).toString() + "px";
+        }
+        function OnGroupChange() {
+            var select = document.getElementById("Group");
+            m_eMethod = Method.GetServices;
+            m_request.open("post", m_strUrl, false);
+            m_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            m_request.send("Method=GetServices" + (select.selectedIndex == 0 ? "" : ("&Group=" + select.options[select.selectedIndex].text)));
+        }
+
+        function OnServiceTableHeadCheckBoxClick() {
+            var cbHead = document.getElementById("ServiceTableHeadCheckBox");
+            var bgc = cbHead.checked ? "#528bcb" : "#ffffff";
+            var fc = cbHead.checked ? "#ffffff" : "#000000";
+
+            var table = document.getElementById("ServiceTable");
+            for (i = 0; i < table.rows.length; i++) {
+                table.rows[i].cells[0].childNodes[0].checked = cbHead.checked;
+                for (j = 0; j < table.rows[i].cells.length; j++) {
+                    table.rows[i].cells[j].style.backgroundColor = bgc;
+                    table.rows[i].cells[j].style.color = fc;
+                }
+            }
+        }
+        function OnServiceTableCheckBoxClick() {
+            var i = parseInt(window.event.srcElement.value);
+            var bgc = window.event.srcElement.checked ? "#528bcb" : "#ffffff";
+            var fc = window.event.srcElement.checked ? "#ffffff" : "#000000";
+            var table = document.getElementById("ServiceTable");
+            for (j = 0; j < table.rows[i].cells.length; j++) {
+                table.rows[i].cells[j].style.backgroundColor = bgc;
+                table.rows[i].cells[j].style.color = fc;
+            }
+        }
+
+        function AddGroup() {
+            var select = document.getElementById("Group");
+            var str = prompt("请输入服务组名称：", "Group" + (select.options.length + 1));
+            if (str == null) //取消
+                return;
+            if (str == "") {
+                alert("服务组名称不能为空。");
+                return;
+            }
+            for (i = 0; i < select.options.length; i++) {
+                if (select.options[i].text == str) {
+                    alert("服务组名称不能重复。");
+                    return;
+                }
+            }
+            select.options.add(new Option(str));
+            select.selectedIndex = select.options.length - 1;
+            select.onchange();
+        }
+        function DelGroup() {
+            var select = document.getElementById("Group");
+            if (select.selectedIndex < 0 || select.selectedIndex >= select.options.length) {
+                alert("没有选中服务组。");
+                return;
+            }
+            if (select.selectedIndex == 0) {
+                alert("不能删除全部服务组。");
+                return;
+            }
+            var table = document.getElementById("ServiceTable");
+            if (table.rows.length > 0) {
+                alert("当前服务组的服务数大于0，不能删除。");
+                return;
+            }
+            if (!confirm("删除后无法恢复，确定删除吗？"))
+                return;
+            var i = select.selectedIndex;
+            select.options.remove(select.selectedIndex);
+            select.selectedIndex = i % select.options.length;
+            select.onchange();
+        }
+
+        function OpenServiceDialog() {
+            var selectDst = document.getElementById("ServiceDialogGroup");
+            for (i = selectDst.length - 1; i >= 0; i--) {
+                selectDst.remove(i);
+            }
+            var select = document.getElementById("Group");
+            for (i = 1; i < select.options.length; i++) {
+                selectDst.options.add(new Option(select.options[i].text));
+            }
+
+            var labelCaption = document.getElementById("ServiceDialogCaption");
+            var textMethod = document.getElementById("ServiceDialog_textMethod");
+            var textName = document.getElementById("ServiceDialog_textName");
+            if (textMethod.value == "AddService") {
+                labelCaption.innerHTML = "添加服务";
+
+                textName.value = "";
+                textName.disabled = "";
+
+                selectDst.selectedIndex = select.selectedIndex == 0 ? 0 : (select.selectedIndex - 1);
+                selectDst.disabled = "";
+
+                document.getElementById("ServiceDialog_textModel").value = "";
+                document.getElementById("ServiceDialog_textDescription").value = "";
+            }
+            else if (textMethod.value == "ModifyService") {
+                labelCaption.innerHTML = "修改服务";
+
+                var table = document.getElementById("ServiceTable");
+                textName.value = table.rows[m_nModifiedService].cells[1].innerText;
+                textName.disabled = "disabled";
+
+                for (j = 0; j < selectDst.options.length; j++) {
+                    if (selectDst.options[j].text == table.rows[m_nModifiedService].cells[2].innerText) {
+                        selectDst.selectedIndex = j;
+                        selectDst.disabled = "disabled";
+                        break;
+                    }
+                }
+
+                document.getElementById("ServiceDialog_textModel").value = table.rows[m_nModifiedService].cells[3].innerText;
+                document.getElementById("ServiceDialog_textDescription").value = table.rows[m_nModifiedService].cells[4].innerText;
+            }
+            var fileModel = document.getElementById("ServiceDialog_fileModel");
+            fileModel.value = "";
+            fileModel.disabled = "";
+
+            var div = document.getElementById("ServiceDialog");
+            div.style.display = "block";
+            div = document.getElementById("DialogOverlay");
+            div.style.display = "block";
+        }
+        function AddService() {
+            document.getElementById("ServiceDialog_textMethod").value = "AddService";
+            OpenServiceDialog();
+        }
+        function ModifyService() {
+            m_nModifiedService = parseInt(window.event.srcElement.id);
+            document.getElementById("ServiceDialog_textMethod").value = "ModifyService";
+            OpenServiceDialog();
+        }
+
+        function DownloadModel() {
+            var table = document.getElementById("ServiceTable");
+            var i = parseInt(window.event.srcElement.id);
+            document.getElementById("DownloadModelDialog_textName").value = table.rows[i].cells[1].innerText;
+            document.getElementById("DownloadModelDialog_textGroup").value = table.rows[i].cells[2].innerText;
+
+            document.getElementById("DownloadModelDialog_buttonOK").click();
+        }
+
+        function GetSelectedServices(services) {
+            var table = document.getElementById("ServiceTable");
+            for (i = 0; i < table.rows.length; i++) {
+                if (!table.rows[i].cells[0].childNodes[0].checked)
+                    continue;
+                var row = table.rows[i];
+                if (services.strNames != "")
+                    services.strNames += "%2C"; //逗号分隔
+                services.strNames += row.cells[1].innerText;
+                if (services.strGroups != "")
+                    services.strGroups += "%2C"; //逗号分隔
+                services.strGroups += row.cells[2].innerText;
+            }
+        }
+
+        function DelService() {
+            var services = { strNames: "", strGroups: "" };
+            GetSelectedServices(services);
+            if (services.strNames == "") {
+                alert("请勾选服务。");
+                return;
+            }
+            if (!confirm("删除后无法恢复，确定删除吗？"))
+                return;
+            m_eMethod = Method.DelService;
+            m_request.open("post", m_strUrl, false);
+            m_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            m_request.send("Method=DelService&Names=" + services.strNames + "&Groups=" + services.strGroups);
+        }
+
+        function ExecuteModel() {
+            var table = document.getElementById("ServiceTable");
+            var strName = table.rows[parseInt(window.event.srcElement.id)].cells[1].innerText;
+            var strGroup = table.rows[parseInt(window.event.srcElement.id)].cells[2].innerText;
+
+            var strParams = "{\"UserID\":\"" + m_strUserID + "\",\"Method\":\"ExecuteModel\",\"Name\":\"" + strName + "\",\"Group\":\"" + strGroup + "\",\"StartTime\":\"2016-11-15 08:00:00\",";
+            strParams += "\"Bounds\":\"110.3 34.6 114.4 40.7\",\"CellSize\":\"0.05 0.05\",\"Smoothness\":5,\"MainTitle\":\"测试传递主标题参数\"}";
+
+            document.getElementById("ExecuteModelDialog_textParams").value = strParams;
+
+            var div = document.getElementById("ExecuteModelDialog");
+            div.style.display = "block";
+            div = document.getElementById("DialogOverlay");
+            div.style.display = "block";
+        }
+        function CloseExecuteModelDialog() {
+            var div = document.getElementById("ExecuteModelDialog");
+            div.style.display = "none";
+            div = document.getElementById("DialogOverlay");
+            div.style.display = "none";
+        }
+        function ExecuteModelDialogOnOK() {
+            CloseExecuteModelDialog();
+
+            var strParams = document.getElementById("ExecuteModelDialog_textParams").value;
+
+            m_eMethod = Method.ExecuteModel;
+            m_request.open("post", m_strUrl, true);
+            m_request.setRequestHeader("Accept-Charset", "UTF-8");
+            m_request.setRequestHeader("Content-Type", "application/json");
+            m_request.setRequestHeader("Content-Length", strParams.length);
+            m_request.send(strParams);
+        }
+        function ExecuteModelDialogOnCancel() {
+            CloseExecuteModelDialog();
+        }
+
+        function OutputDialogOnOK() {
+            var div = document.getElementById("OutputDialog");
+            div.style.display = "none";
+            div = document.getElementById("DialogOverlay");
+            div.style.display = "none";
+        }
+
+        function OnReadyStateChange() {
+            if (this.readyState == this.DONE) {
+                if (m_eMethod == Method.GetGroups) {
+                    if (this.responseText == "")
+                        return;
+                    var select = document.getElementById("Group");
+                    var arr = this.responseText.split(',');
+                    for (i = 0; i < arr.length; i++) {
+                        select.options.add(new Option(arr[i]));
+                    }
+                }
+                else if (m_eMethod == Method.GetServices) {
+                    var table = document.getElementById("ServiceTable");
+                    for (i = table.rows.length - 1; i >= 0; i--)
+                        table.deleteRow(i);
+                    var services = JSON.parse(this.responseText);
+                    var tableHead = document.getElementById("ServiceTableHead");
+                    for (i = 0; i < services.length; i++) {
+                        var row = table.insertRow();
+                        var cell = row.insertCell();
+                        cell.innerHTML = "<input type=\"checkbox\" value=\"" + i + "\" onclick=\"OnServiceTableCheckBoxClick()\" />";
+                        cell = row.insertCell();
+                        cell.innerHTML = services[i].Name;
+                        cell = row.insertCell();
+                        cell.innerHTML = services[i].Group;
+                        cell = row.insertCell();
+                        cell.innerHTML = services[i].ModelName;
+                        cell.style.display = "none";
+                        cell = row.insertCell();
+                        cell.innerHTML = services[i].Description;
+                        cell = row.insertCell();
+                        cell.innerHTML = "<input type=\"button\" id=\"" + i + "\" value=\"修改服务\" onclick=\"ModifyService()\" />";
+                        cell = row.insertCell();
+                        cell.innerHTML = "<input type=\"button\" id=\"" + i + "\" value=\"下载模型\" onclick=\"DownloadModel()\" />";
+                        cell = row.insertCell();
+                        cell.innerHTML = "<input type=\"button\" id=\"" + i + "\" value=\"测试服务\" onclick=\"ExecuteModel()\" />";
+                        cell = row.insertCell();
+
+                        for (j = 0; j < row.cells.length; j++) {
+                            row.cells[j].width = tableHead.rows[0].cells[j].width;
+                        }
+                    }
+                }
+                else if (m_eMethod == Method.DelService) {
+                    if (this.responseText.indexOf("false") >= 0) {
+                        alert("删除服务失败！");
+                        return;
+                    }
+                    var select = document.getElementById("Group");
+                    select.onchange();
+                }
+                else if (m_eMethod == Method.ExecuteModel) {
+                    if (this.responseText.indexOf("false") >= 0) {
+                        alert("测试服务失败！");
+                        return;
+                    }
+                }
+            }
+        }
+
+        function CloseServiceDialog() {
+            var div = document.getElementById("ServiceDialog");
+            div.style.display = "none";
+            div = document.getElementById("DialogOverlay");
+            div.style.display = "none";
+        }
+        function ServiceDialogOnOK() {
+            var textMethod = document.getElementById("ServiceDialog_textMethod");
+            var fileModel = document.getElementById("ServiceDialog_fileModel");
+            if (textMethod.value == "AddService") {
+                if (document.getElementById("ServiceDialog_textName").value == "") {
+                    alert("请输入服务名称。");
+                    return false;
+                }
+                if (fileModel.value == "") {
+                    alert("请选择模型。");
+                    return false;
+                }
+            }
+            else if (textMethod.value == "ModifyService") {
+                if (fileModel.value == "") //未选择模型
+                    fileModel.disabled = "disabled"; //不提交模型
+            }
+            document.getElementById("ServiceDialog_textName").disabled = "";
+            document.getElementById("ServiceDialogGroup").disabled = "";
+            return true;
+        }
+        function ServiceDialogOnCancel() {
+            CloseServiceDialog();
+        }
+        function ServiceDialog_iframeSubmitOnLoad() {
+            var text = document.getElementById("ServiceDialog_textMethod");
+            if (text.value != "AddService" && text.value != "ModifyService")
+                return;
+            var iframe = document.getElementById("ServiceDialog_iframeSubmit");
+            if (iframe.contentDocument.body.innerText == "")
+                return;
+            var nResult = parseInt(iframe.contentDocument.body.innerText);
+            if (nResult != Result.OK) {
+                if (nResult == Result.ServiceExisted)
+                    alert("服务已存在，提交失败！");
+                else if (nResult == Result.ServiceNotExisted)
+                    alert("服务不存在，提交失败！");
+                else if (nResult == Result.InvalidModel)
+                    alert("无效的模型，提交失败！");
+                else
+                    alert("未知错误，提交失败！");
+                return;
+            }
+            CloseServiceDialog();
+            var select = document.getElementById("Group");
+            select.onchange();
+            text.value = "";
+        }
+        function ServiceDialog_fileModelOnChange() {
+            var textModel = document.getElementById("ServiceDialog_textModel");
+            var textName = document.getElementById("ServiceDialog_textName");
+            var fileModel = document.getElementById("ServiceDialog_fileModel");
+            var str = fileModel.value.replace(/\\/g, '/');
+            var nStart = str.lastIndexOf('/');
+            var nEnd = str.lastIndexOf('.');
+            str = str.substring(nStart == -1 ? 0 : (nStart + 1), nEnd == -1 ? str.length : nEnd);
+            if (document.getElementById("ServiceDialog_textMethod").value == "AddService") {
+                if (textName.value == "" || textName.value == textModel.value)
+                    textName.value = str;
+            }
+            textModel.value = str;
+        }
+    </script>
+</head>
+<body onload="OnLoad()" onresize="OnResize()">
+    <h1 style="line-height: 20px;">
+        WMF ModelServer</h1>
+    <label>
+        服务组:</label>
+    <select id="Group" style="width: 150px; height: 25px;" onchange="OnGroupChange()">
+        <option>全部</option>
+    </select>
+    <input type="button" value="添加服务组" onclick="AddGroup()" />
+    <input type="button" value="删除服务组" onclick="DelGroup()" />
+    <input type="button" value="添加服务" onclick="AddService()" />
+    <input type="button" value="删除服务" onclick="DelService()" />
+    <div style="overflow-x: hidden; overflow-y: scroll; margin-top: 10px;">
+        <table id="ServiceTableHead">
+            <tr>
+                <th width="4%">
+                    <input type="checkbox" id="ServiceTableHeadCheckBox" onclick="OnServiceTableHeadCheckBoxClick()" />
+                </th>
+                <th width="15%">
+                    名称
+                </th>
+                <th width="15%">
+                    服务组
+                </th>
+                <th style="display: none;" width="0%">
+                    ModelName
+                </th>
+                <th width="30%">
+                    描述
+                </th>
+                <th width="8%">
+                    修改服务
+                </th>
+                <th width="8%">
+                    下载模型
+                </th>
+                <th width="8%">
+                    测试服务
+                </th>
+                <th width="12%">
+                    状态
+                </th>
+            </tr>
+        </table>
+    </div>
+    <div id="divServiceTable" style="overflow-x: hidden; overflow-y: scroll;">
+        <table id="ServiceTable">
+        </table>
+    </div>
+
+    <div id="DialogOverlay">
+    </div>
+    <div id="ServiceDialog">
+        <label id="ServiceDialogCaption">添加服务
+        </label>
+        <form enctype="multipart/form-data" action="ModelServer" method="post" target="ServiceDialog_iframeSubmit">
+        <input type="text" name="Method" id="ServiceDialog_textMethod" style="display: none;" />
+        <p>
+            <label style="width: 65px; display: inline-block;">
+                名称：</label>
+            <input type="text" name="Name" id="ServiceDialog_textName" style="box-sizing: border-box;
+                width: 200px; height: 25px;" />
+        </p>
+        <p>
+            <label style="width: 65px; display: inline-block;">
+                服务组：</label>
+            <select name="Group" id="ServiceDialogGroup" style="box-sizing: border-box; width: 200px; height: 25px;">
+            </select>
+        </p>
+        <p>
+            <label style="width: 65px; display: inline-block;">
+                模型：</label>
+            <input type="text" readonly="readonly" id="ServiceDialog_textModel" style="box-sizing: border-box;
+                width: 175px; height: 25px;" /><input type="button" style="width: 25px;" value="..." onclick="ModelFile.click()" />
+            <input type="file" name="ModelFile" style="display: none;" id="ServiceDialog_fileModel"
+                onchange="ServiceDialog_fileModelOnChange()" />
+        </p>
+        <p>
+            <label style="width: 65px; display: inline-block;">
+                描述：</label>
+            <input type="text" name="Description" id="ServiceDialog_textDescription" style="box-sizing: border-box;
+                width: 200px; height: 25px;" />
+        </p>
+        <p style="float: right;">
+            <input type="submit" style="width: 80px" id="ServiceDialogOK" value="提交" onclick="return ServiceDialogOnOK()"  />
+            <input type="button" style="width: 80px" id="ServiceDialogCancel" value="取消" onclick="ServiceDialogOnCancel()" />
+        </p>
+        </form>
+        <iframe id="ServiceDialog_iframeSubmit" name="ServiceDialog_iframeSubmit" style="display: none;" src="#" onload="ServiceDialog_iframeSubmitOnLoad()">
+        </iframe>
+    </div>
+    <div id="ExecuteModelDialog">
+        <label>
+            测试服务
+        </label>
+        <p>
+            <label style="width: 600px; display: inline-block;">
+                模型参数（UserID,Method,Name,Group,StartTime为必选参数）：</label>
+        </p>
+        <p>
+            <textarea rows="20" cols="100" id="ExecuteModelDialog_textParams">
+            </textarea>
+        </p>
+        <p style="float: right;">
+            <input type="button" style="width: 80px" value="确定" onclick="ExecuteModelDialogOnOK()" />
+            <input type="button" style="width: 80px" value="取消" onclick="ExecuteModelDialogOnCancel()" />
+        </p>
+    </div>
+    <div id="OutputDialog">
+        <label>
+            输出
+        </label>
+        <p>
+            <textarea rows="30" cols="100" id="OutputDialog_textOutput">
+            </textarea>
+        </p>
+        <p style="float: right;">
+            <input type="button" style="width: 80px" value="确定" onclick="OutputDialogOnOK()" />
+        </p>
+    </div>
+    <div style="display: none;">
+        <form action="ModelServer" method="post">
+        <input type="text" name="Method" value="DownloadModel" />
+        <input type="text" name="Name" id="DownloadModelDialog_textName" />
+        <input type="text" name="Group" id="DownloadModelDialog_textGroup" />
+        <input type="submit" id="DownloadModelDialog_buttonOK" />
+        </form>
+    </div>
+</body>
+</html>

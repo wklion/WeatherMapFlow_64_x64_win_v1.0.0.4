@@ -1,0 +1,172 @@
+<!--
+//-------------------------------------------------------------
+// \project WeatherMapFlow JobManager
+// \file login.html
+// \brief 登录页
+// \author 王庆飞
+// \date 2017-2-16
+// \attention
+// Copyright(c) WeatherMap Group
+// All Rights Reserved
+// \version 1.0
+//-------------------------------------------------------------
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        input[type="button"]
+        {
+            padding: 5px 10px 5px 10px;
+            background-color: rgb(190,225,247);
+            color: rgb(0,0,0);
+            border-radius: 5px;
+            border: none;
+        }
+        input:active[type="button"]
+        {
+            background-color: rgb(0,163,254);
+            color: rgb(255,255,255);
+        }
+        p
+        {
+            margin: 10px auto;
+        }
+        div#LoginDialog
+        {
+            position: absolute;
+            height: 164px;
+            width: 266px;
+            margin: -82px 0px 0px -133px;
+            top: 50%;
+            left: 50%;
+            padding: 8px;
+            background-color: #ffffff;
+            border: 1px dotted #000000;
+            overflow: hidden;
+        }
+    </style>
+    <script type="text/javascript" src="js/md5.js"></script>
+    <script language="JavaScript" type="text/javascript">
+        var m_request = new XMLHttpRequest();
+        m_request.onreadystatechange = OnReadyStateChange;
+
+        var str = window.location.href;
+        var m_strUrl = str.substring(0, str.lastIndexOf('/') + 1) + "JobManager";
+
+        if (typeof Method == "undefined") {
+            var Method = {};
+            Method.GetUserGroups = 0;
+            Method.Login = 1;
+        }
+        var m_eMethod;
+
+        function OnLoad() {
+            m_eMethod = Method.GetUserGroups;
+            m_request.open("get", m_strUrl + "?Method=GetUserGroups", false);
+            m_request.send();
+
+            document.getElementById("selectGroup").focus();
+        }
+
+        if (typeof Result == "undefined") {
+            var Result = {};
+            Result.OK = 0;
+            Result.ExpiredCredentials = 1;
+            Result.IncorrectCredentials = 2;
+            Result.ExcessiveAttempts = 3;
+            Result.LockedAccount = 4;
+            Result.ConcurrentAccess = 5;
+            Result.UnknownAccount = 6;
+            Result.UnknownError = 7;
+        }
+        function OnReadyStateChange() {
+            if (this.readyState == this.DONE) {
+                if (m_eMethod == Method.GetUserGroups) {
+                    if (this.responseText == "")
+                        return;
+                    var select = document.getElementById("selectGroup");
+                    var arr = this.responseText.split(',');
+                    for (i = 0; i < arr.length; i++) {
+                        select.options.add(new Option(arr[i]));
+                    }
+                }
+                else if (m_eMethod == Method.Login) {
+                    var nResult = parseInt(this.responseText);
+                    if (nResult == Result.OK) {
+                        var str = window.location.href;
+                        window.location.href = str.substring(0, str.lastIndexOf('/') + 1) + "index.html?User=" +
+                            encodeURIComponent(document.getElementById("textUsername").value + "@" + document.getElementById("selectGroup").value);
+                    }
+                    else if (nResult == Result.ExpiredCredentials)
+                        alert("过期的凭证！");
+                    else if (nResult == Result.IncorrectCredentials)
+                        alert("密码错误！");
+                    else if (nResult == Result.ExcessiveAttempts)
+                        alert("登录失败次数过多！");
+                    else if (nResult == Result.LockedAccount)
+                        alert("账号被锁定！");
+                    else if (nResult == Result.ConcurrentAccess)
+                        alert("多次登录！");
+                    else if (nResult == Result.UnknownAccount)
+                        alert("账号不存在！");
+                    else
+                        alert("未知错误！");
+                }
+            }
+        }
+
+        function OnClickLogin() {
+            if (document.getElementById("selectGroup").value == "") {
+                alert("请选择用户组。");
+                return;
+            }
+            if (document.getElementById("textUsername").value == "") {
+                alert("请输入用户名。");
+                return;
+            }
+            if (document.getElementById("textPassword").value == "") {
+                alert("请输入密码。");
+                return;
+            }
+
+            m_eMethod = Method.Login;
+            m_request.open("post", "", false);
+            m_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            m_request.send("method=login&username=" + document.getElementById("textUsername").value + "@" + document.getElementById("selectGroup").value +
+                "&password=" + hex_md5(document.getElementById("textPassword").value));
+        }
+
+        function OnKeyDown() {
+            if (event.keyCode == 13) {
+                OnClickLogin();
+            }
+        }
+    </script>
+</head>
+<body style="background-color: #c0c0c0;" onload="OnLoad()" onkeydown="OnKeyDown()">
+    <div id="LoginDialog">
+        <label>
+            WMF JobManager
+        </label>
+        <p>
+            <label style="width: 65px; display: inline-block;">
+                用户组:</label><select id="selectGroup" style="width: 200px; height: 25px; box-sizing: border-box;"></select>
+        </p>
+        <p>
+            <label style="width: 65px; display: inline-block;">
+                用户名:</label><input type="text" id="textUsername" value="root"
+                    style="width: 200px; height: 25px; box-sizing: border-box;" />
+        </p>
+        <p>
+            <label style="width: 65px; display: inline-block;">
+                密码:</label><input type="password" id="textPassword" style="width: 200px;
+                    height: 25px; box-sizing: border-box;" />
+        </p>
+        <p>
+            <input type="button" style="margin-left: 65px; width: 200px;" value="登录" onclick="OnClickLogin()" />
+        </p>
+    </div>
+</body>
+</html>

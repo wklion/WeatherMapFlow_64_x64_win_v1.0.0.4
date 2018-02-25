@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value=""/>
+		<Param Name="Author" Value="lenovo"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2018-02-05 01:40:25"/>
+		<Param Name="DataStartTime" Value="2018-02-05 01:40:25"/>
+		<Param Name="DataEndTime" Value="2018-02-05 01:40:25"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample2.ModuleOpenDS" x="256" y="288">
+			<Params>
+				<Param Name="Type" Value="GTiff"/>
+				<Param Name="Alias" Value="Datasource1"/>
+				<Param Name="Server" Value="E:\GS\Data\Output\MCR\201708221024.tif"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRaster"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.pluginexample2.ModuleGraphicProduct" x="592" y="288">
+			<Params>
+				<Param Name="TemplateFile" Value="D:\component\WeatherMapFlow_64_x64_win_v1.0.0.4\Data\GraphicProductTemplate\GanSu\RasterRange.xml"/>
+				<Param Name="Datasource" Value=""/>
+				<Param Name="Dataset" Value=""/>
+				<Param Name="Unit" Value=""/>
+				<Param Name="Datasource" Value=""/>
+				<Param Name="Dataset" Value=""/>
+				<Param Name="Unit" Value=""/>
+				<Param Name="Datasource" Value="Datasource1"/>
+				<Param Name="Dataset" Value="d1"/>
+				<Param Name="Unit" Value=""/>
+				<Param Name="Bounds" Value="0.000000 0.000000 0.000000 0.000000"/>
+				<Param Name="ClipRegion" Value=""/>
+				<Param Name="MainTitle" Value="pup雷达拼图"/>
+				<Param Name="SubTitle" Value=""/>
+				<Param Name="Organization" Value="兰州中心台"/>
+				<Param Name="PublishTime" Value="[yyyy年M月d日HH时mm分]发布"/>
+				<Param Name="GeoLegendToLayer" Value="yun_nan.MGCBottom.RasterRange"/>
+				<Param Name="FileName" Value="C:\Users\lenovo\Desktop\temp\tt.png"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="2" Type="Unknown"/>
+				<InputPort ID="3" Type="DatasetRaster"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="ImageFile"/>
+			</OutputPorts>
+		</Module>
+	</Modules>
+	<Pipes>
+		<Pipe ID="3" IncomingModule="1" IncomingPort="1" OutgoingModule="2" OutgoingPort="3"/>
+	</Pipes>
+</Model>

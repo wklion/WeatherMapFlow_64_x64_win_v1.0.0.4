@@ -1,0 +1,14 @@
+#
+# The IceGrid locator proxy.
+#
+Ice.Default.Locator=WMFIceGrid/Locator:default -h localhost -p 4061
+
+#
+# To use the IceGrid discovery plugin comment out the default locator
+# property above and un-comment the two properties below. The discovery
+# plugin uses multicast to discover IceGrid.
+#
+#Ice.Plugin.IceLocatorDiscovery=IceLocatorDiscovery:IceLocatorDiscovery.PluginFactory
+#IceLocatorDiscovery.InstanceName=WMFIceGrid
+
+WMFClusterJobListenerAdapter.Endpoints=default

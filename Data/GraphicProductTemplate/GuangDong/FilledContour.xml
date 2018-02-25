@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="gb2312"?>
+<Workspace Version="20150901">
+	<Datasources>
+		<Datasource Type="ESRI Shapefile" Alias="gd" Server="./gd.shp" ReadOnly="true"/>
+	</Datasources>
+	<Volumes/>
+	<Maps>
+    <Map Version="20150901" Name="test" Projection="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs" Size="0 0" MinScale="0.000000" MaxScale="0.000000">
+			<Bounds>
+				<Rect left="0" bottom="0" right="0" top="0"/>
+			</Bounds>
+			<BackgroundStyle>
+				<FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+			</BackgroundStyle>
+			<FixedScales/>
+			<ClipRegion Datasource="" Dataset="" Where=""/>
+			<LayerGroups>
+				<LayerGroup Name="MGCBottom">
+          <Layer Version="20150901" Type="VectorRange" Name="VectorRange" Datasource="" Dataset="" MinScale="0" MaxScale="0" Filter="" RangeExpression="MGMinValue" FilledContour="true">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGB(0,0,255)"/>
+            <VectorRangeItem>
+              <Item Value="-1" Caption="-1">
+                <FillStyle ForeColor="RGBA(0,0,255,255)"/>
+              </Item>
+              <Item Value="0" Caption="0">
+                <FillStyle ForeColor="RGBA(23,0,231,255)"/>
+              </Item>
+              <Item Value="1" Caption="1">
+                <FillStyle ForeColor="RGBA(46,0,208,255)"/>
+              </Item>
+              <Item Value="2" Caption="2">
+                <FillStyle ForeColor="RGBA(69,0,185,255)"/>
+              </Item>
+              <Item Value="3" Caption="3">
+                <FillStyle ForeColor="RGBA(92,0,162,255)"/>
+              </Item>
+              <Item Value="4" Caption="4">
+                <FillStyle ForeColor="RGBA(115,0,139,255)"/>
+              </Item>
+              <Item Value="5" Caption="5">
+                <FillStyle ForeColor="RGBA(139,0,115,255)"/>
+              </Item>
+              <Item Value="6" Caption="6">
+                <FillStyle ForeColor="RGBA(162,0,92,255)"/>
+              </Item>
+              <Item Value="7" Caption="7">
+                <FillStyle ForeColor="RGBA(185,0,69,255)"/>
+              </Item>
+              <Item Value="8" Caption="8">
+                <FillStyle ForeColor="RGBA(208,0,46,255)"/>
+              </Item>
+              <Item Value="9" Caption="9">
+                <FillStyle ForeColor="RGBA((231,0,23,255)"/>
+              </Item>
+              <Item Value="10" Caption="10">
+                <FillStyle ForeColor="RGBA(255,0,0,255)"/>
+              </Item>
+            </VectorRangeItem>
+          </Layer>
+          <Layer Version="20150901" Type="Plot" Name="Plot" Datasource="" Dataset="" MinScale="0" MaxScale="0" LOD="true" LODOrderBy="Level" InterpolationMode="NearestNeighbor">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGB(0,0,0)"/>
+            <!--坐标定义：x向右，y向下，单位毫米。-->
+            <PlotItem Caption="站点值" Visible="true" Field="value" AngleField="" x="0" y="0">
+              <Label>
+                <TextStyle Alignment="MiddleCenter" ForeColor="RGB(0,0,0)"/>
+                <Format>
+                  <Item Value="0" Format="%.2f"/>
+                </Format>
+              </Label>
+            </PlotItem>
+          </Layer>
+				</LayerGroup>
+        <LayerGroup Name="MGCTop">
+          <!--裁剪显示导致边界线显示一半宽度-->
+          <Layer Version="20150901" Type="Region" Name="Region" Datasource="gd" Dataset="gd" MinScale="0.000000" MaxScale="0.000000" Filter="">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGBA(0,0,0,0)"/>
+            <LineStyle Width="1" color="RGB(64,64,64)" SymbolID="0"/>
+            <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,0)" SymbolID="0"/>
+          </Layer>
+        </LayerGroup>
+			</LayerGroups>
+		</Map>
+	</Maps>
+	<Layouts>
+		<Layout Version="20150901" Name="test">
+			<Bounds>
+        <Rect left="0.000000" bottom="203.200000" right="270.933333" top="0.000000"/>
+			</Bounds>
+			<BackgroundStyle>
+				<FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+			</BackgroundStyle>
+			<Geometries>
+				<Geometry Version="20150901" Type="GeoMap" Visible="true" MapName="test">
+					<Bounds>
+            <Rect left="0" bottom="0" right="0" top="0"/>
+					</Bounds>
+					<Margin>
+						<Rect left="2" bottom="2" right="2" top="2"/>
+					</Margin>
+          <Padding>
+            <Rect left="0" bottom="0" right="0" top="0"/>
+          </Padding>
+					<BorderStyle>
+						<LineStyle Width="1" color="RGBA(0,0,0,255)" SymbolID="0"/>
+					</BorderStyle>
+				</Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="0 3" Text="MainTitle">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="宋体" FontSize="7" Weight="0" Alignment="TopCenter" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="0 11" Text="SubTitle">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="宋体" FontSize="5" Weight="0" Alignment="TopCenter" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="230 193" Text="Organization">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="微软雅黑" FontSize="5" Weight="0" Alignment="BottomRight" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="230 200" Text="PublishTime">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="微软雅黑" FontSize="5" Weight="0" Alignment="BottomRight" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoLegend" Visible="true" Origin="0 0" Alignment="BottomRight" Offset="5 5" LegendType="Range" Orientation="Vertical" Title="图例" SubTitle="" ItemSize="0 6" ItemSpace="2 0" ItemCaptionStep="1" MaxValueCaption="11">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <BackgroundStyle>
+            <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+          </BackgroundStyle>
+          <BorderStyle>
+            <LineStyle Width="1" color="RGBA(0,0,0,255)" SymbolID="0"/>
+          </BorderStyle>
+          <Margin>
+            <Rect left="2.000000" bottom="2.000000" right="2.000000" top="2.000000"/>
+          </Margin>
+          <ItemTextStyle>
+            <TextStyle FontName="宋体" FontSize="3.8" Weight="0" Alignment="TopLeft" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+          </ItemTextStyle>
+          <LegendItem/>
+        </Geometry>
+			</Geometries>
+		</Layout>
+	</Layouts>
+	<Symbols>
+	</Symbols>
+	<Terrains/>
+	<Scenes/>
+</Workspace>

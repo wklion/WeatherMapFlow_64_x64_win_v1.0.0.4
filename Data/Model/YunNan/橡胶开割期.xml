@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value=""/>
+		<Param Name="Author" Value="Administrator"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2016-10-25 16:22:54"/>
+		<Param Name="DataStartTime" Value="2016-10-27 14:16:31"/>
+		<Param Name="DataEndTime" Value="2000-01-01 14:16:31"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample2.ModuleCreateDS" x="32" y="32">
+			<Params>
+				<Param Name="Type" Value="Memory"/>
+				<Param Name="Alias" Value="Datasource7"/>
+				<Param Name="Server" Value=""/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts/>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.pluginexample2.ModuleCreateDS" x="144" y="32">
+			<Params>
+				<Param Name="Type" Value="GTiff"/>
+				<Param Name="Alias" Value="Datasource9"/>
+				<Param Name="Server" Value="d:/temp/test.tif"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts/>
+		</Module>
+		<Module ID="3" ClassName="com.wmf.pluginexample3.ModuleQuery" x="32" y="128">
+			<Params>
+				<Param Name="ConnectionName" Value="mysql_connection"/>
+				<Param Name="Sql" Value="select number as StationNum,x,y from station_info"/>
+				<Param Name="Name" Value="查询"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="JDBCResultSet"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="4" ClassName="com.wmf.pluginexample3.ModuleQuery" x="32" y="224">
+			<Params>
+				<Param Name="ConnectionName" Value="mysql_connection"/>
+				<Param Name="Sql" Value="SELECT number as StationNum,concat(lpad(year,4,'0'),'-',lpad(month,2,'0'),'-',lpad(day,2,'0')) as Time,t FROM observation"/>
+				<Param Name="Name" Value="查询"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="JDBCResultSet"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="5" ClassName="com.wmf.pluginexample3.ModulePeriodStatistics" x="224" y="128">
+			<Params>
+				<Param Name="Name" Value="站点信息"/>
+				<Param Name="Name" Value="2000-2007日数据"/>
+				<Param Name="ExpressionItemCount" Value="0"/>
+				<Param Name="Model" Value=""/>
+				<Param Name="StationNumField" Value="StationNum"/>
+				<Param Name="XField" Value="x"/>
+				<Param Name="YField" Value="y"/>
+				<Param Name="TimeField" Value="Time"/>
+				<Param Name="TimeFieldFormat" Value="yyyy-MM-dd"/>
+				<Param Name="StatsMethod" Value="MovingAvg_StartTime"/>
+				<Param Name="MovingAvgCondition" Value="t&gt;=200"/>
+				<Param Name="MovingAvgStepCount" Value="5"/>
+				<Param Name="MovingAvgStartStep" Value="-4"/>
+				<Param Name="PersistenceCondition" Value=""/>
+				<Param Name="OutputField" Value="Value"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="JDBCResultSet"/>
+				<InputPort ID="2" Type="JDBCResultSet"/>
+				<InputPort ID="3" Type="Unknown"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="CSV"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="6" ClassName="com.wmf.pluginexample1.ModuleOutput" x="416" y="48">
+			<Params/>
+			<InputPorts>
+				<InputPort ID="1" Type="CSV"/>
+			</InputPorts>
+			<OutputPorts/>
+		</Module>
+		<Module ID="7" ClassName="com.wmf.pluginexample2.ModuleImportPoint" x="400" y="128">
+			<Params>
+				<Param Name="XField" Value="x"/>
+				<Param Name="YField" Value="y"/>
+				<Param Name="Datasource" Value="Datasource7"/>
+				<Param Name="Dataset" Value="ImportPoint5"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="Unknown"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetPoint"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="8" ClassName="com.wmf.pluginexample2.ModuleIDW" x="592" y="128">
+			<Params>
+				<Param Name="Datasource" Value="Datasource7"/>
+				<Param Name="Dataset" Value="ImportPoint5"/>
+				<Param Name="Field" Value="Value"/>
+				<Param Name="Bounds" Value="111.200000 32.133340 115.666700 36.050000"/>
+				<Param Name="CellSize" Value="0.050000 0.050000"/>
+				<Param Name="ValueType" Value="Single"/>
+				<Param Name="SearchMode" Value="RadiusVariable"/>
+				<Param Name="PointCount" Value="12"/>
+				<Param Name="MaxRadius" Value="0"/>
+				<Param Name="Radius" Value="5"/>
+				<Param Name="MinPointCount" Value="0"/>
+				<Param Name="Power" Value="2"/>
+				<Param Name="CrossValidation" Value="false"/>
+				<Param Name="ResidualFileName" Value=""/>
+				<Param Name="Datasource" Value="Datasource7"/>
+				<Param Name="Dataset" Value="IDW6"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetPoint"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRaster"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="9" ClassName="com.wmf.pluginexample2.ModuleRasterCalc" x="768" y="128">
+			<Params>
+				<Param Name="ExpressionItemCount" Value="1"/>
+				<Param Name="Expression" Value="([v]-[DataEndTime])/1000/3600/24"/>
+				<Param Name="Condition" Value=""/>
+				<Param Name="v" Value="-9999.000000"/>
+				<Param Name="Datasource" Value="Datasource7"/>
+				<Param Name="Dataset" Value="IDW6"/>
+				<Param Name="Datasource" Value="Datasource9"/>
+				<Param Name="Dataset" Value="RasterCalc8"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetRaster"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRaster"/>
+			</OutputPorts>
+		</Module>
+	</Modules>
+	<Pipes>
+		<Pipe ID="10" IncomingModule="3" IncomingPort="1" OutgoingModule="5" OutgoingPort="1"/>
+		<Pipe ID="11" IncomingModule="4" IncomingPort="1" OutgoingModule="5" OutgoingPort="2"/>
+		<Pipe ID="12" IncomingModule="5" IncomingPort="1" OutgoingModule="7" OutgoingPort="1"/>
+		<Pipe ID="13" IncomingModule="7" IncomingPort="1" OutgoingModule="8" OutgoingPort="1"/>
+		<Pipe ID="14" IncomingModule="8" IncomingPort="1" OutgoingModule="9" OutgoingPort="1"/>
+		<Pipe ID="15" IncomingModule="5" IncomingPort="1" OutgoingModule="6" OutgoingPort="1"/>
+	</Pipes>
+</Model>

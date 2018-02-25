@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DefaultUserInfoFinder>
+  <Roles>
+    <Role Name="管理员" Permissions="AddJob,ModifyJob,DelJob,StartSchedule,PauseSchedule,ManualTrigger,Patch,CancelExecute,DelExecutedJob,ExecuteAgain,CancelExecuteAgain" />
+    <Role Name="业务员" Permissions="StartSchedule,PauseSchedule,ManualTrigger,Patch,CancelExecute,ExecuteAgain,CancelExecuteAgain" />
+    <Role Name="来宾" Permissions="" />
+  </Roles>
+  <Users>
+    <!--Password="root"-->
+  	<User Name="root" Group="root" Password="63a9f0ea7bb98050796b649e85481845" Role="" />
+    <!--Password="test"-->
+  	<User Name="test" Group="test" Password="098f6bcd4621d373cade4e832627b4f6" Role="管理员" />
+    <!--Password="zhangsan"-->
+    <User Name="张三" Group="用户组1" Password="01d7f40760960e7bd9443513f22ab9af" Role="管理员" />
+    <!--Password="lisi"-->
+    <User Name="李四" Group="用户组1" Password="dc3a8f1670d65bea69b7b65048a0ac40" Role="业务员" />
+    <!--Password="wangwu"-->
+    <User Name="王五" Group="用户组1" Password="9f001e4166cf26bfbdd3b4f67d9ef617" Role="来宾" />
+    <!--Password="zhangsan"-->
+    <User Name="张三" Group="用户组2" Password="01d7f40760960e7bd9443513f22ab9af" Role="管理员" />
+    <!--Password="lisi"-->
+    <User Name="李四" Group="用户组2" Password="dc3a8f1670d65bea69b7b65048a0ac40" Role="业务员" />
+    <!--Password="wangwu"-->
+    <User Name="王五" Group="用户组2" Password="9f001e4166cf26bfbdd3b4f67d9ef617" Role="来宾" />
+  </Users>
+</DefaultUserInfoFinder>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value=""/>
+		<Param Name="Author" Value="lenovo"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2018-02-05 11:27:03"/>
+		<Param Name="DataStartTime" Value="2018-02-05 11:27:03"/>
+		<Param Name="DataEndTime" Value="2018-02-05 11:27:03"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample2.ModuleOpenDS" x="288" y="288">
+			<Params>
+				<Param Name="Type" Value="ESRI Shapefile"/>
+				<Param Name="Alias" Value="Datasource2"/>
+				<Param Name="Server" Value="E:\Map\SC\xn.shp"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRegion"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.pluginexample2.ModuleExportToGeoJSON" x="672" y="320">
+			<Params>
+				<Param Name="Datasource" Value="Datasource2"/>
+				<Param Name="Dataset" Value="xn"/>
+				<Param Name="CoordFormat" Value="%f"/>
+				<Param Name="Fields" Value=""/>
+				<Param Name="FileName" Value="C:\Users\lenovo\Desktop\temp\xn"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetRegion"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="JSONFile"/>
+			</OutputPorts>
+		</Module>
+	</Modules>
+	<Pipes>
+		<Pipe ID="3" IncomingModule="1" IncomingPort="1" OutgoingModule="2" OutgoingPort="1"/>
+	</Pipes>
+</Model>

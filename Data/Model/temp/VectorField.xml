@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value=""/>
+		<Param Name="Author" Value="Administrator"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2017-04-24 08:49:35"/>
+		<Param Name="DataStartTime" Value="2017-04-24 08:49:35"/>
+		<Param Name="DataEndTime" Value="2017-04-24 08:49:35"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample2.ModuleCreateDS" x="32" y="16">
+			<Params>
+				<Param Name="Type" Value="Memory"/>
+				<Param Name="Alias" Value="temp"/>
+				<Param Name="Server" Value=""/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts/>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.pluginexample2.ModuleOpenDS" x="32" y="112">
+			<Params>
+				<Param Name="Type" Value="Micaps"/>
+				<Param Name="Alias" Value="VectorField"/>
+				<Param Name="Server" Value="../../Input/07121108.000"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRaster"/>
+				<OutputPort ID="2" Type="DatasetRaster"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="3" ClassName="com.wmf.pluginexample2.ModuleRasterCalc" x="224" y="192">
+			<Params>
+				<Param Name="ExpressionItemCount" Value="1"/>
+				<Param Name="Expression" Value="-atan2([v],[u])*57.295779513082320876846+90"/>
+				<Param Name="Condition" Value=""/>
+				<Param Name="v" Value="-9999.000000"/>
+				<Param Name="u" Value="-9999.000000"/>
+				<Param Name="Datasource" Value="VectorField"/>
+				<Param Name="Dataset" Value="07121108.000_v"/>
+				<Param Name="Datasource" Value="VectorField"/>
+				<Param Name="Dataset" Value="07121108.000_u"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="direction"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetRaster"/>
+				<InputPort ID="2" Type="DatasetRaster"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRaster"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="4" ClassName="com.wmf.pluginexample2.ModuleRasterCalc" x="224" y="80">
+			<Params>
+				<Param Name="ExpressionItemCount" Value="1"/>
+				<Param Name="Expression" Value="sqrt([u]*[u]+[v]*[v])"/>
+				<Param Name="Condition" Value=""/>
+				<Param Name="u" Value="-9999.000000"/>
+				<Param Name="v" Value="-9999.000000"/>
+				<Param Name="Datasource" Value="VectorField"/>
+				<Param Name="Dataset" Value="07121108.000_u"/>
+				<Param Name="Datasource" Value="VectorField"/>
+				<Param Name="Dataset" Value="07121108.000_v"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="speed"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetRaster"/>
+				<InputPort ID="2" Type="DatasetRaster"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRaster"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="5" ClassName="com.wmf.pluginexample2.ModuleGraphicProduct" x="448" y="144">
+			<Params>
+				<Param Name="TemplateFile" Value="..\..\GraphicProductTemplate\VectorField.xml"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="speed"/>
+				<Param Name="Unit" Value=""/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="direction"/>
+				<Param Name="Unit" Value=""/>
+				<Param Name="Bounds" Value="0.000000 0.000000 0.000000 0.000000"/>
+				<Param Name="ClipRegion" Value=""/>
+				<Param Name="MainTitle" Value="测试向量场"/>
+				<Param Name="SubTitle" Value=""/>
+				<Param Name="Organization" Value=""/>
+				<Param Name="PublishTime" Value=""/>
+				<Param Name="GeoLegendToLayer" Value=""/>
+				<Param Name="FileName" Value="d:/temp/[yyMMddHH].png"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetRaster"/>
+				<InputPort ID="2" Type="DatasetRaster"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="ImageFile"/>
+			</OutputPorts>
+		</Module>
+	</Modules>
+	<Pipes>
+		<Pipe ID="6" IncomingModule="2" IncomingPort="1" OutgoingModule="4" OutgoingPort="1"/>
+		<Pipe ID="7" IncomingModule="2" IncomingPort="2" OutgoingModule="4" OutgoingPort="2"/>
+		<Pipe ID="8" IncomingModule="2" IncomingPort="2" OutgoingModule="3" OutgoingPort="1"/>
+		<Pipe ID="9" IncomingModule="2" IncomingPort="1" OutgoingModule="3" OutgoingPort="2"/>
+		<Pipe ID="10" IncomingModule="4" IncomingPort="1" OutgoingModule="5" OutgoingPort="1"/>
+		<Pipe ID="11" IncomingModule="3" IncomingPort="1" OutgoingModule="5" OutgoingPort="2"/>
+	</Pipes>
+</Model>

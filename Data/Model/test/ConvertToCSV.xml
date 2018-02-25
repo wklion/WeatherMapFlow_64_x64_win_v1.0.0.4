@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.model.Model">
+	<Params>
+		<Param Name="Description" Value=""/>
+		<Param Name="Author" Value="Administrator"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2017-07-24 15:45:04"/>
+		<Param Name="DataStartTime" Value="2017-07-24 15:45:04"/>
+		<Param Name="DataEndTime" Value="2017-07-24 15:45:04"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample3.ModuleQuery" x="80" y="80">
+			<Params>
+				<Param Name="ConnectionName" Value="mysql_connection"/>
+				<Param Name="Sql" Value="select number as StationNum,x from station_info"/>
+				<Param Name="Name" Value="查询"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="JDBCResultSet"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.pluginexample1.ModuleConvertToCSV" x="240" y="80">
+			<Params>
+				<Param Name="Name" Value="x"/>
+				<Param Name="StationNumField" Value="StationNum"/>
+				<Param Name="TimeField" Value=""/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="JDBCResultSet"/>
+				<InputPort ID="2" Type="Unknown"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="CSV"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="3" ClassName="com.wmf.pluginexample3.ModuleQuery" x="80" y="176">
+			<Params>
+				<Param Name="ConnectionName" Value="mysql_connection"/>
+				<Param Name="Sql" Value="select number as StationNum,y from station_info"/>
+				<Param Name="Name" Value="查询"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="JDBCResultSet"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="4" ClassName="com.wmf.pluginexample1.ModuleConvertToCSV" x="240" y="176">
+			<Params>
+				<Param Name="Name" Value="y"/>
+				<Param Name="StationNumField" Value="StationNum"/>
+				<Param Name="TimeField" Value=""/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="JDBCResultSet"/>
+				<InputPort ID="2" Type="Unknown"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="CSV"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="5" ClassName="com.wmf.pluginexample1.ModuleConvertToCSV" x="432" y="128">
+			<Params>
+				<Param Name="Name" Value="x"/>
+				<Param Name="Name" Value=""/>
+				<Param Name="StationNumField" Value="StationNum"/>
+				<Param Name="TimeField" Value=""/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="CSV"/>
+				<InputPort ID="2" Type="CSV"/>
+				<InputPort ID="3" Type="Unknown"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="CSV"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="6" ClassName="com.wmf.pluginexample1.ModuleOutput" x="624" y="128">
+			<Params/>
+			<InputPorts>
+				<InputPort ID="1" Type="CSV"/>
+			</InputPorts>
+			<OutputPorts/>
+		</Module>
+	</Modules>
+	<Pipes>
+		<Pipe ID="7" IncomingModule="1" IncomingPort="1" OutgoingModule="2" OutgoingPort="1"/>
+		<Pipe ID="8" IncomingModule="3" IncomingPort="1" OutgoingModule="4" OutgoingPort="1"/>
+		<Pipe ID="9" IncomingModule="2" IncomingPort="1" OutgoingModule="5" OutgoingPort="1"/>
+		<Pipe ID="10" IncomingModule="4" IncomingPort="1" OutgoingModule="5" OutgoingPort="2"/>
+		<Pipe ID="11" IncomingModule="5" IncomingPort="1" OutgoingModule="6" OutgoingPort="1"/>
+	</Pipes>
+</Model>

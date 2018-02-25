@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value=""/>
+		<Param Name="Author" Value="Administrator"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2017-05-30 10:29:35"/>
+		<Param Name="DataStartTime" Value="2017-05-30 10:29:35"/>
+		<Param Name="DataEndTime" Value="2017-05-30 10:29:35"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample2.ModuleCreateDS" x="32" y="32">
+			<Params>
+				<Param Name="Type" Value="Memory"/>
+				<Param Name="Alias" Value="temp"/>
+				<Param Name="Server" Value=""/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts/>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.pluginexample2.ModuleCreateDS" x="144" y="32">
+			<Params>
+				<Param Name="Type" Value="GTiff"/>
+				<Param Name="Alias" Value="tif"/>
+				<Param Name="Server" Value="d:\temp\年平均温度_GIDW.tif"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts/>
+		</Module>
+		<Module ID="3" ClassName="com.wmf.pluginexample1.ModuleImportCSV" x="32" y="144">
+			<Params>
+				<Param Name="FileName" Value="..\..\Input\YunNan\云南30年平均值.csv"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="CSV"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="4" ClassName="com.wmf.pluginexample2.ModuleImportPoint" x="192" y="144">
+			<Params>
+				<Param Name="XField" Value="x"/>
+				<Param Name="YField" Value="y"/>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="ImportPoint3"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="Unknown"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetPoint"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="5" ClassName="com.wmf.pluginexample2.ModuleOpenDS" x="240" y="240">
+			<Params>
+				<Param Name="Type" Value="GTiff"/>
+				<Param Name="Alias" Value="Datasource4"/>
+				<Param Name="Server" Value="..\..\Input\YunNan\yunnan_dem_1000.tif"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRaster"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="6" ClassName="com.wmf.pluginexample2.ModuleGIDW" x="416" y="176">
+			<Params>
+				<Param Name="Datasource" Value="temp"/>
+				<Param Name="Dataset" Value="ImportPoint3"/>
+				<Param Name="Datasource" Value="Datasource4"/>
+				<Param Name="Dataset" Value="d1"/>
+				<Param Name="Field" Value="t"/>
+				<Param Name="ZField" Value="z"/>
+				<Param Name="a" Value="-0.321718 -0.545163 -0.004087"/>
+				<Param Name="Bounds" Value="97.820000 21.480000 106.530000 29.450000"/>
+				<Param Name="CellSize" Value="0.01 0.01"/>
+				<Param Name="ValueType" Value="Single"/>
+				<Param Name="SearchMode" Value="RadiusVariable"/>
+				<Param Name="PointCount" Value="12"/>
+				<Param Name="MaxRadius" Value="0"/>
+				<Param Name="Radius" Value="5"/>
+				<Param Name="MinPointCount" Value="0"/>
+				<Param Name="CrossValidation" Value="true"/>
+				<Param Name="ResidualFileName" Value="C:\temp.csv"/>
+				<Param Name="Datasource" Value="tif"/>
+				<Param Name="Dataset" Value="GIDW1"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetPoint"/>
+				<InputPort ID="2" Type="DatasetRaster"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRaster"/>
+			</OutputPorts>
+		</Module>
+	</Modules>
+	<Pipes>
+		<Pipe ID="7" IncomingModule="5" IncomingPort="1" OutgoingModule="6" OutgoingPort="2"/>
+		<Pipe ID="8" IncomingModule="3" IncomingPort="1" OutgoingModule="4" OutgoingPort="1"/>
+		<Pipe ID="9" IncomingModule="4" IncomingPort="1" OutgoingModule="6" OutgoingPort="1"/>
+	</Pipes>
+</Model>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="gb2312"?>
+<Workspace Version="20150901">
+	<Datasources>
+    <Datasource Type="ESRI Shapefile" Alias="T_ADMINDIV_PROVINCE" Server="./T_ADMINDIV_PROVINCE.shp" ReadOnly="true"/>
+	<Datasource Type="ESRI Shapefile" Alias="T_ADMINDIV_CITY" Server="./T_ADMINDIV_CITY.shp" ReadOnly="true"/>
+	<Datasource Type="ESRI Shapefile" Alias="T_ADMINDIV_COUNTY" Server="./T_ADMINDIV_COUNTY.shp" ReadOnly="true"/>
+	</Datasources>
+	<Volumes/>
+	<Maps>
+    <Map Version="20150901" Name="gan_su" Projection="+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs" Size="0 0" MinScale="0.000000" MaxScale="0.000000">
+			<Bounds>
+				<!--<Rect left="97.500000" bottom="21.000000" right="106.200000" top="29.300000"/>-->
+        <Rect left="0" bottom="0" right="0" top="0"/>
+			</Bounds>
+			<BackgroundStyle>
+				<FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+			</BackgroundStyle>
+			<FixedScales/>
+      <!--不裁剪MGCTop图层分组-->
+			<ClipRegion Datasource="" Dataset="" Where=""/>
+			<LayerGroups>
+				<LayerGroup Name="MGCBottom">
+          <Layer Version="20150901" Type="RasterUnique" Name="RasterUnique" Datasource="" Dataset="" MinScale="0" MaxScale="0">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGB(0,0,255)"/>
+            <RasterUniqueItem>
+            </RasterUniqueItem>
+          </Layer>
+          <Layer Version="20150901" Type="Label" Name="city_label" Datasource="T_ADMINDIV_CITY" Dataset="T_ADMINDIV_CITY" MinScale="0.000000" MaxScale="0.000000" LOD="true" LabelExpression="NAME" InterpolationMode="NearestNeighbor">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGBA(0,0,255,255)"/>
+            <TextStyle FontName="微软雅黑" FontSize="4" Weight="0" Alignment="TopLeft" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="true" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+          </Layer>
+          <Layer Version="20150901" Type="Plot" Name="Plot" Datasource="" Dataset="" MinScale="0" MaxScale="0" LOD="true" LODOrderBy="Level" InterpolationMode="NearestNeighbor">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGB(0,0,0)"/>
+            <!--坐标定义：x向右，y向下，单位毫米。-->
+            <PlotItem Caption="站点值" Visible="true" Field="Value1" AngleField="" x="0" y="0">
+              <Label>
+                <TextStyle Alignment="MiddleCenter" ForeColor="RGB(0,0,255)"/>
+              </Label>
+            </PlotItem>
+          </Layer>
+        </LayerGroup>
+				<LayerGroup Name="MGCTop">
+          <!--裁剪显示导致边界线显示一半宽度-->
+          <Layer Version="20150901" Type="Region" Name="Region" Datasource="T_ADMINDIV_PROVINCE" Dataset="T_ADMINDIV_PROVINCE" MinScale="0.000000" MaxScale="0.000000" Filter="">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGBA(0,0,0,0)"/>
+            <LineStyle Width="1" color="RGB(64,64,64)" SymbolID="0"/>
+            <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,0)" SymbolID="0"/>
+          </Layer>
+		  <Layer Version="20150901" Type="Region" Name="Region" Datasource="T_ADMINDIV_CITY" Dataset="T_ADMINDIV_CITY" MinScale="0.000000" MaxScale="0.000000" Filter="">
+            <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
+            <SelectedStyle Color="RGBA(0,0,0,0)"/>
+            <LineStyle Width="1" color="RGB(64,64,64)" SymbolID="0"/>
+            <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,0)" SymbolID="0"/>
+          </Layer>
+        </LayerGroup>
+			</LayerGroups>
+		</Map>
+	</Maps>
+	<Layouts>
+		<Layout Version="20150901" Name="layout">
+			<Bounds>
+        <Rect left="0.000000" bottom="203.200000" right="270.933333" top="0.000000"/>
+			</Bounds>
+			<BackgroundStyle>
+				<FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+			</BackgroundStyle>
+			<Geometries>
+				<Geometry Version="20150901" Type="GeoMap" Visible="true" MapName="gan_su">
+					<Bounds>
+            <Rect left="0" bottom="0" right="0" top="0"/>
+					</Bounds>
+					<Margin>
+						<Rect left="0" bottom="0" right="0" top="0"/>
+					</Margin>
+          <Padding>
+            <Rect left="0" bottom="0" right="0" top="0"/>
+          </Padding>
+					<BorderStyle>
+						<LineStyle Width="1" color="RGBA(0,0,0,255)" SymbolID="0"/>
+					</BorderStyle>
+				</Geometry>
+        <Geometry Version="20150901" Type="GeoMapDivision" Visible="false" MapName="gan_su" AutoCalc="false" Base="97.000000 20.000000" Interval="1.000000 1.000000">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <LineStyle Width="1" color="RGBA(160,160,160,255)" SymbolID="1001"/>
+          <TextStyle FontName="微软雅黑" FontSize="3.8" Weight="0" Alignment="MiddleLeft" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(160,160,160,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+          <LabelOffset>
+            <Rect left="-1.000000" bottom="-1.000000" right="-1.000000" top="-1.000000"/>
+          </LabelOffset>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="0 8" Text="MainTitle">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="微软雅黑" FontSize="8" Weight="0" Alignment="TopCenter" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="0 18" Text="SubTitle">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="宋体" FontSize="6" Weight="0" Alignment="TopCenter" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="260 188" Text="Organization">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="微软雅黑" FontSize="5" Weight="0" Alignment="BottomRight" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoText" Visible="true" Origin="260 195" Text="PublishTime">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <TextStyle FontName="微软雅黑" FontSize="5" Weight="0" Alignment="BottomRight" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoPicture" Visible="true" FileName="./LOGO.png" Origin="13 9" Alignment="TopLeft" Offset="0.000000 0.000000" Size="0 0">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+        </Geometry>
+        <Geometry Version="20150901" Type="GeoLegend" Visible="true" Origin="9 0" Alignment="BottomLeft" Offset="0 6" LegendType="Range" Orientation="Vertical" Title="图 例" SubTitle="(单位:dbZ)" ItemSize="0 6" ItemSpace="2 0" ItemCaptionStep="1" MaxValueCaption="35">
+          <Bounds>
+            <Rect left="0.000000" bottom="0.000000" right="0.000000" top="0.000000"/>
+          </Bounds>
+          <BackgroundStyle>
+            <FillStyle BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(255,255,255,255)" SymbolID="0"/>
+          </BackgroundStyle>
+          <BorderStyle>
+            <LineStyle Width="1" color="RGBA(0,0,0,255)" SymbolID="0"/>
+          </BorderStyle>
+          <Margin>
+            <Rect left="2.000000" bottom="2.000000" right="2.000000" top="2.000000"/>
+          </Margin>
+          <TitleTextStyle>
+            <TextStyle FontName="微软雅黑" FontSize="4.5" Weight="0" Alignment="TopCenter" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+          </TitleTextStyle>
+          <SubTitleTextStyle>
+            <TextStyle FontName="微软雅黑" FontSize="4" Weight="0" Alignment="TopRight" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+          </SubTitleTextStyle>
+          <ItemTextStyle>
+            <TextStyle FontName="宋体" FontSize="3.8" Weight="0" Alignment="TopLeft" Angle="0" BackColor="RGBA(0,0,0,0)" ForeColor="RGBA(0,0,0,255)" ItalicAngle="10" Margin="0" Italic="false" Underline="false" Strikeout="false" Outline="false" Shadow="false" CornerRadius="0 0" BackSymbolID="0"/>
+          </ItemTextStyle>
+          <LegendItem/>
+        </Geometry>
+        
+			</Geometries>
+		</Layout>
+	</Layouts>
+	<Symbols>
+	</Symbols>
+	<Terrains/>
+	<Scenes/>
+</Workspace>
