@@ -35,9 +35,6 @@
 				<Param Name="Datasource" Value=""/>
 				<Param Name="Dataset" Value=""/>
 				<Param Name="Unit" Value=""/>
-				<Param Name="Datasource" Value="Datasource1"/>
-				<Param Name="Dataset" Value="d1"/>
-				<Param Name="Unit" Value=""/>
 				<Param Name="Bounds" Value="0.000000 0.000000 0.000000 0.000000"/>
 				<Param Name="ClipRegion" Value=""/>
 				<Param Name="MainTitle" Value="pup雷达拼图"/>
@@ -48,8 +45,8 @@
 				<Param Name="FileName" Value="C:\Users\lenovo\Desktop\temp\tt.png"/>
 			</Params>
 			<InputPorts>
-				<InputPort ID="2" Type="Unknown"/>
-				<InputPort ID="3" Type="DatasetRaster"/>
+				<InputPort ID="1" Type="Unknown"/>
+				<InputPort ID="2" Type="DatasetRaster"/>
 			</InputPorts>
 			<OutputPorts>
 				<OutputPort ID="1" Type="ImageFile"/>
@@ -57,6 +54,6 @@
 		</Module>
 	</Modules>
 	<Pipes>
-		<Pipe ID="3" IncomingModule="1" IncomingPort="1" OutgoingModule="2" OutgoingPort="3"/>
+		<Pipe ID="3" IncomingModule="1" IncomingPort="1" OutgoingModule="2" OutgoingPort="2"/>
 	</Pipes>
 </Model>

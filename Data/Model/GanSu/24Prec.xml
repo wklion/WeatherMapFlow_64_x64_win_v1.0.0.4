@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value=""/>
+		<Param Name="Author" Value="wklion"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2018-02-26 23:51:41"/>
+		<Param Name="DataStartTime" Value="2018-02-26 23:51:41"/>
+		<Param Name="DataEndTime" Value="2018-02-26 23:51:41"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample2.ModuleCimiss" x="352" y="176">
+			<Params>
+				<Param Name="Alias" Value="BCLZ_ZXT_zxtybs"/>
+				<Param Name="Alias" Value="yubaoshi"/>
+				<Param Name="Alias" Value="10.166.89.55"/>
+				<Param Name="Alias" Value="620000"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="Unknown"/>
+			</OutputPorts>
+		</Module>
+	</Modules>
+	<Pipes/>
+</Model>
