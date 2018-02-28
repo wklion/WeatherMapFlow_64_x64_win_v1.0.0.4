@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value=""/>
+		<Param Name="Author" Value="wklion"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2018-02-26 23:51:41"/>
+		<Param Name="DataStartTime" Value="2018-02-26 23:51:41"/>
+		<Param Name="DataEndTime" Value="2018-02-26 23:51:41"/>
+	</Params>
+	<Modules>
+		<Module ID="1" ClassName="com.wmf.pluginexample2.ModuleCreateDS" x="64" y="80">
+			<Params>
+				<Param Name="Type" Value="Memory"/>
+				<Param Name="Alias" Value="tempDS"/>
+				<Param Name="Server" Value="C:\Users\lenovo\Desktop\temp\kg"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts/>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.projectplugin.ModuleCimiss" x="64" y="272">
+			<Params>
+				<Param Name="Alias" Value="BCLZ_ZXT_zxtybs"/>
+				<Param Name="Alias" Value="yubaoshi"/>
+				<Param Name="Alias" Value="10.166.89.55"/>
+				<Param Name="Alias" Value="620000"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts>
+				<OutputPort ID="1" Type="Unknown"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="3" ClassName="com.wmf.projectplugin.ModuleJsonToDatasetVector" x="256" y="288">
+			<Params>
+				<Param Name="Alias" Value="tempDV"/>
+				<Param Name="Alias" Value="SUM_PRE_1H"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="JSONFile"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetPoint"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="4" ClassName="com.wmf.pluginexample2.ModuleIDW" x="480" y="288">
+			<Params>
+				<Param Name="Datasource" Value="tempDS"/>
+				<Param Name="Dataset" Value="tempDV"/>
+				<Param Name="Field" Value="SUM_PRE_1H"/>
+				<Param Name="Bounds" Value="91.000000 32.000000 108.000000 42.000000"/>
+				<Param Name="CellSize" Value="0.05 0.05"/>
+				<Param Name="ValueType" Value="Single"/>
+				<Param Name="SearchMode" Value="RadiusVariable"/>
+				<Param Name="PointCount" Value="12"/>
+				<Param Name="MaxRadius" Value="0"/>
+				<Param Name="Radius" Value="5"/>
+				<Param Name="MinPointCount" Value="0"/>
+				<Param Name="Power" Value="2"/>
+				<Param Name="CrossValidation" Value="false"/>
+				<Param Name="ResidualFileName" Value=""/>
+				<Param Name="Datasource" Value="tempDS"/>
+				<Param Name="Dataset" Value="IDW4"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetPoint"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRaster"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="5" ClassName="com.wmf.pluginexample2.ModuleContour" x="672" y="288">
+			<Params>
+				<Param Name="Datasource" Value="tempDS"/>
+				<Param Name="Dataset" Value="IDW4"/>
+				<Param Name="Values" Value="0.000000 4.403289 8.806579 13.209868 17.613158 22.016447 26.419736 30.823026 35.226315 39.629605 "/>
+				<Param Name="Smoothness" Value="3"/>
+				<Param Name="Datasource" Value="tempDS"/>
+				<Param Name="Dataset" Value="Contour5"/>
+				<Param Name="Datasource" Value="tempDS"/>
+				<Param Name="Dataset" Value="ValidBorder5"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetRaster"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetLine"/>
+				<OutputPort ID="2" Type="DatasetLine"/>
+			</OutputPorts>
+		</Module>
+		<Module ID="6" ClassName="com.wmf.pluginexample2.ModulePolygonizer" x="848" y="288">
+			<Params>
+				<Param Name="Datasource" Value="tempDS"/>
+				<Param Name="Dataset" Value="Contour5"/>
+				<Param Name="Datasource" Value="tempDS"/>
+				<Param Name="Dataset" Value="ValidBorder5"/>
+				<Param Name="Datasource" Value=""/>
+				<Param Name="Dataset" Value=""/>
+				<Param Name="Datasource" Value="tempDS"/>
+				<Param Name="Dataset" Value="IDW4"/>
+				<Param Name="Field" Value="SUM_PRE_1H"/>
+				<Param Name="MinValue" Value="0.000000"/>
+				<Param Name="MaxValue" Value="0.000000"/>
+				<Param Name="NoDataValue" Value="-9999.000000"/>
+				<Param Name="CalcValue" Value="true"/>
+				<Param Name="Datasource" Value="tempDS"/>
+				<Param Name="Dataset" Value="Polygonizer8"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="DatasetLine"/>
+				<InputPort ID="2" Type="DatasetLine"/>
+				<InputPort ID="3" Type="Unknown"/>
+				<InputPort ID="4" Type="DatasetRaster"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetRegion"/>
+			</OutputPorts>
+		</Module>
+	</Modules>
+	<Pipes>
+		<Pipe ID="7" IncomingModule="2" IncomingPort="1" OutgoingModule="3" OutgoingPort="1"/>
+		<Pipe ID="8" IncomingModule="3" IncomingPort="1" OutgoingModule="4" OutgoingPort="1"/>
+		<Pipe ID="9" IncomingModule="4" IncomingPort="1" OutgoingModule="5" OutgoingPort="1"/>
+		<Pipe ID="10" IncomingModule="5" IncomingPort="1" OutgoingModule="6" OutgoingPort="1"/>
+		<Pipe ID="11" IncomingModule="5" IncomingPort="2" OutgoingModule="6" OutgoingPort="2"/>
+		<Pipe ID="12" IncomingModule="4" IncomingPort="1" OutgoingModule="6" OutgoingPort="4"/>
+	</Pipes>
+</Model>

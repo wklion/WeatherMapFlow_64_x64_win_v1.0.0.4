@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Model ClassName="com.wmf.pluginexample2.Model2">
+	<Params>
+		<Param Name="Description" Value=""/>
+		<Param Name="Author" Value="lenovo"/>
+		<Param Name="Company" Value=""/>
+		<Param Name="Background" Value="255 255 255"/>
+		<Param Name="GridSize" Value="16 16"/>
+		<Param Name="ShowGrid" Value="true"/>
+		<Param Name="SnapToGrid" Value="true"/>
+		<Param Name="Lock" Value="false"/>
+		<Param Name="StartTime" Value="2018-02-27 11:50:02"/>
+		<Param Name="DataStartTime" Value="2018-02-27 11:50:02"/>
+		<Param Name="DataEndTime" Value="2018-02-27 11:50:02"/>
+	</Params>
+	<Modules/>
+	<Pipes/>
+</Model>

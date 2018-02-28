@@ -15,7 +15,16 @@
 		<Param Name="DataEndTime" Value="2018-02-26 23:51:41"/>
 	</Params>
 	<Modules>
-		<Module ID="1" ClassName="com.wmf.pluginexample2.ModuleCimiss" x="352" y="176">
+		<Module ID="1" ClassName="com.wmf.pluginexample2.ModuleCreateDS" x="272" y="32">
+			<Params>
+				<Param Name="Type" Value="ESRI Shapefile"/>
+				<Param Name="Alias" Value="tempDS"/>
+				<Param Name="Server" Value="C:\Users\lenovo\Desktop\temp\kg"/>
+			</Params>
+			<InputPorts/>
+			<OutputPorts/>
+		</Module>
+		<Module ID="2" ClassName="com.wmf.projectplugin.ModuleCimiss" x="224" y="272">
 			<Params>
 				<Param Name="Alias" Value="BCLZ_ZXT_zxtybs"/>
 				<Param Name="Alias" Value="yubaoshi"/>
@@ -27,6 +36,20 @@
 				<OutputPort ID="1" Type="Unknown"/>
 			</OutputPorts>
 		</Module>
+		<Module ID="3" ClassName="com.wmf.projectplugin.ModuleJsonToDatasetVector" x="416" y="272">
+			<Params>
+				<Param Name="Alias" Value="tempDV"/>
+				<Param Name="Alias" Value="SUM_PRE_1H"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="JSONFile"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="DatasetPoint"/>
+			</OutputPorts>
+		</Module>
 	</Modules>
-	<Pipes/>
+	<Pipes>
+		<Pipe ID="4" IncomingModule="2" IncomingPort="1" OutgoingModule="3" OutgoingPort="1"/>
+	</Pipes>
 </Model>

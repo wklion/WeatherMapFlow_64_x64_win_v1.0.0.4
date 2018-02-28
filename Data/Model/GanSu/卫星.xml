@@ -28,7 +28,7 @@
 		</Module>
 		<Module ID="2" ClassName="com.wmf.pluginexample2.ModuleGraphicProduct" x="464" y="192">
 			<Params>
-				<Param Name="TemplateFile" Value="D:\component\WeatherMapFlow_64_x64_win_v1.0.0.4\Data\GraphicProductTemplate\GanSu\云图.xml"/>
+				<Param Name="TemplateFile" Value="../../GraphicProductTemplate\GanSu\云图.xml"/>
 				<Param Name="Datasource" Value=""/>
 				<Param Name="Dataset" Value=""/>
 				<Param Name="Unit" Value=""/>
@@ -42,7 +42,7 @@
 				<Param Name="Organization" Value="兰州中心台"/>
 				<Param Name="PublishTime" Value="[yyyy年M月d日HH时mm分]发布"/>
 				<Param Name="GeoLegendToLayer" Value=""/>
-				<Param Name="FileName" Value="C:\Users\wklion\Desktop\temp\sat.png"/>
+				<Param Name="FileName" Value="C:\Users\lenovo\Desktop\temp\sat.png"/>
 			</Params>
 			<InputPorts>
 				<InputPort ID="1" Type="Unknown"/>

@@ -2,12 +2,12 @@
 ::-------------------------------------------------------------------------------------------------------------------------------------
 
 
-for /f "delims=" %%i in ('dir %~dp0"PluginExample2\bin\*.svn" /ad /b /s') do (
+for /f "delims=" %%i in ('dir %~dp0"PluginProject\bin\*.svn" /ad /b /s') do (
 	rd /s /q "%%i"
 )
-jar cvfm ./Modeler/wmf-pluginexample2.jar ./PluginExample2/WebRoot/META-INF/MANIFEST.MF -C PluginExample2/bin .
-xcopy ".\Modeler\wmf-pluginexample2.jar" ".\PluginTest\lib\" /y
-xcopy ".\Modeler\wmf-pluginexample2.jar" ".\JobClusterScheduler\" /y
+jar cvfm ./Modeler/wmf-pluginproject.jar ./PluginProject/WebRoot/META-INF/MANIFEST.MF -C PluginProject/bin .
+xcopy ".\Modeler\wmf-pluginproject.jar" ".\Modeler\" /y
+xcopy ".\Modeler\wmf-pluginproject.jar" ".\JobClusterScheduler\" /y
 
 
 

@@ -5,7 +5,7 @@
     <Plugin FileName=".\wmf-pluginexample1.jar" Enable="true"/>
     <Plugin FileName=".\wmf-pluginexample2.jar" Enable="true"/>
     <Plugin FileName=".\wmf-pluginexample3.jar" Enable="true"/>
-    <Plugin FileName=".\wmf-plugintest.jar" Enable="true"/>
+    <Plugin FileName=".\wmf-pluginproject.jar" Enable="true"/>
   </Plugins>
   <GlobalObjects>
     <GlobalObject ClassName="com.wmf.pluginexample3.ConnectionObject" Name="mysql_connection">

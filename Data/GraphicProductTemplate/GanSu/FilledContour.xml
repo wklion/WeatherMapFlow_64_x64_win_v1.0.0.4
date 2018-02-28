@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="gb2312"?>
 <Workspace Version="20150901">
 	<Datasources>
-		<Datasource Type="ESRI Shapefile" Alias="China_Province_pt" Server="./China_Province_pt.shp" ReadOnly="true"/>
-    <Datasource Type="ESRI Shapefile" Alias="China_Province_pl" Server="./China_Province_pl.shp" ReadOnly="true"/>
-    <Datasource Type="ESRI Shapefile" Alias="Ocean" Server="./Ocean.shp" ReadOnly="true"/>
-    <Datasource Type="ESRI Shapefile" Alias="nine-dashed_line" Server="./nine-dashed_line.shp" ReadOnly="true"/>
+		<Datasource Type="ESRI Shapefile" Alias="T_ADMINDIV_PROVINCE" Server="./T_ADMINDIV_PROVINCE.shp" ReadOnly="true"/>
+		<Datasource Type="ESRI Shapefile" Alias="T_ADMINDIV_CITY" Server="./T_ADMINDIV_CITY.shp" ReadOnly="true"/>
+		<Datasource Type="ESRI Shapefile" Alias="T_ADMINDIV_COUNTY" Server="./T_ADMINDIV_COUNTY.shp" ReadOnly="true"/>
 	</Datasources>
 	<Volumes/>
 	<Maps>
@@ -19,7 +18,7 @@
 			<ClipRegion Datasource="" Dataset="" Where=""/>
 			<LayerGroups>
 				<LayerGroup Name="MGCBottom">
-          <Layer Version="20150901" Type="Region" Name="Ocean" Datasource="Ocean" Dataset="Ocean" MinScale="0.000000" MaxScale="0.000000" Filter="">
+          <Layer Version="20150901" Type="Region" Name="Ocean" Datasource="T_ADMINDIV_CITY" Dataset="T_ADMINDIV_CITY" MinScale="0.000000" MaxScale="0.000000" Filter="">
             <State Visible="true" Selectable="false" Editable="false" Snapable="false"/>
             <SelectedStyle Color="RGBA(0,0,0,0)"/>
             <LineStyle Width="0" color="RGB(0,0,0)" SymbolID="0"/>
