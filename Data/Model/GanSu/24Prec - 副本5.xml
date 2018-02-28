@@ -121,13 +121,39 @@
 				<OutputPort ID="1" Type="DatasetRegion"/>
 			</OutputPorts>
 		</Module>
+		<Module ID="7" ClassName="com.wmf.pluginexample2.ModuleGraphicProduct" x="1024" y="288">
+			<Params>
+				<Param Name="TemplateFile" Value="D:\component\WeatherMapFlow_64_x64_win_v1.0.0.4\Data\GraphicProductTemplate\GanSu\Prec24h.xml"/>
+				<Param Name="Datasource" Value=""/>
+				<Param Name="Dataset" Value=""/>
+				<Param Name="Unit" Value=""/>
+				<Param Name="Datasource" Value="tempDS"/>
+				<Param Name="Dataset" Value="Polygonizer8"/>
+				<Param Name="Unit" Value=""/>
+				<Param Name="Bounds" Value="0.000000 0.000000 0.000000 0.000000"/>
+				<Param Name="ClipRegion" Value=""/>
+				<Param Name="MainTitle" Value="TT"/>
+				<Param Name="SubTitle" Value=""/>
+				<Param Name="Organization" Value=""/>
+				<Param Name="PublishTime" Value=""/>
+				<Param Name="FileName" Value="C:\Users\lenovo\Desktop\temp\prec.png"/>
+			</Params>
+			<InputPorts>
+				<InputPort ID="1" Type="Unknown"/>
+				<InputPort ID="2" Type="DatasetRegion"/>
+			</InputPorts>
+			<OutputPorts>
+				<OutputPort ID="1" Type="ImageFile"/>
+			</OutputPorts>
+		</Module>
 	</Modules>
 	<Pipes>
-		<Pipe ID="7" IncomingModule="2" IncomingPort="1" OutgoingModule="3" OutgoingPort="1"/>
-		<Pipe ID="8" IncomingModule="3" IncomingPort="1" OutgoingModule="4" OutgoingPort="1"/>
-		<Pipe ID="9" IncomingModule="4" IncomingPort="1" OutgoingModule="5" OutgoingPort="1"/>
-		<Pipe ID="10" IncomingModule="5" IncomingPort="1" OutgoingModule="6" OutgoingPort="1"/>
-		<Pipe ID="11" IncomingModule="5" IncomingPort="2" OutgoingModule="6" OutgoingPort="2"/>
-		<Pipe ID="12" IncomingModule="4" IncomingPort="1" OutgoingModule="6" OutgoingPort="4"/>
+		<Pipe ID="8" IncomingModule="2" IncomingPort="1" OutgoingModule="3" OutgoingPort="1"/>
+		<Pipe ID="9" IncomingModule="3" IncomingPort="1" OutgoingModule="4" OutgoingPort="1"/>
+		<Pipe ID="10" IncomingModule="4" IncomingPort="1" OutgoingModule="5" OutgoingPort="1"/>
+		<Pipe ID="11" IncomingModule="5" IncomingPort="1" OutgoingModule="6" OutgoingPort="1"/>
+		<Pipe ID="12" IncomingModule="5" IncomingPort="2" OutgoingModule="6" OutgoingPort="2"/>
+		<Pipe ID="13" IncomingModule="4" IncomingPort="1" OutgoingModule="6" OutgoingPort="4"/>
+		<Pipe ID="14" IncomingModule="6" IncomingPort="1" OutgoingModule="7" OutgoingPort="2"/>
 	</Pipes>
 </Model>

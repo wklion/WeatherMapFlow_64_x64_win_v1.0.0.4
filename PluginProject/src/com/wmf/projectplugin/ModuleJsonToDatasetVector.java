@@ -141,11 +141,17 @@ public class ModuleJsonToDatasetVector extends ModuleBase
 		return alParam.size();
 	}
 	public boolean OnAttach(Port portFrom, Port portTo){
-		ArrayList<Param> alParam = new ArrayList<Param>();
-		portFrom.GetModule().GetOutputParam(portFrom, alParam);
-		if (alParam.size() < 1)
+		int i = FindPort(portFrom, false);
+		if (i != -1)
+			return true;
+		i = FindPort(portTo, true);
+		if (i == -1)
 			return false;
-		strJson = (String)alParam.get(0).m_objValue;
+		ArrayList<Param> tempParam = new ArrayList<Param>();
+		portFrom.GetModule().GetOutputParam(portFrom, tempParam);
+		if (tempParam.size() < 1)
+			return false;
+		strJson = (String)tempParam.get(0).m_objValue;
 		return true;
 	}
 	protected String m_strDatasetAlias;//数据集别名
