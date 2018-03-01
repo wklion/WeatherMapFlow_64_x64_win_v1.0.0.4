@@ -85,7 +85,7 @@ public class ModuleCimiss extends ModuleBase
 		Boolean isDebug = true;
 		String content = "";
 		if(isDebug){
-			String file = "D:/component/WeatherMapFlow_64_x64_win_v1.0.0.4/Data/Input/Cimiss/prec/2017062120_1440.json";
+			String file = "E:/component/WeatherMapFlow_64_x64_win_v1.0.0.4/Data/Input/Cimiss/prec/2017062120_1440.json";
 			FileHelper fileHelper = new FileHelper();
 			content = fileHelper.readFile(file);
 		}
